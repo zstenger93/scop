@@ -1,0 +1,42 @@
+#ifndef OBJECT_HPP
+#define OBJECT_HPP
+
+#include "headers.hpp"
+
+struct Vertex {
+	float x, y, z;
+};
+
+class Object {
+   private:
+	std::string name;
+	std::vector<Vertex> vertices;
+	std::vector<std::vector<int>> faces;
+
+   public:
+	void loadFromObjFile(const std::string& filePath);
+
+	const std::vector<Vertex>& getVertices() const { return vertices; }
+	const std::vector<std::vector<int>>& getFaces() const { return faces; }
+	const std::string& getName() const { return name; }
+
+	void printVertices() const {
+		std::cout << "Vertices:\n";
+		for (const auto& vertex : vertices) {
+			std::cout << "(" << vertex.x << ", " << vertex.y << ", " << vertex.z << ")\n";
+		}
+	}
+
+	void printFaces() const {
+		std::cout << "Faces:\n";
+		for (const auto& face : faces) {
+			std::cout << "Face: ";
+			for (const auto& index : face) {
+				std::cout << index << " ";
+			}
+			std::cout << std::endl;
+		}
+	}
+};
+
+#endif
