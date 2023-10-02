@@ -8,14 +8,10 @@ int main(int argc, char **argv) {
 
 	object.loadFromObjFile(argv[1]);
 
-	const std::vector<Vertex>& vertices = object.getVertices();
-    const std::vector<std::vector<int>>& faces = object.getFaces();
 
 	// object.printVertices();
 	// object.printFaces();
-
 	// std::cout << object.getName() << std::endl;
-
 	// object.printMaterialProperties();
 
     // if (!glfwInit()) {
