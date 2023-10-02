@@ -11,8 +11,12 @@ int main(int argc, char **argv) {
 	const std::vector<Vertex>& vertices = object.getVertices();
     const std::vector<std::vector<int>>& faces = object.getFaces();
 
-	object.printVertices();
-	object.printFaces();
+	// object.printVertices();
+	// object.printFaces();
+
+	// std::cout << object.getName() << std::endl;
+
+	// object.printMaterialProperties();
 
     // if (!glfwInit()) {
     //     std::cerr << "Failed to initialize GLFW\n";
