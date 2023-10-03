@@ -6,7 +6,6 @@
 void MouseHandler::mouseCallback(GLFWwindow* window, double xpos, double ypos) {
 	MouseHandler* handler = static_cast<MouseHandler*>(glfwGetWindowUserPointer(window));
 
-	// Check if the left mouse button is pressed
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
 		float sensitivity = 0.005f;
 
