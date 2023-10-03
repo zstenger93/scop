@@ -38,10 +38,7 @@ class Object {
 
 	// create triangles
 	void createTriangles(std::vector<std::vector<Vertex>>& triangles);
-
 	void renderShape();
-
-	void setPerspectiveProjection(int width, int height);
 
 	// getters
 	const std::string& getName() const { return name; }
@@ -55,6 +52,7 @@ class Object {
 	void setWindow() { window = glfwCreateWindow(1600, 1200, name.c_str(), NULL, NULL); }
 	void initGLFW(Object& object);
 	void runGLFW(Object& object);
+	void setPerspectiveProjection(int width, int height);
 
 	// testing stuff with printing
 	void printFaces() const;

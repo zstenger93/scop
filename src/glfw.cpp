@@ -32,8 +32,8 @@ void Object::runGLFW(Object& object) {
 	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glRotatef(mouseHandler.rotationAngleX, 1.0f, 0.0f, 0.0f);
-        glRotatef(mouseHandler.rotationAngleY, 0.0f, 1.0f, 0.0f);
+		glRotatef(mouseHandler.rotationAngleX, 0.0f, 1.0f, 0.0f);
+        glRotatef(mouseHandler.rotationAngleY, 1.0f, 0.0f, 0.0f);
 		object.renderShape();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
