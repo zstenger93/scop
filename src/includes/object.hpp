@@ -56,6 +56,7 @@ class Object {
 	void printVertices() const;
 	void printTriangles() const;
 	void printMaterialProperties() const;
+	void debugPrint(Object &object) const;
 };
 
 #endif

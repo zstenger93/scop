@@ -21,7 +21,6 @@ void Object::runGLFW(Object& object) {
 	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 		glBegin(GL_TRIANGLES);
 		for (const auto& face : faces) {
 			for (int i = 0; i < 3; ++i) {

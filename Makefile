@@ -12,6 +12,7 @@ SRC		= scop \
 		  readObjectFile \
 		  object \
 		  glfw \
+		  debugPrint \
 
 
 SRCS	= $(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC)))
