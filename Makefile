@@ -13,6 +13,7 @@ SRC		= scop \
 		  object \
 		  glfw \
 		  debugPrint \
+		  mouse \
 
 
 SRCS	= $(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC)))
