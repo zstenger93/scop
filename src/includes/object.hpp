@@ -39,6 +39,8 @@ class Object {
 	// create triangles
 	void createTriangles(std::vector<std::vector<Vertex>>& triangles);
 
+	void renderShape();
+
 	void setPerspectiveProjection(int width, int height);
 
 	// getters
@@ -62,43 +64,6 @@ class Object {
 	void debugPrint(Object& object) const;
 };
 
-class MouseHandler {
-   public:
-	float rotationAngleX = 0.0f;
-	float rotationAngleY = 0.0f;
-	double lastXPos = 0.0;
-	double lastYPos = 0.0;
 
-	static void mouseCallback(GLFWwindow* window, double xpos, double ypos) {
-		MouseHandler* handler = static_cast<MouseHandler*>(glfwGetWindowUserPointer(window));
-
-		if (handler->lastXPos == 0.0 && handler->lastYPos == 0.0) {
-			handler->lastXPos = xpos;
-			handler->lastYPos = ypos;
-		}
-
-		double deltaX = xpos - handler->lastXPos;
-		double deltaY = ypos - handler->lastYPos;
-		float sensitivity = 0.01f;
-
-		handler->rotationAngleX += deltaX * sensitivity;
-		handler->rotationAngleY += deltaY * sensitivity;
-
-		if (handler->rotationAngleX > 360.0f) {
-			handler->rotationAngleX -= 360.0f;
-		} else if (handler->rotationAngleX < -360.0f) {
-			handler->rotationAngleX += 360.0f;
-		}
-
-		if (handler->rotationAngleY > 360.0f) {
-			handler->rotationAngleY -= 360.0f;
-		} else if (handler->rotationAngleY < -360.0f) {
-			handler->rotationAngleY += 360.0f;
-		}
-
-		handler->lastXPos = xpos;
-		handler->lastYPos = ypos;
-	}
-};
 
 #endif
