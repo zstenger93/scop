@@ -14,15 +14,11 @@ void Object::createTriangles(std::vector<std::vector<Vertex>>& triangles) {
 
 void Object::renderShape() {
 	for (const auto& shape : triangles) {
-			if (shape.size() == 3) {
-				glBegin(GL_TRIANGLES);
-			} else if (shape.size() == 4) {
-				glBegin(GL_QUADS);
-			}
-
-			for (const auto& vertex : shape) {
-				glVertex3f(vertex.x, vertex.y, vertex.z);
-			}
-			glEnd();
-		}
+		if (shape.size() == 3)
+			glBegin(GL_TRIANGLES);
+		else if (shape.size() == 4)
+			glBegin(GL_QUADS);
+		for (const auto& vertex : shape) glVertex3f(vertex.x, vertex.y, vertex.z);
+		glEnd();
+	}
 }

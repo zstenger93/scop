@@ -64,9 +64,8 @@ void Object::loadMtllibFile(const std::string& filePath) {
 				materialFile >> Ka.r >> Ka.g >> Ka.b;
 			} else if (attribute == "Kd") {
 				materialFile >> Kd.r >> Kd.g >> Kd.b;
-			} else if (attribute == "Ks") {
+			} else if (attribute == "Ks")
 				materialFile >> Ks.r >> Ks.g >> Ks.b;
-			}
 		}
 		materialFile.close();
 	} else {

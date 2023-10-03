@@ -1,6 +1,6 @@
 #include "includes/headers.hpp"
-#include "includes/object.hpp"
 #include "includes/mouse.hpp"
+#include "includes/object.hpp"
 
 void Object::initGLFW(Object& object) {
 	if (!glfwInit()) {
@@ -9,31 +9,27 @@ void Object::initGLFW(Object& object) {
 	}
 	object.setWindow();
 	GLFWwindow* window = object.getWindow();
-	if (!window) {
-		glfwTerminate();
-		return;
-	}
+	if (!window) return glfwTerminate();
 	glfwMakeContextCurrent(window);
 	object.setPerspectiveProjection(1600, 1200);
 }
 
 void Object::runGLFW(Object& object) {
 	GLFWwindow* window = object.getWindow();
-
 	MouseHandler mouseHandler;
-    glfwSetWindowUserPointer(window, &mouseHandler);
+
+	glfwSetWindowUserPointer(window, &mouseHandler);
 	glfwSetCursorPosCallback(window, [](GLFWwindow* window, double xpos, double ypos) {
-        MouseHandler* handler = static_cast<MouseHandler*>(glfwGetWindowUserPointer(window));
-        handler->mouseCallback(window, xpos, ypos);
-    });
-    
-	glRotatef(-90.0f, 0.0f, 0.0f, 0.0f);
+		MouseHandler* handler = static_cast<MouseHandler*>(glfwGetWindowUserPointer(window));
+		handler->mouseCallback(window, xpos, ypos);
+	});
+	glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glRotatef(mouseHandler.rotationAngleX, 0.0f, 1.0f, 0.0f);
-        glRotatef(mouseHandler.rotationAngleY, 1.0f, 0.0f, 0.0f);
+		glRotatef(mouseHandler.rotationAngleY, 1.0f, 0.0f, 0.0f);
 		object.renderShape();
 		glfwSwapBuffers(window);
 		glfwPollEvents();

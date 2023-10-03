@@ -18,13 +18,10 @@ class Object {
 	std::vector<Vertex> vertices;
 	std::vector<std::vector<int>> faces;
 	int triangleCount;
-
-	// created triangles from points
+	// created triangles from faces and vertices
 	std::vector<std::vector<Vertex>> triangles;
-
 	// GLFW
 	GLFWwindow* window;
-
 	// mtllib attributes
 	float Ns, Ni, d, illum;	 // Specular Exponent, Optical Density, Dissolve, Illumination Model
 	Color Ka;				 // Ambient color
@@ -35,25 +32,20 @@ class Object {
 	// input reading
 	void loadMtllibFile(const std::string& filePath);
 	void loadFromObjFile(const std::string& filePath);
-
 	// create triangles
 	void createTriangles(std::vector<std::vector<Vertex>>& triangles);
 	void renderShape();
-
 	// getters
 	const std::string& getName() const { return name; }
 	const std::vector<Vertex>& getVertices() const { return vertices; }
 	const std::vector<std::vector<int>>& getFaces() const { return faces; }
 	std::vector<std::vector<Vertex>>& getTriangles() { return triangles; }
-
-	static void mouseCallback(GLFWwindow* window, double xpos, double ypos);
 	// GLFW
 	GLFWwindow* getWindow() { return window; }
 	void setWindow() { window = glfwCreateWindow(1600, 1200, name.c_str(), NULL, NULL); }
 	void initGLFW(Object& object);
 	void runGLFW(Object& object);
 	void setPerspectiveProjection(int width, int height);
-
 	// testing stuff with printing
 	void printFaces() const;
 	void printVertices() const;
