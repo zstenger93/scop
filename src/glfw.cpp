@@ -21,12 +21,12 @@ void Object::runGLFW(Object& object) {
 	GLFWwindow* window = object.getWindow();
 
 	MouseHandler mouseHandler;
-    glfwSetWindowUserPointer(window, &mouseHandler);
-	glfwSetCursorPosCallback(window, [](GLFWwindow* window, double xpos, double ypos) {
-        MouseHandler* handler = static_cast<MouseHandler*>(glfwGetWindowUserPointer(window));
-        handler->mouseCallback(window, xpos, ypos);
-    });
-	glfwSetMouseButtonCallback(window, MouseHandler::mouseStopCallback);
+    // glfwSetWindowUserPointer(window, &mouseHandler);
+	// glfwSetCursorPosCallback(window, [](GLFWwindow* window, double xpos, double ypos) {
+    //     MouseHandler* handler = static_cast<MouseHandler*>(glfwGetWindowUserPointer(window));
+    //     handler->mouseCallback(window, xpos, ypos);
+    // });
+	// glfwSetMouseButtonCallback(window, MouseHandler::mouseStopCallback);
     
 	glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);

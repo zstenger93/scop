@@ -64,6 +64,4 @@ class Object {
 	void debugPrint(Object& object) const;
 };
 
-
-
 #endif
