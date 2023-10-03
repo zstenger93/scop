@@ -10,6 +10,8 @@ OBJ_DIR = objects/
 
 SRC		= scop \
 		  readObjectFile \
+		  object \
+		  glfw \
 
 
 SRCS	= $(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC)))
