@@ -46,6 +46,7 @@ class Object {
 	void loadFromObjFile(const std::string& filePath);
 	// create triangles
 	void createTriangles(std::vector<std::vector<Vertex>>& triangles);
+	void centering();
 	void renderShape();
 	// getters
 	const std::string& getName() const { return name; }
