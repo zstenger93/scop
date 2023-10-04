@@ -7,13 +7,21 @@ class MouseHandler {
    public:
 	float rotationAngleX = 0.0f;
 	float rotationAngleY = 0.0f;
+	float sensitivity = 0.0f;
+	bool mouseMoved = false;
 	double lastXPos = 0.0;
 	double lastYPos = 0.0;
-	bool mouseMoved = false;
+	double deltaY;
+	double deltaX;
+	double _xpos;
+	double _ypos;
 
 	void mouseCallback(GLFWwindow* window, double xpos, double ypos);
+	void updatePosition(MouseHandler* handler);
+	void calculateRotationSpeed(MouseHandler* handler);
 	void preventFlip(MouseHandler* handler);
-	void setSensitivity(MouseHandler* handler, double& deltaX, double& deltaY, float sensitivity);
+	void updateHandler(MouseHandler* handler);
+	void stopRotation(MouseHandler* handler);
 };
 
 #endif

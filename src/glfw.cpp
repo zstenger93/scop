@@ -41,7 +41,7 @@ void Object::setPerspectiveProjection(int width, int height) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	float aspectRatio = static_cast<float>(width) / static_cast<float>(height);
-	float fov = 90.0f;
+	float fov = 50.0f;
 	float nearPlane = 0.1f;
 	float farPlane = 100.0f;
 
