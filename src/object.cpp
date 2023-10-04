@@ -25,7 +25,7 @@ void Object::renderShape() {
 		else if (shape.size() == 4)
 			glBegin(GL_QUADS);
 		for (const auto& vertex : shape) {
-			glTexCoord2f(vertex.texX, vertex.texY);
+			glTexCoord2f(vertex.z, vertex.y);
 			glVertex3f(vertex.x, vertex.y, vertex.z);
 		}
 		glEnd();

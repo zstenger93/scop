@@ -6,6 +6,8 @@
 
 struct Vertex {
 	float x, y, z, texX, texY;
+	glm::vec3 position;
+    glm::vec2 uv;
 };
 
 struct Color {
