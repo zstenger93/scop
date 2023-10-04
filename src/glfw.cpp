@@ -28,15 +28,7 @@ void Object::runGLFW(Object& object) {
 	glEnable(GL_DEPTH_TEST);
 	object.centering();
 	glm::vec3 objectCenter(centerX, centerY, centerZ);
-	while (!glfwWindowShouldClose(window)) {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glTranslatef(objectCenter.x, objectCenter.y, objectCenter.z);
-		object.rotation(mouseHandler);
-		glTranslatef(-objectCenter.x, -objectCenter.y, -objectCenter.z);
-		object.renderShape();
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-	}
+	object.renderingLoop(object, objectCenter, mouseHandler);
 	glfwTerminate();
 }
 
@@ -61,6 +53,20 @@ void Object::centering() {
 	centerX = (minX + maxX) / 2.0f;
 	centerY = (minY + maxY) / 2.0f;
 	centerZ = (minZ + maxZ) / 2.0f;
+}
+
+void Object::renderingLoop(Object& object, glm::vec3& objectCenter, MouseHandler& mouseHandler) {
+	GLFWwindow* window = object.getWindow();
+
+	while (!glfwWindowShouldClose(window)) {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glTranslatef(objectCenter.x, objectCenter.y, objectCenter.z);
+		object.rotation(mouseHandler);
+		glTranslatef(-objectCenter.x, -objectCenter.y, -objectCenter.z);
+		object.renderShape();
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
 }
 
 void Object::rotation(MouseHandler& mouseHandler) {

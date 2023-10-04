@@ -14,44 +14,45 @@ struct Color {
 
 class Object {
    private:
-	// obj file attributes
+	// OBJ FILE ATTRIBUTES
 	std::string name;
 	std::vector<Vertex> vertices;
 	std::vector<std::vector<int>> faces;
 	int triangleCount;
-	// created triangles from faces and vertices
+	// CREATED TRIANGLES BY COMBINING FACES AND VERTICES
 	std::vector<std::vector<Vertex>> triangles;
 	// GLFW
 	GLFWwindow* window;
-	// mtllib attributes
+	// MTLLIB ATTRIBUTES
 	float Ns, Ni, d, illum;	 // Specular Exponent, Optical Density, Dissolve, Illumination Model
 	Color Ka;				 // Ambient color
 	Color Kd;				 // Diffuse color
 	Color Ks;				 // Specular color
 
-	// object min max coordinates
+	// OBJECT MIN-MAX COORDINATES
 	float minX;
 	float minY;
 	float minZ;
 	float maxX;
 	float maxY;
 	float maxZ;
-	// object center
+	// OBJECT CENTER
 	float centerX;
 	float centerY;
 	float centerZ;
-	// object rotation
 
    public:
-	// input reading
+	// INPUT READING
 	void loadMtllibFile(const std::string& filePath);
 	void loadFromObjFile(const std::string& filePath);
-	// create triangles
+	// CREATE TRIANGLES
 	void createTriangles(std::vector<std::vector<Vertex>>& triangles);
 	void centering();
+	// RENDERING
+	void renderingLoop(Object& object, glm::vec3& objectCenter, MouseHandler& mouseHandler);
 	void rotation(MouseHandler& mouseHandler);
 	void renderShape();
-	// getters
+	// GETERS
 	const std::string& getName() const { return name; }
 	const std::vector<Vertex>& getVertices() const { return vertices; }
 	const std::vector<std::vector<int>>& getFaces() const { return faces; }
@@ -62,7 +63,7 @@ class Object {
 	void initGLFW(Object& object);
 	void runGLFW(Object& object);
 	void setPerspectiveProjection(int width, int height);
-	// testing stuff with printing
+	// TESTING STUFF WITH PRINTING
 	void printFaces() const;
 	void printVertices() const;
 	void printTriangles() const;
