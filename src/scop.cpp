@@ -9,7 +9,7 @@ int main(int argc, char** argv) {
 	std::vector<std::vector<Vertex>>& triangles = object.getTriangles();
 	object.createTriangles(triangles);
 
-	object.debugPrint(object);
+	// object.debugPrint(object);
 
 	object.initGLFW(object);
 	object.runGLFW(object);

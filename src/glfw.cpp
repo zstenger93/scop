@@ -7,11 +7,19 @@ void Object::initGLFW(Object& object) {
 		std::cerr << "Failed to initialize GLFW" << std::endl;
 		return;
 	}
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 	object.setWindow();
 	GLFWwindow* window = object.getWindow();
 	if (!window) return glfwTerminate();
 	glfwMakeContextCurrent(window);
 	object.setPerspectiveProjection(1600, 1200);
+	glewExperimental = GL_TRUE;
+	GLenum err = glewInit();
+	if (err != GLEW_OK) {
+		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+		exit(-1);
+	}
 }
 
 void Object::runGLFW(Object& object) {

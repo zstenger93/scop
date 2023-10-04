@@ -1,6 +1,5 @@
 #include "includes/mouse.hpp"
 
-#include "includes/headers.hpp"
 #include "includes/object.hpp"
 
 void MouseHandler::mouseCallback(GLFWwindow* window, double xpos, double ypos) {
