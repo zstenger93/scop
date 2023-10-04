@@ -28,6 +28,18 @@ class Object {
 	Color Kd;				 // Diffuse color
 	Color Ks;				 // Specular color
 
+	// object min max coordinates
+	float minX;
+	float minY;
+	float minZ;
+	float maxX;
+	float maxY;
+	float maxZ;
+	// object center
+	float centerX;
+	float centerY;
+	float centerZ;
+
    public:
 	// input reading
 	void loadMtllibFile(const std::string& filePath);
