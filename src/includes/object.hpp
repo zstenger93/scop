@@ -3,11 +3,10 @@
 
 #include "headers.hpp"
 #include "mouse.hpp"
+#include "shader.hpp"
 
 struct Vertex {
 	float x, y, z, texX, texY;
-	glm::vec3 position;
-    glm::vec2 uv;
 };
 
 struct Color {
@@ -33,7 +32,7 @@ class Object {
 
 	GLint texSize;
 	GLuint texture;
-
+	
 	// OBJECT MIN-MAX COORDINATES
 	float minX;
 	float minY;
@@ -76,6 +75,10 @@ class Object {
 	void printTriangles() const;
 	void printMaterialProperties() const;
 	void debugPrint(Object& object) const;
+
+	GLuint compileShaderProgram(const char* vertexShaderSource, const char* fragmentShaderSource);
+	void checkShaderCompileStatus(GLuint shader);
+	void checkProgramLinkStatus(GLuint program);
 };
 
 #endif

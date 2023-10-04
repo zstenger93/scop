@@ -1,6 +1,7 @@
 #include "includes/headers.hpp"
 #include "includes/mouse.hpp"
 #include "includes/object.hpp"
+#include "includes/shader.hpp"
 
 void Object::initGLFW(Object& object) {
 	if (!glfwInit()) {
@@ -8,7 +9,7 @@ void Object::initGLFW(Object& object) {
 		return;
 	}
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	object.setWindow();
 	GLFWwindow* window = object.getWindow();
 	if (!window) return glfwTerminate();
@@ -73,9 +74,34 @@ void Object::centering() {
 void Object::renderingLoop(Object& object, glm::vec3& objectCenter, MouseHandler& mouseHandler) {
 	GLFWwindow* window = object.getWindow();
 
+	const char* vertexShaderSource = R"(
+    attribute vec3 vertices;
+    attribute vec2 inTexCoord;
+
+    varying vec2 fragTexCoord;
+
+    uniform mat4 modelViewProjection;
+
+    void main() {
+        gl_Position = modelViewProjection * vec4(vertices, 1.0);
+        fragTexCoord = inTexCoord;
+    }
+)";
+
+	const char* fragmentShaderSource = R"(
+    varying vec2 fragTexCoord;
+    uniform sampler2D textureSampler;
+
+    void main() {
+        vec4 texColor = texture2D(textureSampler, fragTexCoord);
+        gl_FragColor = texColor;
+    }
+)";
+	GLuint shaderProgram = compileShaderProgram(vertexShaderSource, fragmentShaderSource);
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glTranslatef(objectCenter.x, objectCenter.y, objectCenter.z);
+		// glUseProgram(shaderProgram);
 		object.rotation(mouseHandler);
 		glTranslatef(-objectCenter.x, -objectCenter.y, -objectCenter.z);
 		object.renderShape();

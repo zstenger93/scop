@@ -5,7 +5,7 @@
 
 class Shader {
    public:
-
+	
 };
 
 #endif
