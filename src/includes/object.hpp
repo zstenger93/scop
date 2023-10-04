@@ -2,6 +2,7 @@
 #define OBJECT_HPP
 
 #include "headers.hpp"
+#include "mouse.hpp"
 
 struct Vertex {
 	float x, y, z;
@@ -39,6 +40,7 @@ class Object {
 	float centerX;
 	float centerY;
 	float centerZ;
+	// object rotation
 
    public:
 	// input reading
@@ -47,6 +49,7 @@ class Object {
 	// create triangles
 	void createTriangles(std::vector<std::vector<Vertex>>& triangles);
 	void centering();
+	void rotation(MouseHandler& mouseHandler);
 	void renderShape();
 	// getters
 	const std::string& getName() const { return name; }

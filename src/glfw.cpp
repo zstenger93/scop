@@ -30,12 +30,9 @@ void Object::runGLFW(Object& object) {
 	glm::vec3 objectCenter(centerX, centerY, centerZ);
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 		glTranslatef(objectCenter.x, objectCenter.y, objectCenter.z);
-		glRotatef(mouseHandler.rotationAngleX, 0.0f, 1.0f, 0.0f);
-		glRotatef(mouseHandler.rotationAngleY, 1.0f, 0.0f, 0.0f);
+		object.rotation(mouseHandler);
 		glTranslatef(-objectCenter.x, -objectCenter.y, -objectCenter.z);
-
 		object.renderShape();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -64,6 +61,16 @@ void Object::centering() {
 	centerX = (minX + maxX) / 2.0f;
 	centerY = (minY + maxY) / 2.0f;
 	centerZ = (minZ + maxZ) / 2.0f;
+}
+
+void Object::rotation(MouseHandler& mouseHandler) {
+	glm::quat rotationX =
+		glm::angleAxis(glm::radians(mouseHandler.rotationAngleX), glm::vec3(1.0f, 0.0f, 0.0f));
+	glm::quat rotationY =
+		glm::angleAxis(glm::radians(mouseHandler.rotationAngleY), glm::vec3(0.0f, 1.0f, 0.0f));
+	glm::quat combinedRotation = rotationY * rotationX;
+	glm::mat4 rotationMatrix = glm::mat4_cast(combinedRotation);
+	glMultMatrixf(glm::value_ptr(rotationMatrix));
 }
 
 void Object::setPerspectiveProjection(int width, int height) {
