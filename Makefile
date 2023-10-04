@@ -49,6 +49,7 @@ re:
 	@echo "$(GREEN)The project has been recompiled.$(COLOR_END)"
 
 t:
+	make re
 	./scop resources/42.obj textures/ok.jpg
 
 .PHONY: all clean fclean re test

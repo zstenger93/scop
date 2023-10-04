@@ -62,6 +62,12 @@ void Object::centering() {
 	centerX = (minX + maxX) / 2.0f;
 	centerY = (minY + maxY) / 2.0f;
 	centerZ = (minZ + maxZ) / 2.0f;
+	for (auto& triangle : triangles) {
+		for (auto& vertex : triangle) {
+			vertex.texX = (vertex.x - minX) / (maxX - minX);
+			vertex.texY = (vertex.y - minY) / (maxY - minY);
+		}
+	}
 }
 
 void Object::renderingLoop(Object& object, glm::vec3& objectCenter, MouseHandler& mouseHandler) {

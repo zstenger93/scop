@@ -25,8 +25,8 @@ void Object::loadFromObjFile(const std::string& filePath) {
 			loadMtllibFile(materialLibrary);
 		} else if (prefix == "v") {
 			stream >> vertex.x >> vertex.y >> vertex.z;
-			vertex.texX = (vertex.x + 1) / 2;
-			vertex.texY = (vertex.y + 1) / 2;
+			vertex.texX = vertex.x;
+			vertex.texY = vertex.y;
 			vertices.push_back(vertex);
 		} else if (prefix == "f") {
 			while (stream >> index) {

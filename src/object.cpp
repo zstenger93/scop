@@ -13,8 +13,9 @@ void Object::createTriangles(std::vector<std::vector<Vertex>>& triangles) {
 }
 
 void Object::renderShape() {
-	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
+	
+	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDepthMask(GL_TRUE);
 	glEnable(GL_BLEND);
@@ -24,7 +25,7 @@ void Object::renderShape() {
 		else if (shape.size() == 4)
 			glBegin(GL_QUADS);
 		for (const auto& vertex : shape) {
-			glTexCoord2f(vertex.z, vertex.texY);
+			glTexCoord2f(vertex.texX, vertex.texY);
 			glVertex3f(vertex.x, vertex.y, vertex.z);
 		}
 		glEnd();
