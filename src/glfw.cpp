@@ -8,7 +8,7 @@ void Object::initGLFW(Object& object) {
 		return;
 	}
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	object.setWindow();
 	GLFWwindow* window = object.getWindow();
 	if (!window) return glfwTerminate();
@@ -26,6 +26,7 @@ void Object::runGLFW(Object& object) {
 	GLFWwindow* window = object.getWindow();
 	MouseHandler mouseHandler;
 
+	object.loadTexture("textures/ok.jpg");
 	glfwSetWindowUserPointer(window, &mouseHandler);
 	glfwSetCursorPosCallback(window, [](GLFWwindow* window, double xpos, double ypos) {
 		MouseHandler* handler = static_cast<MouseHandler*>(glfwGetWindowUserPointer(window));

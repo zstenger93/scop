@@ -5,7 +5,7 @@
 #include "mouse.hpp"
 
 struct Vertex {
-	float x, y, z;
+	float x, y, z, texX, texY;
 };
 
 struct Color {
@@ -29,6 +29,9 @@ class Object {
 	Color Kd;				 // Diffuse color
 	Color Ks;				 // Specular color
 
+	GLint texSize;
+	GLuint texture;
+
 	// OBJECT MIN-MAX COORDINATES
 	float minX;
 	float minY;
@@ -45,6 +48,8 @@ class Object {
 	// INPUT READING
 	void loadMtllibFile(const std::string& filePath);
 	void loadFromObjFile(const std::string& filePath);
+	// TEXTURE
+	void loadTexture(std::string imagePath);
 	// CREATE TRIANGLES
 	void createTriangles(std::vector<std::vector<Vertex>>& triangles);
 	void centering();

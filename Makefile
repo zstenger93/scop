@@ -16,7 +16,7 @@ SRC		= scop \
 		  debugPrint \
 		  mouse \
 		  shader \
-
+		  texture \
 
 SRCS	= $(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC)))
 OBJS	= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC)))

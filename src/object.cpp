@@ -6,19 +6,27 @@ void Object::createTriangles(std::vector<std::vector<Vertex>>& triangles) {
 		std::vector<Vertex> triangle;
 		for (int index : face) {
 			triangle.push_back(vertices[index - 1]);
-			triangleCount++;
 		}
+		triangleCount++;
 		triangles.push_back(triangle);
 	}
 }
 
 void Object::renderShape() {
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glDepthMask(GL_TRUE);
+	glEnable(GL_BLEND);
 	for (const auto& shape : triangles) {
 		if (shape.size() == 3)
 			glBegin(GL_TRIANGLES);
 		else if (shape.size() == 4)
 			glBegin(GL_QUADS);
-		for (const auto& vertex : shape) glVertex3f(vertex.x, vertex.y, vertex.z);
+		for (const auto& vertex : shape) {
+			glTexCoord2f(vertex.z, vertex.texY);
+			glVertex3f(vertex.x, vertex.y, vertex.z);
+		}
 		glEnd();
 	}
 }
