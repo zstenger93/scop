@@ -70,6 +70,7 @@ class Object {
 	void centering();
 	// RENDERING
 	void renderingLoop(Object& object, glm::vec3& objectCenter, MouseHandler& mouseHandler);
+	void setPolygonMode(Object& object, MouseHandler& mouseHandler);
 	void rotation(MouseHandler& mouseHandler);
 	void renderShape();
 	// GETERS
