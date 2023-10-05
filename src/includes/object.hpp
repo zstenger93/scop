@@ -19,6 +19,14 @@ class Object {
 	std::string name;
 	std::vector<Vertex> vertices;
 	std::vector<std::vector<int>> faces;
+
+	// CAMERA
+	float aspectRatio;
+	float fov;
+	float nearPlane;
+	float farPlane;
+	glm::mat4 projectionMatrix;
+
 	int triangleCount;
 	// CREATED TRIANGLES BY COMBINING FACES AND VERTICES
 	std::vector<std::vector<Vertex>> triangles;
@@ -32,7 +40,7 @@ class Object {
 
 	GLint texSize;
 	GLuint texture;
-	
+
 	// OBJECT MIN-MAX COORDINATES
 	float minX;
 	float minY;
@@ -45,7 +53,11 @@ class Object {
 	float centerY;
 	float centerZ;
 
+
    public:
+	glm::mat4 translationMatrix;
+	float zoom = 1.0f;
+	float zoomSpeed = 2.0f;
 	// INPUT READING
 	void loadMtllibFile(const std::string& filePath);
 	void loadFromObjFile(const std::string& filePath);
@@ -65,7 +77,7 @@ class Object {
 	std::vector<std::vector<Vertex>>& getTriangles() { return triangles; }
 	// GLFW
 	GLFWwindow* getWindow() { return window; }
-	void setWindow() { window = glfwCreateWindow(1600, 1200, name.c_str(), NULL, NULL); }
+	void setWindow() { window = glfwCreateWindow(3200, 1800, name.c_str(), NULL, NULL); }
 	void initGLFW(Object& object);
 	void runGLFW(Object& object);
 	void setPerspectiveProjection(int width, int height);

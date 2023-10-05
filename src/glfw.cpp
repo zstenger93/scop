@@ -14,7 +14,7 @@ void Object::initGLFW(Object& object) {
 	GLFWwindow* window = object.getWindow();
 	if (!window) return glfwTerminate();
 	glfwMakeContextCurrent(window);
-	object.setPerspectiveProjection(1600, 1200);
+	object.setPerspectiveProjection(3200, 1800);
 	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
 	if (err != GLEW_OK) {
@@ -27,12 +27,14 @@ void Object::runGLFW(Object& object) {
 	GLFWwindow* window = object.getWindow();
 	MouseHandler mouseHandler;
 
+	mouseHandler.object = &object;
 	object.loadTexture("textures/ok.jpg");
 	glfwSetWindowUserPointer(window, &mouseHandler);
 	glfwSetCursorPosCallback(window, [](GLFWwindow* window, double xpos, double ypos) {
 		MouseHandler* handler = static_cast<MouseHandler*>(glfwGetWindowUserPointer(window));
 		handler->mouseCallback(window, xpos, ypos);
 	});
+	glfwSetScrollCallback(window, MouseHandler::scrollCallback);
 	glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
@@ -74,34 +76,49 @@ void Object::centering() {
 void Object::renderingLoop(Object& object, glm::vec3& objectCenter, MouseHandler& mouseHandler) {
 	GLFWwindow* window = object.getWindow();
 
-	const char* vertexShaderSource = R"(
-    attribute vec3 vertices;
-    attribute vec2 inTexCoord;
+	const char* vertexShaderSource = R"glsl(
+	attribute vec3 inPosition;
+	attribute vec2 inTexCoord;
+	varying vec2 fragTexCoord;
+	uniform mat4 modelViewProjection;
+	void main() {
+		gl_Position = modelViewProjection * vec4(inPosition, 1.0);
+		fragTexCoord = inTexCoord;
+	}
+	)glsl";
 
-    varying vec2 fragTexCoord;
+	const char* fragmentShaderSource = R"glsl(
+	varying vec2 fragTexCoord;
+	uniform sampler2D textureSampler;
+	void main() {
+		vec4 texColor = texture2D(textureSampler, fragTexCoord);
+		gl_FragColor = texColor;
+	}
+	)glsl";
 
-    uniform mat4 modelViewProjection;
+	GLuint vbo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(),
+				 GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, x));
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texX));
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindTexture(GL_TEXTURE_2D, texture);
 
-    void main() {
-        gl_Position = modelViewProjection * vec4(vertices, 1.0);
-        fragTexCoord = inTexCoord;
-    }
-)";
-
-	const char* fragmentShaderSource = R"(
-    varying vec2 fragTexCoord;
-    uniform sampler2D textureSampler;
-
-    void main() {
-        vec4 texColor = texture2D(textureSampler, fragTexCoord);
-        gl_FragColor = texColor;
-    }
-)";
 	GLuint shaderProgram = compileShaderProgram(vertexShaderSource, fragmentShaderSource);
+	GLenum error = glGetError();
+	if (error != GL_NO_ERROR) {
+		std::cerr << "OpenGL Error: " << error << std::endl;
+	}
 	while (!glfwWindowShouldClose(window)) {
+		glfwSetScrollCallback(window, MouseHandler::scrollCallback);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glTranslatef(objectCenter.x, objectCenter.y, objectCenter.z);
+		projectionMatrix = glm::perspective(glm::radians(zoom), aspectRatio, nearPlane, farPlane);
 		// glUseProgram(shaderProgram);
+		glTranslatef(objectCenter.x, objectCenter.y, objectCenter.z);
 		object.rotation(mouseHandler);
 		glTranslatef(-objectCenter.x, -objectCenter.y, -objectCenter.z);
 		object.renderShape();
@@ -110,26 +127,15 @@ void Object::renderingLoop(Object& object, glm::vec3& objectCenter, MouseHandler
 	}
 }
 
-void Object::rotation(MouseHandler& mouseHandler) {
-	glm::quat rotationX =
-		glm::angleAxis(glm::radians(mouseHandler.rotationAngleX), glm::vec3(1.0f, 0.0f, 0.0f));
-	glm::quat rotationY =
-		glm::angleAxis(glm::radians(mouseHandler.rotationAngleY), glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::quat combinedRotation = rotationY * rotationX;
-	glm::mat4 rotationMatrix = glm::mat4_cast(combinedRotation);
-	glMultMatrixf(glm::value_ptr(rotationMatrix));
-}
-
 void Object::setPerspectiveProjection(int width, int height) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	float aspectRatio = static_cast<float>(width) / static_cast<float>(height);
-	float fov = 50.0f;
-	float nearPlane = 0.1f;
-	float farPlane = 100.0f;
+	aspectRatio = static_cast<float>(width) / static_cast<float>(height);
+	fov = 50.0f;
+	nearPlane = 0.1f;
+	farPlane = 100.0f;
 
-	glm::mat4 projectionMatrix =
-		glm::perspective(glm::radians(fov), aspectRatio, nearPlane, farPlane);
+	projectionMatrix = glm::perspective(glm::radians(fov), aspectRatio, nearPlane, farPlane);
 	glLoadMatrixf(glm::value_ptr(projectionMatrix));
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();

@@ -3,6 +3,7 @@ CFLAGS =  -Wno-c++11-extensions -std=c++11
 LDFLAGS = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib -lglfw -framework OpenGL -framework CoreGraphics -framework CoreFoundation
 INCLUDES = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include
 GLEWSHIT = -I/Users/zstenger/.brew/Cellar/glew/2.2.0_1/include -L/Users/zstenger/.brew/Cellar/glew/2.2.0_1/lib -lGLEW -framework OpenGL
+TYPESHIT = -I/Users/zstenger/.brew/Cellar/freetype/2.13.2/include/freetype2 -L/Users/zstenger/.brew/Cellar/freetype/2.13.2/lib -lfreetype
 
 RM		= rm -rf
 CC		= c++
@@ -24,7 +25,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "$(YELLOW)Compiling..$(COLOR_END)"
-	@$(CC) $(CFLAGS) $(GLEWSHIT) $(INCLUDES) $(LDFLAGS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(GLEWSHIT) ${TYPESHIT} $(INCLUDES) $(LDFLAGS) $(OBJS) -o $(NAME)
 	@echo "$(GREEN)The project is compiled..$(COLOR_END)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
@@ -51,6 +52,10 @@ re:
 t:
 	make re
 	./scop resources/42.obj textures/ok.jpg
+
+tp:
+	make re
+	./scop resources/teapot.obj textures/ok.jpg
 
 .PHONY: all clean fclean re test
 

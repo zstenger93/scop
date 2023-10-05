@@ -13,7 +13,21 @@ void MouseHandler::mouseCallback(GLFWwindow* window, double xpos, double ypos) {
 		updateHandler(handler);
 	} else
 		stopRotation(handler);
-	xpos = _xpos, ypos = _ypos;
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
+		double deltaX = _xpos - handler->lastXPos;
+		double deltaY = _ypos - handler->lastYPos;
+
+		float translationSpeed = 0.01f;
+		translateX = -0.0f;
+		translateY = -deltaY * translationSpeed;
+		translateZ = +deltaX * translationSpeed;
+	} else {
+		translateX = 0.0f;
+		translateY = 0.0f;
+		translateZ = 0.0f;
+	}
+	handler->lastXPos = _xpos;
+	handler->lastYPos = _ypos;
 }
 
 void MouseHandler::updatePosition(MouseHandler* handler) {
@@ -55,4 +69,29 @@ void MouseHandler::stopRotation(MouseHandler* handler) {
 	handler->rotationAngleX = 0.0f;
 	handler->rotationAngleY = 0.0f;
 	handler->mouseMoved = false;
+}
+
+void MouseHandler::scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
+	std::cout << "Scroll Offset y: " << yoffset << std::endl;
+	MouseHandler* handler = static_cast<MouseHandler*>(glfwGetWindowUserPointer(window));
+
+	Object* objInstance = handler->object;
+	if (objInstance->zoom - yoffset > 2 && objInstance->zoom - yoffset < 300)
+		objInstance->zoom -= static_cast<float>(yoffset) * objInstance->zoomSpeed;
+}
+
+void Object::rotation(MouseHandler& mouseHandler) {
+	glm::quat rotationX =
+		glm::angleAxis(glm::radians(mouseHandler.rotationAngleX), glm::vec3(1.0f, 0.0f, 0.0f));
+	glm::quat rotationY =
+		glm::angleAxis(glm::radians(mouseHandler.rotationAngleY), glm::vec3(0.0f, 1.0f, 0.0f));
+	glm::quat combinedRotation = rotationY * rotationX;
+	glm::mat4 rotationMatrix = glm::mat4_cast(combinedRotation);
+
+	translationMatrix = glm::translate(
+		glm::mat4(1.0f),
+		glm::vec3(mouseHandler.translateX, mouseHandler.translateY, mouseHandler.translateZ));
+	rotationMatrix = translationMatrix * rotationMatrix;
+
+	glMultMatrixf(glm::value_ptr(rotationMatrix));
 }
