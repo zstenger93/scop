@@ -27,8 +27,11 @@ class Object {
 	float farPlane;
 	glm::mat4 projectionMatrix;
 
-	int triangleCount;
+	// SHADER
+	GLuint shaderProgram;
+
 	// CREATED TRIANGLES BY COMBINING FACES AND VERTICES
+	int triangleCount;
 	std::vector<std::vector<Vertex>> triangles;
 	// GLFW
 	GLFWwindow* window;
@@ -53,6 +56,7 @@ class Object {
 	float centerY;
 	float centerZ;
 
+	// POLYGON MODES
 	bool wireframeMode = false;
 	bool pointMode = false;
 
@@ -94,6 +98,7 @@ class Object {
 	GLuint compileShaderProgram(const char* vertexShaderSource, const char* fragmentShaderSource);
 	void checkShaderCompileStatus(GLuint shader);
 	void checkProgramLinkStatus(GLuint program);
+	void shader();
 };
 
 #endif
