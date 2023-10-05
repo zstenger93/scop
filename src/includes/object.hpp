@@ -95,10 +95,11 @@ class Object {
 	void printMaterialProperties() const;
 	void debugPrint(Object& object) const;
 
+	// SHADER
+	void shader();
 	GLuint compileShaderProgram(const char* vertexShaderSource, const char* fragmentShaderSource);
 	void checkShaderCompileStatus(GLuint shader);
 	void checkProgramLinkStatus(GLuint program);
-	void shader();
 };
 
 #endif
