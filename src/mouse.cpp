@@ -76,7 +76,7 @@ void MouseHandler::scrollCallback(GLFWwindow* window, double xoffset, double yof
 	MouseHandler* handler = static_cast<MouseHandler*>(glfwGetWindowUserPointer(window));
 
 	Object* objInstance = handler->object;
-	if (objInstance->zoom - yoffset > 2 && objInstance->zoom - yoffset < 300)
+	if (objInstance->zoom - yoffset > 2 && objInstance->zoom - yoffset < 200)
 		objInstance->zoom -= static_cast<float>(yoffset) * objInstance->zoomSpeed;
 }
 

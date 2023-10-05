@@ -46,6 +46,7 @@ fclean: clean
 re:
 	@echo "$(YELLOW)Recompiling...$(COLOR_END)"
 	@make fclean
+	@rm -rf ${OBJ_DIR}
 	@make all
 	@echo "$(GREEN)The project has been recompiled.$(COLOR_END)"
 
@@ -56,6 +57,14 @@ t:
 tp:
 	make re
 	./scop resources/teapot.obj textures/ok.jpg
+
+tsk:
+	make re
+	./scop resources/skull.obj textures/ok.jpg
+
+tsp:
+	make re
+	./scop resources/spider.obj textures/ok.jpg
 
 .PHONY: all clean fclean re test
 
