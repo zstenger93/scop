@@ -53,6 +53,8 @@ class Object {
 	float centerY;
 	float centerZ;
 
+	bool wireframeMode = false;
+	bool pointMode = false;
 
    public:
 	glm::mat4 translationMatrix;

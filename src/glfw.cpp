@@ -114,8 +114,29 @@ void Object::renderingLoop(Object& object, glm::vec3& objectCenter, MouseHandler
 		std::cerr << "OpenGL Error: " << error << std::endl;
 	}
 	while (!glfwWindowShouldClose(window)) {
+		if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
+			wireframeMode = true;
+		} else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
+			wireframeMode = false;
+			pointMode = true;
+		} else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
+			wireframeMode = false;
+			pointMode = false;
+		}
+
 		glfwSetScrollCallback(window, MouseHandler::scrollCallback);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		} else {
+			if (wireframeMode) {
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			} else if (pointMode){
+				glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+			}
+		}
+
 		projectionMatrix = glm::perspective(glm::radians(zoom), aspectRatio, nearPlane, farPlane);
 		// glUseProgram(shaderProgram);
 		glTranslatef(objectCenter.x, objectCenter.y, objectCenter.z);
