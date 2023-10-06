@@ -13,6 +13,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <csignal>
 
 #include "stb_image.hpp"
 

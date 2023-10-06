@@ -66,6 +66,10 @@ tsp:
 	make re
 	./scop resources/spider.obj textures/ok.jpg
 
+tsa:
+	make re
+	./scop resources/alienanimal.obj textures/ok.jpg
+
 .PHONY: all clean fclean re test
 
 COLOR_END = \033[0;39m

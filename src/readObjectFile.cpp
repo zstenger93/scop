@@ -1,5 +1,6 @@
 #include "includes/headers.hpp"
 #include "includes/object.hpp"
+#include "includes/errorLog.hpp"
 
 void Object::loadFromObjFile(const std::string& filePath) {
 	std::ifstream objFile(filePath);

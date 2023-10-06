@@ -2,6 +2,7 @@
 #include "includes/mouse.hpp"
 #include "includes/object.hpp"
 #include "includes/shader.hpp"
+#include "includes/errorLog.hpp"
 
 void Object::initGLFW(Object& object) {
 	if (!glfwInit()) {
@@ -53,7 +54,7 @@ void Object::renderingLoop(Object& object, glm::vec3& objectCenter, MouseHandler
 		object.setPolygonMode(object, mouseHandler);
 
 		projectionMatrix = glm::perspective(glm::radians(zoom), aspectRatio, nearPlane, farPlane);
-		// glUseProgram(shaderProgram);
+		glUseProgram(shaderProgram);
 		glTranslatef(objectCenter.x, objectCenter.y, objectCenter.z);
 		object.rotation(mouseHandler);
 		glTranslatef(-objectCenter.x, -objectCenter.y, -objectCenter.z);
