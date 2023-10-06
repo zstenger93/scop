@@ -6,6 +6,9 @@
 #include "stb_image.hpp"
 #define STB_IMAGE_IMPLEMENTATION
 
+#include "shader.hpp"
+#define STB_IMAGE_IMPLEMENTATION
+
 void framebuffer_size_callback(GLFWwindow *window, int width, int heigth);
 void processInput(GLFWwindow *window);
 
@@ -47,46 +50,11 @@ int main(int argc, char **argv) {
 		return -1;
 	}
 
+	glEnable(GL_DEPTH_TEST);
+
 	// SHADER CREATION
 
-	std::string vSS = ReadShaderSource(argv[2]);
-	std::string fSS = ReadShaderSource(argv[3]);
-
-	const char * vertexShaderSource = vSS.c_str();
-	const char * fragmentShaderSource = fSS.c_str();
-
-	int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vertexShader);
-	int success;
-	char infoLog[512];
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-	if (!success) {
-		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-		std::cout << "Vertex shader compilation failed." << std::endl;
-	}
-
-	int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-	glCompileShader(fragmentShader);
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-	if (!success) {
-		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-		std::cout << "Fragment shader compilation failed." << std::endl;
-	}
-
-	int shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-	if (!success) {
-		glGetShaderInfoLog(shaderProgram, 512, NULL, infoLog);
-		std::cout << "Shader program linking failed." << std::endl;
-	}
-
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
+	Shader shader(argv[2], argv[3]);
 
 	// VETICES
 
@@ -147,7 +115,7 @@ int main(int argc, char **argv) {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glUseProgram(shaderProgram);
+		shader.use();
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		// glDrawArrays(GL_TRIANGLES, 0, 3);

@@ -17,7 +17,6 @@
 #include <vector>
 #include <csignal>
 
-
 #define WINDOW_WIDTH 3200
 #define WINDOW_HEIGTH 1800
 
