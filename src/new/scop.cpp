@@ -49,6 +49,8 @@ int main() {
 		return -1;
 	}
 
+	// SHADER CREATION
+
 	int vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 	glCompileShader(vertexShader);
@@ -60,7 +62,7 @@ int main() {
 		std::cout << "Vertex shader compilation failed." << std::endl;
 	}
 
-	int fragmentShader = glCreateShader(GL_VERTEX_SHADER);
+	int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
 	glCompileShader(fragmentShader);
 	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
@@ -82,6 +84,21 @@ int main() {
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
+	// VETICES
+
+	float vertices[] = {-0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f, 0.0f, 0.5f, 0.0f};
+
+	unsigned int VBO, VAO;
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
+	glEnableVertexAttribArray(0);
+
+	// MAIN LOOP FOR RENDERING
+
 	while (!glfwWindowShouldClose(window)) {
 		processInput(window);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -95,6 +112,9 @@ int main() {
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+
 	glfwTerminate();
 	return 0;
 }
