@@ -26,7 +26,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "$(YELLOW)Compiling..$(COLOR_END)"
-	gcc -c src/includes/glad/glad.c -Ilibs
+	@gcc -c src/includes/glad/glad.c -Ilibs
 	@$(CC) $(CFLAGS) $(GLEWSHIT) $(INCLUDES) glad.o $(LDFLAGS) $(OBJS) -o $(NAME)
 	@echo "$(GREEN)The project is compiled..$(COLOR_END)"
 
