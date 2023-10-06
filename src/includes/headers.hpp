@@ -1,6 +1,7 @@
 #ifndef HEADERS_HPP
 #define HEADERS_HPP
 
+#include "stb_image.hpp"
 // #include </Users/zstenger/.brew/Cellar/glew/2.2.0_1/include/GL/glew.h>
 #include </Users/zstenger/.brew/Cellar/glfw/3.3.8/include/GLFW/glfw3.h>
 #include <OpenGL/OpenGL.h>
@@ -16,7 +17,6 @@
 #include <vector>
 #include <csignal>
 
-#include "stb_image.hpp"
 
 #define WINDOW_WIDTH 3200
 #define WINDOW_HEIGTH 1800
