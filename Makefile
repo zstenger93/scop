@@ -1,5 +1,5 @@
 NAME = scop
-CFLAGS =  -Wno-c++11-extensions -std=c++11
+CFLAGS =  -Wno-deprecated-declarations -Wno-c++11-extensions -std=c++11
 LDFLAGS = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib -lglfw -framework OpenGL -framework CoreGraphics -framework CoreFoundation
 INCLUDES = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include
 GLEWSHIT = -I/Users/zstenger/.brew/Cellar/glew/2.2.0_1/include -L/Users/zstenger/.brew/Cellar/glew/2.2.0_1/lib -lGLEW -framework OpenGL
@@ -19,6 +19,7 @@ OBJ_DIR = objects/
 # 		  texture \
 
 SRC = new/scop \
+	  new/shader \
 
 SRCS	= $(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC)))
 OBJS	= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC)))
