@@ -26,6 +26,125 @@ bool firstMouse = true;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
+struct Vertex {
+	float x, y, z, u, v;
+};
+
+struct Triangle {
+	int v1, v2, v3;
+};
+
+void calculateAndNormalizeUV(std::vector<Vertex> &vertices) {
+	// Calculate UV coordinates based on vertex positions
+	for (size_t i = 0; i < vertices.size(); ++i) {
+		Vertex &vertex = vertices[i];
+		// Normalize vertex positions to generate UV coordinates
+		vertex.u = std::fmod(vertex.x, 1.0f);
+		vertex.v = std::fmod(vertex.y, 1.0f);
+
+		if (vertex.u < 0) {
+			vertex.u += 1.0f;
+		}
+		if (vertex.v < 0) {
+			vertex.v += 1.0f;
+		}
+
+		// Normalize UV coordinates closer to 0 or 1
+		if (vertex.u > 0.5f) {
+			vertex.u = 1.0f;
+		} else {
+			vertex.u = 0.0f;
+		}
+		if (vertex.v > 0.5f) {
+			vertex.v = 1.0f;
+		} else {
+			vertex.v = 0.0f;
+		}
+	}
+}
+
+float *loadFromObjFile(const std::string &filename, int &numVertices) {
+	std::ifstream file(filename);
+	std::string line;
+	std::vector<Vertex> vertices;
+	std::vector<Triangle> triangles;
+
+	while (std::getline(file, line)) {
+        std::istringstream iss(line);
+        std::string prefix;
+        iss >> prefix;
+
+        if (prefix == "v") {
+            Vertex vertex;
+            iss >> vertex.x >> vertex.y >> vertex.z;
+            vertex.u = 0.0f;
+            vertex.v = 0.0f;
+            vertices.push_back(vertex);
+        } else if (prefix == "f") {
+            std::vector<int> faceIndices;
+            int index;
+            while (iss >> index) {
+                // OBJ indices start from 1
+                faceIndices.push_back(index - 1);
+            }
+
+            // Create triangles based on the number of vertices in the face
+            for (size_t i = 2; i < faceIndices.size(); ++i) {
+                Triangle triangle;
+                triangle.v1 = faceIndices[0];
+                triangle.v2 = faceIndices[i - 1];
+                triangle.v3 = faceIndices[i];
+                triangles.push_back(triangle);
+            }
+        }
+    }
+
+	calculateAndNormalizeUV(vertices);
+
+	// Combine triangles into a float array
+	numVertices = triangles.size() * 3;			 // Each triangle has 3 vertices
+	float *result = new float[numVertices * 5];	 // Each vertex has 5 values (x, y, z, u, v)
+
+	for (int i = 0; i < numVertices; ++i) {
+    Triangle triangle = triangles[i / 4];
+    Vertex vertex;
+
+    if (i % 3 == 0) {
+        vertex = vertices[triangle.v1];
+    } else if (i % 3 == 1) {
+        vertex = vertices[triangle.v2];
+    } else {
+        vertex = vertices[triangle.v3];
+    }
+
+    // Normalize UV coordinates to [0, 1]
+    float u = vertex.u;
+    float v = vertex.v;
+    
+
+    // Vertex
+    result[i * 5] = vertex.x;
+    result[i * 5 + 1] = vertex.y;
+    result[i * 5 + 2] = vertex.z;
+    result[i * 5 + 3] = u;
+    result[i * 5 + 4] = v;
+}
+	std::string outputFilename = "result.obj";
+	std::ofstream outputFile(outputFilename);
+	if (outputFile.is_open()) {
+		for (int i = 0; i < numVertices; ++i) {
+			outputFile << result[i * 5] << " " << result[i * 5 + 1] << " " << result[i * 5 + 2]
+					   << " " << result[i * 5 + 3] << " " << result[i * 5 + 4] << std::endl;
+		}
+		outputFile.close();
+		std::cout << "Data written to " << outputFilename << std::endl;
+	} else {
+		std::cerr << "Error: Unable to open file " << outputFilename << std::endl;
+	}
+
+	return result;
+}
+
 int main(int argc, char **argv) {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -61,6 +180,9 @@ int main(int argc, char **argv) {
 	Shader shader(argv[2], argv[3]);
 
 	// VETICES
+
+	// int numVertices;
+	// float *vertices = loadFromObjFile(argv[4], numVertices);
 
 	float vertices[] = {-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.5f,	-0.5f, -0.5f, 1.0f, 0.0f,
 						0.5f,  0.5f,  -0.5f, 1.0f, 1.0f, 0.5f,	0.5f,  -0.5f, 1.0f, 1.0f,

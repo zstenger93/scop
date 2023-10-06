@@ -77,7 +77,7 @@ tsa:
 
 tx:
 	make re
-	./scop ../textures/ok.jpg ../src/new/vertexSource.vertex ../src/new/fragmentSource.fragment
+	./scop ../textures/ok.jpg ../src/new/vertexSource.vertex ../src/new/fragmentSource.fragment ../resources/teapot.obj
 
 .PHONY: all clean fclean re test
 
