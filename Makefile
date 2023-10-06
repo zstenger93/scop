@@ -73,6 +73,11 @@ tsa:
 	make re
 	./scop resources/alienanimal.obj textures/ok.jpg
 
+
+tx:
+	make re
+	./scop ../textures/ok.jpg ../src/new/vertexSource.vertex ../src/new/fragmentSource.fragment
+
 .PHONY: all clean fclean re test
 
 COLOR_END = \033[0;39m

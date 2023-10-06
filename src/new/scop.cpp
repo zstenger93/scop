@@ -3,7 +3,7 @@
 #include "../includes/headers.hpp"
 #define STB_IMAGE_IMPLEMENTATION
 
-#include "stb_image.hpp"
+#include "../includes/stb_image.hpp"
 #define STB_IMAGE_IMPLEMENTATION
 
 #include "shader.hpp"

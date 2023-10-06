@@ -16,7 +16,7 @@
 #include <vector>
 
 #include "../includes/glad/glad.h"
-#include "stb_image.hpp"
+// #include "stb_image.hpp"
 
 #define WINDOW_WIDTH 3200
 #define WINDOW_HEIGTH 1800
