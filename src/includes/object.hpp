@@ -84,7 +84,7 @@ class Object {
 	std::vector<std::vector<Vertex>>& getTriangles() { return triangles; }
 	// GLFW
 	GLFWwindow* getWindow() { return window; }
-	void setWindow() { window = glfwCreateWindow(3200, 1800, name.c_str(), NULL, NULL); }
+	void setWindow() { window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGTH, name.c_str(), NULL, NULL); }
 	void initGLFW(Object& object);
 	void runGLFW(Object& object);
 	void setPerspectiveProjection(int width, int height);

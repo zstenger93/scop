@@ -9,13 +9,13 @@ void Object::initGLFW(Object& object) {
 		std::cerr << "Failed to initialize GLFW" << std::endl;
 		return;
 	}
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	object.setWindow();
 	GLFWwindow* window = object.getWindow();
 	if (!window) return glfwTerminate();
 	glfwMakeContextCurrent(window);
-	object.setPerspectiveProjection(3200, 1800);
+	object.setPerspectiveProjection(WINDOW_WIDTH, WINDOW_HEIGTH);
 	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
 	if (err != GLEW_OK) {
@@ -54,10 +54,10 @@ void Object::renderingLoop(Object& object, glm::vec3& objectCenter, MouseHandler
 		object.setPolygonMode(object, mouseHandler);
 
 		projectionMatrix = glm::perspective(glm::radians(zoom), aspectRatio, nearPlane, farPlane);
-		glUseProgram(shaderProgram);
-		glTranslatef(objectCenter.x, objectCenter.y, objectCenter.z);
+		// GLCall(glUseProgram(shaderProgram));
+		// glTranslatef(objectCenter.x, objectCenter.y, objectCenter.z);
 		object.rotation(mouseHandler);
-		glTranslatef(-objectCenter.x, -objectCenter.y, -objectCenter.z);
+		// glTranslatef(-objectCenter.x, -objectCenter.y, -objectCenter.z);
 		object.renderShape();
 		glfwSwapBuffers(window);
 		glfwPollEvents();

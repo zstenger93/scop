@@ -18,7 +18,7 @@ void MouseHandler::mouseCallback(GLFWwindow* window, double xpos, double ypos) {
 		double deltaY = _ypos - handler->lastYPos;
 
 		float translationSpeed = 0.01f;
-		translateX = -0.0f;
+		// translateX = -0.0f;
 		translateY = -deltaY * translationSpeed;
 		translateZ = +deltaX * translationSpeed;
 	} else {
