@@ -12,7 +12,7 @@
 
 ## Setup
 
-Have at least OpenGL 3 or above or elave the page now.
+Have at least OpenGL 3 or above or leave the page now and run for the sake of your sanity.
 
 ## Resources
 
