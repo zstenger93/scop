@@ -1,8 +1,20 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include "headers.hpp"
+/*
+	This class takes the vertexSourceCode and fragmentSourceCode
+	creates the vertex and fragment shader, and combining the 2,
+	creates the shader program.
+	Outside of that:
+		setting for the window:
+			Perspective
+			View
+			Model
+			Settings
+*/
+
 #include "camera.hpp"
+#include "headers.hpp"
 
 class Shader {
    public:
