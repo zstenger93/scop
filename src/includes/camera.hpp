@@ -3,6 +3,12 @@
 
 #include "headers.hpp"
 
+/*
+	Controls zooming, rotating the camera with mouse,
+	moving the camera on x, y and z based on the direction
+	of the camera with wasdqe buttons.
+*/
+
 enum Camera_Movement { FORWARD, BACKWARD, LEFT, RIGHT, UP, DOWN };
 
 const float YAW = -90.0f;
