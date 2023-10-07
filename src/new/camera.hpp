@@ -40,6 +40,7 @@ class Camera {
 	void ProcessKeyboard(Camera_Movement direction, float deltaTime);
 	void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true);
 	void ProcessMouseScroll(float yoffset);
+	void fps(Camera &camera);
 
    private:
 	void updateCameraVectors();

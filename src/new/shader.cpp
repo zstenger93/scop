@@ -77,6 +77,34 @@ void Shader::setMat4(const std::string &name, const glm::mat4 &mat) const {
 	glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 }
 
+void Shader::setPerspective(Camera &camera, Shader &shader) {
+	glm::mat4 projection = glm::perspective(
+		glm::radians(camera.Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGTH, 0.1f, 1000.0f);
+	shader.setMat4("projection", projection);
+}
+
+void Shader::setView(Camera &camera, Shader &shader) {
+	glm::mat4 view = camera.GetViewMatrix();
+	shader.setMat4("view", view);
+}
+
+void Shader::setModel(Camera &camera, Shader &shader) {
+	glm::mat4 model = glm::mat4(1.0f);
+	shader.setMat4("model", model);
+}
+
+void Shader::settings(RenderMode &renderMode, unsigned int &texture) {
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glPolygonMode(GL_FRONT_AND_BACK, (renderMode == WIREFRAME) ? GL_LINE
+										 : (renderMode == POINTS)  ? GL_POINT
+																   : GL_FILL);
+
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture);
+}
+
 void Shader::checkCompileErrors(unsigned int shader, std::string type) {
 	int success;
 	char infoLog[1024];

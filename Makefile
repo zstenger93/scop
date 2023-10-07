@@ -23,6 +23,9 @@ SRC = new/scop \
 	  new/camera \
 	  new/glfw \
 	  new/processObjFile \
+	  new/texture \
+	  new/object \
+	  new/keyPress \
 
 SRCS	= $(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC)))
 OBJS	= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC)))

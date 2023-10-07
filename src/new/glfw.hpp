@@ -1,5 +1,5 @@
-#ifndef SCOP_HPP
-#define SCOP_HPP
+#ifndef GLFW_HPP
+#define GLFW_HPP
 
 #include "../includes/headers.hpp"
 #include "camera.hpp"

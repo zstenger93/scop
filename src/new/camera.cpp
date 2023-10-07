@@ -67,3 +67,9 @@ void Camera::updateCameraVectors() {
 	Right = glm::normalize(glm::cross(Front, WorldUp));
 	Up = glm::normalize(glm::cross(Right, Front));
 }
+
+void Camera::fps(Camera &camera) {
+	float currentFrame = static_cast<float>(glfwGetTime());
+		camera.deltaTime = currentFrame - camera.lastFrame;
+		camera.lastFrame = currentFrame;
+}
