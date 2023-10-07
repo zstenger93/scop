@@ -1,5 +1,5 @@
 NAME = scop
-CFLAGS =  -Wno-deprecated-declarations -Wno-c++11-extensions -std=c++11
+CFLAGS =  -Wno-deprecated-declarations -Wno-macro-redefined -Wno-c++11-extensions -std=c++11
 LDFLAGS = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib -lglfw -framework OpenGL -framework CoreGraphics -framework CoreFoundation
 INCLUDES = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include
 GLEWSHIT = -I/Users/${USER}/.brew/Cellar/glew/2.2.0_1/include -L/Users/${USER}/.brew/Cellar/glew/2.2.0_1/lib -lGLEW -framework OpenGL
@@ -77,7 +77,7 @@ tsa:
 
 tx:
 	make re
-	./scop ../textures/ok.jpg ../src/new/vertexSource.vertex ../src/new/fragmentSource.fragment ../resources/teapot.obj
+	./scop ../textures/ok.jpg ../src/new/vertexSource.vertex ../src/new/fragmentSource.fragment ../resources/spider.obj
 
 .PHONY: all clean fclean re test
 
