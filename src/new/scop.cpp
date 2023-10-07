@@ -76,17 +76,15 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 }
 
 void normalizeTextureCoordinates(std::vector<Vertex> &vertices) {
-	for (auto &vertex : vertices) {
-		if (sqrt(vertex.y * vertex.y) < sqrt(vertex.z * vertex.z)) {
-			float theta = atan2(vertex.z, vertex.x);
-			vertex.texX = (theta + M_PI) / (2.0f * M_PI);
-			vertex.texY = (vertex.y + 1.0f) / 2.0f;
-		} else {
-			float theta = atan2(vertex.y, vertex.x);
-			vertex.texX = (theta + M_PI) / (2.0f * M_PI);
-			vertex.texY = (vertex.z + 1.0f) / 2.0f;
-		}
-	}
+    for (auto &vertex : vertices) {
+        // Calculate theta (horizontal angle) and phi (vertical angle) in spherical coordinates
+        float theta = atan2(vertex.z, vertex.x);
+        float phi = atan2(sqrt(vertex.x * vertex.x + vertex.z * vertex.z), vertex.y);
+
+        // Normalize theta and phi to the range [0, 1] for texture mapping
+        vertex.texX = (theta + M_PI) / (2.0f * M_PI);
+        vertex.texY = (phi + M_PI/2.0f) / M_PI;
+    }
 }
 
 std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, int &triangleCount) {
