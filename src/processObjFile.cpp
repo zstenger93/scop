@@ -1,4 +1,4 @@
-#include "processObjFile.hpp"
+#include "includes/processObjFile.hpp"
 
 std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath) {
 	std::vector<std::vector<int>> faces;

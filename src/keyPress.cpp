@@ -1,4 +1,4 @@
-#include "keyPress.hpp"
+#include "includes/keyPress.hpp"
 
 void keyPressHandler(GLFWwindow *window, RenderMode &renderMode, Camera &camera) {
 	if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS) {

@@ -1,8 +1,8 @@
-#include "render.hpp"
-#include "camera.hpp"
-#include "keyPress.hpp"
+#include "includes/render.hpp"
+#include "includes/camera.hpp"
+#include "includes/keyPress.hpp"
 #define STB_IMAGE_IMPLEMENTATION
-#include "texture.hpp"
+#include "includes/texture.hpp"
 #define STB_IMAGE_IMPLEMENTATION
 
 void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, RenderMode &renderMode,

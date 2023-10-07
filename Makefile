@@ -18,15 +18,15 @@ OBJ_DIR = objects/
 # 		  shader \
 # 		  texture \
 
-SRC = new/scop \
-	  new/shader \
-	  new/camera \
-	  new/glfw \
-	  new/processObjFile \
-	  new/texture \
-	  new/object \
-	  new/keyPress \
-	  new/render \
+SRC = scop \
+	  shader/shader \
+	  camera \
+	  glfw \
+	  processObjFile \
+	  texture \
+	  object \
+	  keyPress \
+	  render \
 
 SRCS	= $(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC)))
 OBJS	= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC)))
@@ -83,7 +83,7 @@ tsa:
 
 tx:
 	make re
-	./scop ../textures/ok.jpg ../src/new/vertexSource.vertex ../src/new/fragmentSource.fragment ../resources/spider.obj
+	./scop ../textures/ok.jpg ../src/shader/vertexSource.vertex ../src/shaderfragmentSource.fragment ../resources/spider.obj
 
 .PHONY: all clean fclean re test
 

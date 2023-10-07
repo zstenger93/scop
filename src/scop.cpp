@@ -1,19 +1,19 @@
 #include <OpenGL/OpenGL.h>
 
-#include "../includes/headers.hpp"
-#include "../includes/stb_image.hpp"
+#include "includes/headers.hpp"
+#include "includes/stb_image.hpp"
 #define STB_IMAGE_IMPLEMENTATION
-#include "shader.hpp"
+#include "includes/shader.hpp"
 #define STB_IMAGE_IMPLEMENTATION
-#include "glfw.hpp"
+#include "includes/glfw.hpp"
 #define STB_IMAGE_IMPLEMENTATION
-#include "processObjFile.hpp"
+#include "includes/processObjFile.hpp"
 #define STB_IMAGE_IMPLEMENTATION
-#include "texture.hpp"
+#include "includes/texture.hpp"
 #define STB_IMAGE_IMPLEMENTATION
-#include "object.hpp"
+#include "includes/object.hpp"
 #define STB_IMAGE_IMPLEMENTATION
-#include "render.hpp"
+#include "includes/render.hpp"
 #define STB_IMAGE_IMPLEMENTATION
 
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));

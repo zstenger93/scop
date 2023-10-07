@@ -1,8 +1,4 @@
-#include "glfw.hpp"
-
-
-
-
+#include "includes/glfw.hpp"
 
 void initGLFW() {
 	glfwInit();
@@ -37,4 +33,3 @@ GLFWwindow *createWindow() {
 	glEnable(GL_DEPTH_TEST);
 	return window;
 }
-
