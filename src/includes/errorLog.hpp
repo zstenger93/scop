@@ -3,6 +3,14 @@
 
 #include "headers.hpp"
 
+/*
+	You can wrap this beauty around functions which ones aren't
+	returning anything (otherwise you won't have access to the
+	returned value) and it will clear the OpenGL error until
+	that point, if any. Then catch, immediatly print the error
+	and exit the program.
+*/
+
 #define ASSERT(x)       \
 	if (!(x)) {         \
 		raise(SIGTRAP); \
@@ -24,7 +32,6 @@ static bool GLLogCall(const char *function, const char *file, int line) {
 				  << std::endl;
 		return false;
 	}
-	// std::cout << "No errors have been found!" << std::endl;
 	return true;
 }
 

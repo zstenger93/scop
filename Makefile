@@ -83,7 +83,7 @@ tsa:
 
 tx:
 	make re
-	./scop ../textures/ok.jpg ../src/shader/vertexSource.vertex ../src/shader/fragmentSource.fragment ../resources/spider.obj
+	./scop ../textures/ok.jpg ../src/shader/vertexSource.vertex ../src/shader/fragmentSource.fragment ../resources/42.obj
 
 .PHONY: all clean fclean re test
 
