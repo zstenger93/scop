@@ -1,10 +1,13 @@
 #ifndef GLFW_HPP
 #define GLFW_HPP
 
-#include "headers.hpp"
 #include "camera.hpp"
+#include "headers.hpp"
 
-
+/*
+    setting up GLFW and creating the first window, other
+    than that mouse handling functions.
+*/
 
 void initGLFW();
 GLFWwindow *createWindow();
