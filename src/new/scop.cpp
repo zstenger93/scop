@@ -76,38 +76,17 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 }
 
 void normalizeTextureCoordinates(std::vector<Vertex> &vertices) {
-	// Find the minimum and maximum values for texX and texY
-	auto minmaxX =
-		std::minmax_element(vertices.begin(), vertices.end(),
-							[](const Vertex &a, const Vertex &b) { return a.texX < b.texX; });
-
-	auto minmaxY =
-		std::minmax_element(vertices.begin(), vertices.end(),
-							[](const Vertex &a, const Vertex &b) { return a.texY < b.texY; });
-
-	float texXMin = minmaxX.first->texX;
-	float texXMax = minmaxX.second->texX;
-
-	float texYMin = minmaxY.first->texY;
-	float texYMax = minmaxY.second->texY;
-
-	// If the range is non-zero, normalize, else set to 0 or 1
-	float texXRange = (texXMax - texXMin > 0.5) ? 1.0f : 0.0f;
-	float texYRange = (texYMax - texYMin > 0.5) ? 1.0f : 0.0f;
-
-	// Normalize texX and texY coordinates
-	std::for_each(vertices.begin(), vertices.end(),
-				  [texXMin, texYMin, texXRange, texYRange](Vertex &vertex) {
-					  if (sqrt(vertex.y * vertex.y) < sqrt(vertex.z * vertex.z)) {
-						  float theta = atan2(vertex.z, vertex.x);
-						  vertex.texX = (theta + M_PI) / (2.0f * M_PI);
-						  vertex.texY = (vertex.y + 1.0f) / 2.0f;
-					  } else {
-						  float theta = atan2(vertex.y, vertex.x);
-						  vertex.texX = (theta + M_PI) / (2.0f * M_PI);
-						  vertex.texY = (vertex.z + 1.0f) / 2.0f;
-					  }
-				  });
+	for (auto &vertex : vertices) {
+		if (sqrt(vertex.y * vertex.y) < sqrt(vertex.z * vertex.z)) {
+			float theta = atan2(vertex.z, vertex.x);
+			vertex.texX = (theta + M_PI) / (2.0f * M_PI);
+			vertex.texY = (vertex.y + 1.0f) / 2.0f;
+		} else {
+			float theta = atan2(vertex.y, vertex.x);
+			vertex.texX = (theta + M_PI) / (2.0f * M_PI);
+			vertex.texY = (vertex.z + 1.0f) / 2.0f;
+		}
+	}
 }
 
 std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, int &triangleCount) {
