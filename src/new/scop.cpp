@@ -153,6 +153,52 @@ void separateTrianglesAndSquares(const std::vector<std::vector<Vertex>> &objects
 	}
 }
 
+std::vector<float> convertSquaresToTriangles(const std::vector<float>& Squares) {
+    std::vector<float> triangles;
+
+    // Iterate through Squares, converting each square into two triangles
+    for (size_t i = 0; i < Squares.size(); i += 20) {
+        // Extract vertices of the square
+        float x1 = Squares[i];
+        float y1 = Squares[i + 1];
+        float z1 = Squares[i + 2];
+        float texX1 = Squares[i + 3];
+        float texY1 = Squares[i + 4];
+
+        float x2 = Squares[i + 5];
+        float y2 = Squares[i + 6];
+        float z2 = Squares[i + 7];
+        float texX2 = Squares[i + 8];
+        float texY2 = Squares[i + 9];
+
+        float x3 = Squares[i + 10];
+        float y3 = Squares[i + 11];
+        float z3 = Squares[i + 12];
+        float texX3 = Squares[i + 13];
+        float texY3 = Squares[i + 14];
+
+        float x4 = Squares[i + 15];
+        float y4 = Squares[i + 16];
+        float z4 = Squares[i + 17];
+        float texX4 = Squares[i + 18];
+        float texY4 = Squares[i + 19];
+
+        // Convert square to triangles
+        // First triangle: (x1, y1, z1), (x2, y2, z2), (x3, y3, z3)
+        triangles.insert(triangles.end(), {x1, y1, z1, texX1, texY1,
+                                           x2, y2, z2, texX2, texY2,
+                                           x3, y3, z3, texX3, texY3});
+        
+        // Second triangle: (x1, y1, z1), (x3, y3, z3), (x4, y4, z4)
+        triangles.insert(triangles.end(), {x1, y1, z1, texX1, texY1,
+                                           x3, y3, z3, texX3, texY3,
+                                           x4, y4, z4, texX4, texY4});
+    }
+
+    return triangles;
+}
+
+
 int main(int argc, char **argv) {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -191,8 +237,11 @@ int main(int argc, char **argv) {
 	std::vector<std::vector<Vertex>> objects = processObjFile(argv[4], numVertices);
 
 	std::vector<float> Triangles;
-	std::vector<float> Squares;
-	separateTrianglesAndSquares(objects, Triangles, Squares);
+	std::vector<float> unpreaparedSquares;
+
+	separateTrianglesAndSquares(objects, Triangles, unpreaparedSquares);
+	std::vector<float> Squares = convertSquaresToTriangles(unpreaparedSquares);
+
 
 	// VAO AND VBO
 	unsigned int VAO_triangles, VBO_triangles, VAO_squares, VBO_squares;
@@ -302,7 +351,7 @@ int main(int argc, char **argv) {
 		glDrawArrays(GL_TRIANGLES, 0, Triangles.size());
 
 		glBindVertexArray(VAO_squares);
-		glDrawArrays(GL_QUADS, 0, Squares.size());
+		glDrawArrays(GL_TRIANGLES, 0, Squares.size());
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
