@@ -1,7 +1,7 @@
 #ifndef PROCESSOBJFILE_HPP
 #define PROCESSOBJFILE_HPP
 
-#include "../includes/headers.hpp"
+#include "headers.hpp"
 
 void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> &faces,
 					 std::vector<Vertex> &vertices);

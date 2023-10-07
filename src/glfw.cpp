@@ -1,65 +1,40 @@
-#include "includes/headers.hpp"
-#include "includes/mouse.hpp"
-#include "includes/object.hpp"
-#include "includes/shader.hpp"
-#include "includes/errorLog.hpp"
+#include "glfw.hpp"
 
-void Object::initGLFW(Object& object) {
-	if (!glfwInit()) {
-		std::cerr << "Failed to initialize GLFW" << std::endl;
-		return;
-	}
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-	object.setWindow();
-	GLFWwindow* window = object.getWindow();
-	if (!window) return glfwTerminate();
-	glfwMakeContextCurrent(window);
-	object.setPerspectiveProjection(WINDOW_WIDTH, WINDOW_HEIGTH);
-	glewExperimental = GL_TRUE;
-	GLenum err = glewInit();
-	if (err != GLEW_OK) {
-		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+
+
+
+
+void initGLFW() {
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	// apple specific bullshit
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+}
+
+GLFWwindow *createWindow() {
+	GLFWwindow *window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGTH, "windowtitle", NULL, NULL);
+	if (window == NULL) {
+		std::cout << "Failed to create the window" << std::endl;
+		glfwTerminate();
 		exit(-1);
 	}
-}
+	glfwMakeContextCurrent(window);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetCursorPosCallback(window, mouse_callback);
+	glfwSetScrollCallback(window, scroll_callback);
 
-void Object::runGLFW(Object& object) {
-	GLFWwindow* window = object.getWindow();
-	MouseHandler mouseHandler;
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	mouseHandler.object = &object;
-	object.loadTexture("textures/ok.jpg");
-	glfwSetWindowUserPointer(window, &mouseHandler);
-	glfwSetCursorPosCallback(window, [](GLFWwindow* window, double xpos, double ypos) {
-		MouseHandler* handler = static_cast<MouseHandler*>(glfwGetWindowUserPointer(window));
-		handler->mouseCallback(window, xpos, ypos);
-	});
-	glfwSetScrollCallback(window, MouseHandler::scrollCallback);
-	glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glEnable(GL_DEPTH_TEST);
-	object.centering();
-	glm::vec3 objectCenter(centerX, centerY, centerZ);
-	object.renderingLoop(object, objectCenter, mouseHandler);
-	glfwTerminate();
-}
-
-void Object::renderingLoop(Object& object, glm::vec3& objectCenter, MouseHandler& mouseHandler) {
-	GLFWwindow* window = object.getWindow();
-
-	object.shader();
-
-	while (!glfwWindowShouldClose(window)) {
-		object.setPolygonMode(object, mouseHandler);
-
-		projectionMatrix = glm::perspective(glm::radians(zoom), aspectRatio, nearPlane, farPlane);
-		// GLCall(glUseProgram(shaderProgram));
-		// glTranslatef(objectCenter.x, objectCenter.y, objectCenter.z);
-		object.rotation(mouseHandler);
-		// glTranslatef(-objectCenter.x, -objectCenter.y, -objectCenter.z);
-		object.renderShape();
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		std::cout << "Failed to initialize GLAD" << std::endl;
+		glfwTerminate();
+		exit(-1);
 	}
+
+	glEnable(GL_DEPTH_TEST);
+	return window;
 }
+

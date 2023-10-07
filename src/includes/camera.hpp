@@ -1,7 +1,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "../includes/headers.hpp"
+#include "headers.hpp"
 
 enum Camera_Movement { FORWARD, BACKWARD, LEFT, RIGHT, UP, DOWN };
 

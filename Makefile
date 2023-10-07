@@ -26,6 +26,7 @@ SRC = new/scop \
 	  new/texture \
 	  new/object \
 	  new/keyPress \
+	  new/render \
 
 SRCS	= $(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC)))
 OBJS	= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC)))
