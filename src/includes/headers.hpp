@@ -22,4 +22,10 @@
 #define WINDOW_WIDTH 3200
 #define WINDOW_HEIGTH 1800
 
+enum RenderMode { WIREFRAME, POINTS, FILLED };
+
+struct Vertex {
+	float x, y, z, texX, texY;
+};
+
 #endif

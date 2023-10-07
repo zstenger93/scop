@@ -21,6 +21,8 @@ OBJ_DIR = objects/
 SRC = new/scop \
 	  new/shader \
 	  new/camera \
+	  new/glfw \
+	  new/processObjFile \
 
 SRCS	= $(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC)))
 OBJS	= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC)))
