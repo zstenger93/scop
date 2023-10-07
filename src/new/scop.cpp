@@ -60,7 +60,7 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 				if (stream.peek() == '/') {
 					stream.ignore();
 					if (stream.peek() != ' ' && stream >> index) {
-						// Read texture coordinates (if present) and ignore normals
+						
 					}
 				}
 			}
@@ -75,15 +75,16 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 	objFile.close();
 }
 
+
 void normalizeTextureCoordinates(std::vector<Vertex> &vertices) {
     for (auto &vertex : vertices) {
-        // Calculate theta (horizontal angle) and phi (vertical angle) in spherical coordinates
+        // Calculate spherical coordinates
         float theta = atan2(vertex.z, vertex.x);
-        float phi = atan2(sqrt(vertex.x * vertex.x + vertex.z * vertex.z), vertex.y);
+        float phi = acos(vertex.y / sqrt(vertex.x * vertex.x + vertex.y * vertex.y + vertex.z * vertex.z));
 
         // Normalize theta and phi to the range [0, 1] for texture mapping
         vertex.texX = (theta + M_PI) / (2.0f * M_PI);
-        vertex.texY = (phi + M_PI/2.0f) / M_PI;
+        vertex.texY = phi / M_PI;
     }
 }
 
@@ -278,7 +279,7 @@ int main(int argc, char **argv) {
 		} else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
 			renderMode = FILLED;
 		}
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glPolygonMode(GL_FRONT_AND_BACK, (renderMode == WIREFRAME) ? GL_LINE
