@@ -9,15 +9,6 @@ CC		= c++
 SRC_DIR = src/
 OBJ_DIR = objects/
 
-# SRC		= scop \
-# 		  readObjectFile \
-# 		  object \
-# 		  glfw \
-# 		  debugPrint \
-# 		  mouse \
-# 		  shader \
-# 		  texture \
-
 SRC = scop \
 	  shader/shader \
 	  camera \
@@ -83,7 +74,7 @@ tsa:
 
 tx:
 	make re
-	./scop ../textures/ok.jpg ../src/shader/vertexSource.vertex ../src/shader/fragmentSource.fragment ../resources/42.obj
+	./scop ../textures/wood.jpeg ../src/shader/vertexSource.vertex ../src/shader/fragmentSource.fragment ../resources/42.obj
 
 .PHONY: all clean fclean re test
 
