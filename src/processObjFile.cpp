@@ -56,21 +56,27 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 		} else if (prefix == "vn") {
 		} else if (prefix == "vt") {
 		} else if (prefix == "f") {
-        while (stream >> index) {
-            faceIndices.push_back(index - 1); // Convert 1-based index to 0-based index
-            stream.ignore(256, '/'); // Ignore until the next slash
+			while (stream >> index) {
+				faceIndices.push_back(index);  // Convert 1-based index to 0-based index
 
-            // Ignore textureCoordinateIndex and normalIndex
-            stream.ignore(256, '/');
-            stream.ignore(256, ' ');
-        }
+				if (stream.peek() == '/') {
+					stream.ignore();
+					// Ignore textureCoordinateIndex and normalIndex
+					stream.ignore(256, '/');
+					stream.ignore(256, ' ');
+				} else {
+					// If no textureCoordinateIndex and normalIndex are provided, ignore until the
+					// next space
+					stream.ignore(256, ' ');
+				}
+			}
 
-        if (faceIndices.size() >= 3) {
-            faces.push_back(faceIndices);
-        } else {
-            std::cerr << "Invalid face with " << faceIndices.size()
-                      << " indices encountered. Ignoring.\n";
-        }
+			if (faceIndices.size() >= 3) {
+				faces.push_back(faceIndices);
+			} else {
+				std::cerr << "Invalid face with " << faceIndices.size()
+						  << " indices encountered. Ignoring.\n";
+			}
 		}
 	}
 	objFile.close();
@@ -106,7 +112,8 @@ void separateTrianglesAndSquares(const std::vector<std::vector<Vertex>> &objects
 				Squares.push_back(vertex.texY);
 			}
 		} else
-			std::cerr << "Invalid shape detected! Shape must have 3 or 4 vertices. " << shape.size() << std::endl;
+			std::cerr << "Invalid shape detected! Shape must have 3 or 4 vertices. " << shape.size()
+					  << std::endl;
 	}
 }
 
