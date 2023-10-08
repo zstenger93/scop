@@ -11,7 +11,7 @@
 void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, RenderMode &renderMode,
 				   unsigned int &texture, unsigned int &VAO_triangles, unsigned int &VAO_squares,
 				   std::vector<float> &Triangles, std::vector<float> &Squares) {
-	int version = 3;
+	int version = 1;
 	glm::vec3 color(1.0f, 0.0f, 0.0f);
 	while (!glfwWindowShouldClose(window)) {
 		camera.fps(camera);
@@ -21,6 +21,7 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, RenderMod
 		glm::mat4 model = keyPressHandler_ObjectCenterRotation(window, Triangles, Squares, model);
 		keyPressHandler_Color_OR_Texture(window, version);
 		keyPressHandler_SetColor(window, color);
+		keyPressHandler_SetColorVersion(window, version);
 		shader.settings(renderMode, texture);
 		shader.use();
 		shader.setTexture_OR_setColor(shader, version, color);

@@ -42,6 +42,7 @@ void keyPressHandler_Camera_Speed(GLFWwindow *window, Camera &camera);
 void keyPressHandler_PolygonModes(GLFWwindow *window, RenderMode &renderMode);
 void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version);
 void keyPressHandler_SetColor(GLFWwindow *window, glm::vec3 &color);
+void keyPressHandler_SetColorVersion(GLFWwindow *window, int &version);
 glm::mat4 keyPressHandler_ObjectCenterRotation(GLFWwindow *window, std::vector<float> &Triangles,
 											   std::vector<float> &Squares, glm::mat4 &model);
 glm::vec3 calculateCenter(const std::vector<float> &triangles);
