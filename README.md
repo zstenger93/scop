@@ -49,9 +49,9 @@ Handling keypress events as:
 				6:	changing the value of B
 			V:		texture mode
 			B:		texture versions
-				-texture
-				-color
-				-mixture between texture and color
+						-texture
+						-color
+						-mixture between texture and color
 ```
 
 ## Resources
