@@ -15,6 +15,6 @@ void main() {
 	} else if (useTexture == 2) {
 		FragColor = vec4(objectColor, 1.0);	
 	} else if (useTexture == 3) {
-		FragColor = mix(texture(texture1, TexCoord), vec4(objectColor, 0.5), 0.15);
+		FragColor = mix(texture(texture1, TexCoord), vec4(objectColor, 1.0), 0.15);
 	}
 }
