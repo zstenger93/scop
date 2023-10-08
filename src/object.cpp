@@ -1,7 +1,7 @@
 #include "includes/object.hpp"
 
-void createVaoVbo(unsigned int VAO_triangles, unsigned int VAO_squares, unsigned int VBO_triangles,
-				  unsigned int VBO_squares, std::vector<float> &Squares,
+void createVaoVbo(unsigned int &VAO_triangles, unsigned int &VAO_squares, unsigned int &VBO_triangles,
+				  unsigned int &VBO_squares, std::vector<float> &Squares,
 				  std::vector<float> &Triangles) {
 	// Initialize VAOs and VBOs for triangles and squares
 	// Generate VAO and VBO for triangles
