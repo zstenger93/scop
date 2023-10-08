@@ -21,9 +21,7 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, RenderMod
 		keyPressHandler_SetColor(window, color);
 		shader.settings(renderMode, texture);
 		shader.use();
-
 		shader.setTexture_OR_setColor(shader, version, color);
-
 		shader.setPerspective(camera, shader);
 		shader.setView(camera, shader);
 		shader.setModel(camera, shader, model);

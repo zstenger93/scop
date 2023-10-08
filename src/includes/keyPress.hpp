@@ -25,6 +25,12 @@
 			1: 		wireframe
 			2:		points
 			3:		filled
+		Switching beteewen texture and color:
+			C:		color mode
+				4:	changing the value of R
+				5:	changing the value of G
+				6:	changing the value of B
+			V:		texture mode
 */
 
 #include "camera.hpp"
