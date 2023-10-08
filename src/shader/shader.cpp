@@ -88,22 +88,20 @@ void Shader::setView(Camera &camera, Shader &shader) {
 	shader.setMat4("view", view);
 }
 
-void Shader::setModel(Camera &camera, Shader &shader) {
-	// glm::mat4 model = glm::mat4(1.0f);
-	// shader.setMat4("model", model);
-	
+void Shader::setModel(Camera &camera, Shader &shader, glm::mat4 &model) {
+	shader.setMat4("model", model);
 }
 
 void Shader::settings(RenderMode &renderMode, unsigned int &texture) {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glPolygonMode(GL_FRONT_AND_BACK, (renderMode == WIREFRAME) ? GL_LINE
-										 : (renderMode == POINTS)  ? GL_POINT
-																   : GL_FILL);
+	glPolygonMode(GL_FRONT_AND_BACK, (renderMode == WIREFRAME) ? GL_LINE
+									 : (renderMode == POINTS)  ? GL_POINT
+															   : GL_FILL);
 
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
 }
 
 void Shader::checkCompileErrors(unsigned int shader, std::string type) {

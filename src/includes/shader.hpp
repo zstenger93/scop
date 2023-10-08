@@ -36,7 +36,7 @@ class Shader {
 	void setMat4(const std::string &name, const glm::mat4 &mat) const;
 	void setPerspective(Camera &camera, Shader &shader);
 	void setView(Camera &camera, Shader &shader);
-	void setModel(Camera &camera, Shader &shader);
+	void setModel(Camera &camera, Shader &shader, glm::mat4 &model);
 	void settings(RenderMode &renderMode, unsigned int &texture);
 
    private:
