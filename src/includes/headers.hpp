@@ -31,4 +31,8 @@ struct Vertex {
 	float x, y, z, texX, texY;
 };
 
+struct Normal {
+
+};
+
 #endif
