@@ -94,8 +94,9 @@ void separateTrianglesAndSquares(const std::vector<std::vector<Vertex>> &objects
 				Squares.push_back(vertex.texY);
 			}
 		} else
-			std::cerr << "Invalid shape detected! Shape must have 3 or 4 vertices. " << shape.size()
-					  << std::endl;
+			;
+			// std::cerr << "Invalid shape detected! Shape must have 3 or 4 vertices. " << shape.size()
+			// 		  << std::endl;
 	}
 }
 
@@ -104,6 +105,7 @@ std::vector<float> convertSquaresToTriangles(const std::vector<float> &Squares) 
 	std::vector<float> triangles;
 
 	for (size_t i = 0; i < Squares.size(); i += 20) {
+		if (Squares.size() == 0) break;
 		float x1 = Squares[i];
 		float y1 = Squares[i + 1];
 		float z1 = Squares[i + 2];

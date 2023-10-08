@@ -22,6 +22,7 @@ OBJECT_ARMOR = ../resources/armor.obj
 OBJECT_ALIENANIMAL = ../resources/alienanimal.obj
 OBJECT_BUILDING = ../resources/building.obj
 OBJECT_STARWARS = ../resources/sw.obj
+OBJECT_HEILBRONN = ../resources/hb.obj
 
 REBUILD = make re
 RM		= rm -rf
@@ -78,7 +79,7 @@ re:
 
 tp:
 	@${REBUILD}
-	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_TEAPOT}
+	${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_TEAPOT}
 
 sp:
 	@${REBUILD}
@@ -107,6 +108,10 @@ bf:
 sw:
 	@${REBUILD}
 	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_STARWARS}
+
+hb:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_HEILBRONN}
 
 .PHONY: all clean fclean re test
 
