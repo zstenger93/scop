@@ -16,7 +16,7 @@ void keyPressHandler_Camera_wasdSpaceX(GLFWwindow *window, Camera &camera) {
 		camera.ProcessKeyboard(DOWN, camera.deltaTime);
 }
 
-void keyPressHandler_Camera_Speed(GLFWwindow *window, RenderMode &renderMode, Camera &camera) {
+void keyPressHandler_Camera_Speed(GLFWwindow *window, Camera &camera) {
 	if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS) {
 		camera.MovementSpeed -= camera.changeSpeed;
 		if (camera.MovementSpeed < 1.0f) camera.MovementSpeed = 1.0f;
@@ -31,6 +31,11 @@ void keyPressHandler_PolygonModes(GLFWwindow *window, RenderMode &renderMode, Ca
 		renderMode = POINTS;
 	} else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
 		renderMode = FILLED;
+}
+
+void keyPressHandler_Color_OR_Texture(GLFWwindow *window, Camera &camera, int &version) {
+	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) version = 0;
+	if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS) version = 1;
 }
 
 float rotationX = 0.0f;

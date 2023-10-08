@@ -99,9 +99,14 @@ void Shader::settings(RenderMode &renderMode, unsigned int &texture) {
 	glPolygonMode(GL_FRONT_AND_BACK, (renderMode == WIREFRAME) ? GL_LINE
 									 : (renderMode == POINTS)  ? GL_POINT
 															   : GL_FILL);
-
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
+}
+
+void Shader::setTexture_OR_setColor(Shader &shader, int &version) {
+	shader.setInt("useTexture", version);
+	shader.setInt("texture", 0);
+	shader.setVec3("objectColor", glm::vec3(1.0f, 0.0f, 0.0f));
 }
 
 void Shader::checkCompileErrors(unsigned int shader, std::string type) {

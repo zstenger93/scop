@@ -38,6 +38,7 @@ class Shader {
 	void setView(Camera &camera, Shader &shader);
 	void setModel(Camera &camera, Shader &shader, glm::mat4 &model);
 	void settings(RenderMode &renderMode, unsigned int &texture);
+	void setTexture_OR_setColor(Shader &shader, int &version);
 
    private:
 	void checkCompileErrors(unsigned int shader, std::string type);
