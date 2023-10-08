@@ -4,20 +4,41 @@ LDFLAGS = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib -lglfw -framework OpenGL 
 INCLUDES = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include
 GLEWSHIT = -I/Users/${USER}/.brew/Cellar/glew/2.2.0_1/include -L/Users/${USER}/.brew/Cellar/glew/2.2.0_1/lib -lGLEW -framework OpenGL
 
+GLAD = glad.o
+GLADLIB = gcc -c src/includes/glad/glad.c -Ilibs
+
+# change the files here for the cases
+TEXTURE_NAME = ok
+EXEC = ./scop
+VERTEX_SOURCE = ../src/shader/vertexSource.vertex
+FRAGMENT_SOURCE = ../src/shader/fragmentSource.fragment
+TEXTURE = ../textures/${TEXTURE_NAME}.jpeg
+OBJECT_42 = ../resources/42.obj
+OBJECT_TEAPOT = ../resources/teapot.obj
+OBJECT_SPIDER = ../resources/spider.obj
+OBJECT_SKULL = ../resources/skull.obj
+OBJECT_AXE = ../resources/axe.obj
+OBJECT_ARMOR = ../resources/armor.obj
+OBJECT_ALIENANIMAL = ../resources/alienanimal.obj
+OBJECT_BUILDING = ../resources/building.obj
+OBJECT_STARWARS = ../resources/sw.obj
+
+REBUILD = make re
 RM		= rm -rf
 CC		= c++
 SRC_DIR = src/
 OBJ_DIR = objects/
 
 SRC = scop \
-	  shader/shader \
-	  camera \
 	  glfw \
-	  processObjFile \
-	  texture \
-	  object \
-	  keyPress \
+	  camera \
 	  render \
+	  object \
+	  texture \
+	  keyPress \
+	  renderText \
+	  shader/shader \
+	  processObjFile \
 
 SRCS	= $(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC)))
 OBJS	= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC)))
@@ -25,8 +46,8 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "$(YELLOW)Compiling..$(COLOR_END)"
-	@gcc -c src/includes/glad/glad.c -Ilibs
-	@$(CC) $(CFLAGS) $(GLEWSHIT) $(INCLUDES) glad.o $(LDFLAGS) $(OBJS) -o $(NAME)
+	@${GLAD_LIB}
+	@$(CC) $(CFLAGS) $(GLEWSHIT) $(INCLUDES) ${GLAD} $(LDFLAGS) $(OBJS) -o $(NAME)
 	@echo "$(GREEN)The project is compiled..$(COLOR_END)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
@@ -51,30 +72,41 @@ re:
 	@make all
 	@echo "$(GREEN)The project has been recompiled.$(COLOR_END)"
 
-t:
-	make re
-	./scop resources/42.obj textures/ok.jpg
+42:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_42}
 
 tp:
-	make re
-	./scop resources/teapot.obj textures/ok.jpg
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_TEAPOT}
 
-tsk:
-	make re
-	./scop resources/skull.obj textures/ok.jpg
+sp:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_SPIDER}
 
-tsp:
-	make re
-	./scop resources/spider.obj textures/ok.jpg
+sk:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_SKULL}
 
-tsa:
-	make re
-	./scop resources/alienanimal.obj textures/ok.jpg
+ax:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_AXE}
 
+am:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_ARMOR}
 
-tx:
-	make re
-	./scop ../textures/uvmap.jpeg ../src/shader/vertexSource.vertex ../src/shader/fragmentSource.fragment ../resources/armor.obj
+an:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_ALIENANIMAL}
+
+bf:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_BUILDING}
+
+sw:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_STARWARS}
 
 .PHONY: all clean fclean re test
 

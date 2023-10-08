@@ -30,8 +30,6 @@ int main(int argc, char **argv) {
 	separateTrianglesAndSquares(objects, Triangles, unpreaparedSquares);
 	Squares = convertSquaresToTriangles(unpreaparedSquares);
 
-	
-
 	unsigned int VAO_triangles, VBO_triangles, VAO_squares, VBO_squares;
 	createVaoVbo(VAO_triangles, VAO_squares, VBO_triangles, VBO_squares, Squares, Triangles);
 

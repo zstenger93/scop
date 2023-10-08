@@ -5,11 +5,13 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "includes/texture.hpp"
 #define STB_IMAGE_IMPLEMENTATION
+#include "includes/renderText.hpp"
+#define STB_IMAGE_IMPLEMENTATION
 
 void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, RenderMode &renderMode,
 				   unsigned int &texture, unsigned int &VAO_triangles, unsigned int &VAO_squares,
 				   std::vector<float> &Triangles, std::vector<float> &Squares) {
-	int version = 1;
+	int version = 3;
 	glm::vec3 color(1.0f, 0.0f, 0.0f);
 	while (!glfwWindowShouldClose(window)) {
 		camera.fps(camera);

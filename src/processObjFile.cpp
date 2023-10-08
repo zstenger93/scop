@@ -58,8 +58,7 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 			if (faceIndices.size() >= 3) {
 				faces.push_back(faceIndices);
 			} else
-				std::cerr << "Invalid face with " << faceIndices.size()
-						  << " indices encountered. Ignoring.\n";
+				std::cerr << "Invalid face with " << faceIndices.size() << " Ignoring.\n";
 		}
 	}
 	objFile.close();
@@ -100,7 +99,7 @@ void separateTrianglesAndSquares(const std::vector<std::vector<Vertex>> &objects
 	}
 }
 
-// our daily sponsor is deprecated functions, no i haven't spent on this one day at all
+// our daily sponsor is deprecated functions, no i haven't spent on this one day at all, noo..
 std::vector<float> convertSquaresToTriangles(const std::vector<float> &Squares) {
 	std::vector<float> triangles;
 

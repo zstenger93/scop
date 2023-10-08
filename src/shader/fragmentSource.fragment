@@ -12,7 +12,9 @@ uniform vec3 objectColor;
 void main() {
 	if (useTexture == 1) {
 		FragColor = texture(texture1, TexCoord);
-	} else {
+	} else if (useTexture == 2) {
 		FragColor = vec4(objectColor, 1.0);	
+	} else if (useTexture == 3) {
+		FragColor = mix(texture(texture1, TexCoord), vec4(objectColor, 0.5), 0.25);
 	}
 }
