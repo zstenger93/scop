@@ -23,16 +23,16 @@ Handling keypress events as:
 		Camera movement:
 			W:		move camera forward
 			A:		move camera left
-			S:		move camera backwards
+			S:			move camera backwards
 			D:		move camera right
 			X:		move camera down
-			SPACE:	move camera up
-			8:		incrase camera movement speed
-			9:		decrase camera movement speed
+			SPACE:		move camera up
+			8:			incrase camera movement speed
+			9:			decrase camera movement speed
 		Object Rotation:
-			I:		rotates the object left on X axis
+			I:			rotates the object left on X axis
 			K:		rotates the object right on X axis
-			J:		rotates the object left on Y axis
+			J:			rotates the object left on Y axis
 			L:		rotates the object right on Y axis
 			U:		rotates the object left on Z axis
 			O:		rotates the object right on Z axis
@@ -40,8 +40,8 @@ Handling keypress events as:
 			N:		reduces the speed
 		Polygon Mode:
 			1: 		wireframe
-			2:		points
-			3:		filled
+			2:			points
+			3:			filled
 ```
 
 ## Resources

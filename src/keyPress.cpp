@@ -1,15 +1,30 @@
 #include "includes/keyPress.hpp"
 
-void keyPressHandler_Camera(GLFWwindow *window, RenderMode &renderMode, Camera &camera) {
+void keyPressHandler_Camera_wasdSpaceX(GLFWwindow *window, Camera &camera) {
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) glfwSetWindowShouldClose(window, true);
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		camera.ProcessKeyboard(FORWARD, camera.deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		camera.ProcessKeyboard(BACKWARD, camera.deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		camera.ProcessKeyboard(LEFT, camera.deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		camera.ProcessKeyboard(RIGHT, camera.deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+		camera.ProcessKeyboard(UP, camera.deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
+		camera.ProcessKeyboard(DOWN, camera.deltaTime);
+}
+
+void keyPressHandler_Camera_Speed(GLFWwindow *window, RenderMode &renderMode, Camera &camera) {
 	if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS) {
 		camera.MovementSpeed -= camera.changeSpeed;
 		if (camera.MovementSpeed < 1.0f) camera.MovementSpeed = 1.0f;
 	}
 	if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS) camera.MovementSpeed += camera.changeSpeed;
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-		camera.ProcessKeyboard(UP, camera.deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
-		camera.ProcessKeyboard(DOWN, camera.deltaTime);
+}
+
+void keyPressHandler_PolygonModes(GLFWwindow *window, RenderMode &renderMode, Camera &camera) {
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
 		renderMode = WIREFRAME;
 	} else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {

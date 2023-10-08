@@ -11,8 +11,9 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, RenderMod
 				   std::vector<float> &Triangles, std::vector<float> &Squares) {
 	while (!glfwWindowShouldClose(window)) {
 		camera.fps(camera);
-		processInput(window, camera);
-		keyPressHandler_Camera(window, renderMode, camera);
+		keyPressHandler_Camera_wasdSpaceX(window, camera);
+		keyPressHandler_Camera_Speed(window, renderMode, camera);
+		keyPressHandler_PolygonModes(window, renderMode, camera);
 		glm::mat4 model = keyPressHandler_ObjectCenterRotation(window, Triangles, Squares, model);
 		shader.settings(renderMode, texture);
 		shader.use();
@@ -23,16 +24,4 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, RenderMod
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-}
-
-void processInput(GLFWwindow *window, Camera &camera) {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) glfwSetWindowShouldClose(window, true);
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		camera.ProcessKeyboard(FORWARD, camera.deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		camera.ProcessKeyboard(BACKWARD, camera.deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		camera.ProcessKeyboard(LEFT, camera.deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		camera.ProcessKeyboard(RIGHT, camera.deltaTime);
 }
