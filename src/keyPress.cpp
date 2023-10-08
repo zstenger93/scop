@@ -24,7 +24,7 @@ void keyPressHandler_Camera_Speed(GLFWwindow *window, Camera &camera) {
 	if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS) camera.MovementSpeed += camera.changeSpeed;
 }
 
-void keyPressHandler_PolygonModes(GLFWwindow *window, RenderMode &renderMode, Camera &camera) {
+void keyPressHandler_PolygonModes(GLFWwindow *window, RenderMode &renderMode) {
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
 		renderMode = WIREFRAME;
 	} else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
@@ -33,9 +33,26 @@ void keyPressHandler_PolygonModes(GLFWwindow *window, RenderMode &renderMode, Ca
 		renderMode = FILLED;
 }
 
-void keyPressHandler_Color_OR_Texture(GLFWwindow *window, Camera &camera, int &version) {
+void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version) {
 	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) version = 0;
 	if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS) version = 1;
+}
+
+float colorChange = 0.05f;
+
+void keyPressHandler_SetColor(GLFWwindow *window, glm::vec3 &color) {
+	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS) {
+		color.r += colorChange;
+		if (color.r > 1.0f) color.r = 0.0f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS) {
+		color.g += colorChange;
+		if (color.g > 1.0f) color.g = 0.0f;
+	}
+	if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS) {
+		color.b += colorChange;
+		if (color.b > 1.0f) color.b = 0.0f;
+	}
 }
 
 float rotationX = 0.0f;

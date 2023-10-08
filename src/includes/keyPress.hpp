@@ -33,8 +33,9 @@
 
 void keyPressHandler_Camera_wasdSpaceX(GLFWwindow *window, Camera &camera);
 void keyPressHandler_Camera_Speed(GLFWwindow *window, Camera &camera);
-void keyPressHandler_PolygonModes(GLFWwindow *window, RenderMode &renderMode, Camera &camera);
-void keyPressHandler_Color_OR_Texture(GLFWwindow *window, Camera &camera, int &version);
+void keyPressHandler_PolygonModes(GLFWwindow *window, RenderMode &renderMode);
+void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version);
+void keyPressHandler_SetColor(GLFWwindow *window, glm::vec3 &color);
 glm::mat4 keyPressHandler_ObjectCenterRotation(GLFWwindow *window, std::vector<float> &Triangles,
 											   std::vector<float> &Squares, glm::mat4 &model);
 glm::vec3 calculateCenter(const std::vector<float> &triangles);

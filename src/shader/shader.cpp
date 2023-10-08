@@ -103,10 +103,10 @@ void Shader::settings(RenderMode &renderMode, unsigned int &texture) {
 	glBindTexture(GL_TEXTURE_2D, texture);
 }
 
-void Shader::setTexture_OR_setColor(Shader &shader, int &version) {
+void Shader::setTexture_OR_setColor(Shader &shader, int &version, glm::vec3 &color) {
 	shader.setInt("useTexture", version);
 	shader.setInt("texture", 0);
-	shader.setVec3("objectColor", glm::vec3(1.0f, 0.0f, 0.0f));
+	shader.setVec3("objectColor", color);
 }
 
 void Shader::checkCompileErrors(unsigned int shader, std::string type) {
