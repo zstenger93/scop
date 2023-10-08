@@ -1,0 +1,25 @@
+newmtl UV_texture
+Ns 398.039216
+Ka 0.000000 0.000000 0.000000
+Kd 0.627451 0.627451 0.627451
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Lightwave\\Images\\UV_raw_rgb.tif
+map_Bump Lightwave\\Images\\UV_bump_02.tif
+map_Ka Lightwave\\Images\\UV_diffuse.tif
+map_Ks Lightwave\\Images\\UV_specular.tif
+
+newmtl glass
+Ns 398.039216
+Ka 0.000000 0.000000 0.000000
+Kd 0.627451 0.627451 0.627451
+Ks 0.000000 0.000000 0.000000
+Ni 1.330000
+d 0.000000
+illum 2
+map_Kd Lightwave\\Images\\UV_raw_rgb.tif
+map_Bump Lightwave\\Images\\UV_bump_02.tif
+map_Ka Lightwave\\Images\\UV_diffuse.tif
+map_Ks Lightwave\\Images\\UV_specular.tif

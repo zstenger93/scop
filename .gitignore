@@ -1,5 +1,4 @@
 *.DS_Store
-*resources
 scop
 *objects
 *glad.o
