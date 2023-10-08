@@ -16,18 +16,6 @@ std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath) {
 		} else
 			std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
 	}
-
-	std::ofstream outputFile("result.obj");
-	if (outputFile.is_open()) {
-		for (const auto &triangle : triangles) {
-			for (const auto &vertex : triangle)
-				outputFile << vertex.x << " " << vertex.y << " " << vertex.z << " " << vertex.texX
-						   << " " << vertex.texY << std::endl;
-			outputFile << "\n";
-		}
-		outputFile.close();
-	} else
-		std::cerr << "Error opening result.obj file for writing.\n";
 	return triangles;
 }
 
@@ -57,26 +45,21 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 		} else if (prefix == "vt") {
 		} else if (prefix == "f") {
 			while (stream >> index) {
-				faceIndices.push_back(index);  // Convert 1-based index to 0-based index
-
+				faceIndices.push_back(index);
 				if (stream.peek() == '/') {
 					stream.ignore();
-					// Ignore textureCoordinateIndex and normalIndex
+					// Ignore textureCoordinateIndex and normalIndex for now
 					stream.ignore(256, '/');
 					stream.ignore(256, ' ');
 				} else {
-					// If no textureCoordinateIndex and normalIndex are provided, ignore until the
-					// next space
 					stream.ignore(256, ' ');
 				}
 			}
-
 			if (faceIndices.size() >= 3) {
 				faces.push_back(faceIndices);
-			} else {
+			} else
 				std::cerr << "Invalid face with " << faceIndices.size()
 						  << " indices encountered. Ignoring.\n";
-			}
 		}
 	}
 	objFile.close();
