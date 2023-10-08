@@ -19,6 +19,8 @@
 			L:		rotates the object right on Y axis
 			U:		rotates the object left on Z axis
 			O:		rotates the object right on Z axis
+			M:		incrases the speed
+			N:		reduces the speed
 		Polygon Mode:
 			1: 		wireframe
 			2:		points
