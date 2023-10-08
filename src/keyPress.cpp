@@ -1,13 +1,13 @@
 #include "includes/keyPress.hpp"
 
 void keyPressHandler_Camera(GLFWwindow *window, RenderMode &renderMode, Camera &camera) {
-	if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS) {
+	if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS) {
 		camera.MovementSpeed -= camera.changeSpeed;
 		if (camera.MovementSpeed < 1.0f) camera.MovementSpeed = 1.0f;
 	}
-	if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS) camera.MovementSpeed += camera.changeSpeed;
-	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) camera.ProcessKeyboard(UP, camera.deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS) camera.MovementSpeed += camera.changeSpeed;
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) camera.ProcessKeyboard(UP, camera.deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
 		camera.ProcessKeyboard(DOWN, camera.deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
 		renderMode = WIREFRAME;
@@ -31,12 +31,12 @@ glm::mat4 keyPressHandler_ObjectCenterRotation(GLFWwindow *window, std::vector<f
 
 	glm::vec3 objectCenter = calculateCenter(allTriangles);
 
-	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) rotationX += rotateSpeed;
-	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS) rotationX -= rotateSpeed;
+	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS) rotationX += rotateSpeed; //u
+	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) rotationX -= rotateSpeed;//o
 	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS) rotationY += rotateSpeed;
 	if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) rotationY -= rotateSpeed;
-	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS) rotationZ += rotateSpeed;
-	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) rotationZ -= rotateSpeed;
+	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) rotationZ += rotateSpeed; //i
+	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS) rotationZ -= rotateSpeed; //k
 
 	model = glm::translate(model, objectCenter);
 	model = glm::rotate(model, glm::radians(rotationX), glm::vec3(1.0f, 0.0f, 0.0f));

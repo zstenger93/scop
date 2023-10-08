@@ -16,7 +16,6 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, RenderMod
 		glm::mat4 model = keyPressHandler_ObjectCenterRotation(window, Triangles, Squares, model);
 		shader.settings(renderMode, texture);
 		shader.use();
-		
 		shader.setPerspective(camera, shader);
 		shader.setView(camera, shader);
 		shader.setModel(camera, shader, model);
