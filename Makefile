@@ -74,7 +74,7 @@ tsa:
 
 tx:
 	make re
-	./scop ../textures/uvmap.jpeg ../src/shader/vertexSource.vertex ../src/shader/fragmentSource.fragment ../resources/42.obj
+	./scop ../textures/uvmap.jpeg ../src/shader/vertexSource.vertex ../src/shader/fragmentSource.fragment ../resources/spider.obj
 
 .PHONY: all clean fclean re test
 

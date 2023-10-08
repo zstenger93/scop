@@ -30,6 +30,10 @@ int main(int argc, char **argv) {
 	separateTrianglesAndSquares(objects, Triangles, unpreaparedSquares);
 	Squares = convertSquaresToTriangles(unpreaparedSquares);
 
+	std::vector<float> result;
+result.insert(result.end(), Triangles.begin(), Triangles.end());
+result.insert(result.end(), Squares.begin(), Squares.end());
+
 	unsigned int VAO_triangles, VBO_triangles, VAO_squares, VBO_squares;
 	createVaoVbo(VAO_triangles, VAO_squares, VBO_triangles, VBO_squares, Squares, Triangles);
 
@@ -39,7 +43,7 @@ int main(int argc, char **argv) {
 	shader.setInt("texture", 0);
 
 	renderingLoop(window, shader, camera, renderMode, texture, VAO_triangles, VAO_squares,
-				  Triangles, Squares);
+				  Triangles, Squares, result);
 
 	glDeleteVertexArrays(1, &VAO_triangles);
 	glDeleteBuffers(1, &VBO_triangles);

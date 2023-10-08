@@ -89,8 +89,9 @@ void Shader::setView(Camera &camera, Shader &shader) {
 }
 
 void Shader::setModel(Camera &camera, Shader &shader) {
-	glm::mat4 model = glm::mat4(1.0f);
-	shader.setMat4("model", model);
+	// glm::mat4 model = glm::mat4(1.0f);
+	// shader.setMat4("model", model);
+	
 }
 
 void Shader::settings(RenderMode &renderMode, unsigned int &texture) {
