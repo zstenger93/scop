@@ -79,7 +79,7 @@ void Shader::setMat4(const std::string &name, const glm::mat4 &mat) const {
 
 void Shader::setPerspective(Camera &camera, Shader &shader) {
 	glm::mat4 projection = glm::perspective(
-		glm::radians(camera.Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGTH, 0.1f, 1000.0f);
+		glm::radians(camera.Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGTH, 0.1f, 1500.0f);
 	shader.setMat4("projection", projection);
 }
 
