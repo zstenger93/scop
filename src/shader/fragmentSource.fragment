@@ -3,6 +3,7 @@
 out vec4 FragColor;
 
 in vec2 TexCoord;
+in vec3 FragNormal;
 
 uniform sampler2D texture1;
 uniform int useTexture;
@@ -16,27 +17,23 @@ uniform float Ni;
 uniform float d;
 uniform int illum;
 
-
 void main() {
-    vec4 texColor = texture(texture1, TexCoord); // Sample texture color
+    vec4 texColor = texture(texture1, TexCoord);
 
-    // Apply lighting to texture color or object color based on the useTexture flag
     vec3 finalColor;
     if (useTexture == 1) {
-        finalColor = texColor.rgb; // Use texture color
+        finalColor = texColor.rgb;
     } else if (useTexture == 2) {
-        finalColor = objectColor; // Use object color
+        finalColor = objectColor;
     } else if (useTexture == 3) {
-        vec3 mixedColor = mix(texColor.rgb, objectColor, 0.15); // Mix texture color and object color
-        finalColor = mixedColor; // Use mixed color
+        vec3 mixedColor = mix(texColor.rgb, objectColor, 0.15);
+        finalColor = mixedColor;
     } else {
-        finalColor = objectColor; // Use object color as default
+        finalColor = objectColor;
     }
 
     // Apply transparency
-    finalColor *= d; // Transparency: 1.0 means fully opaque, 0.0 means fully transparent
+    finalColor *= d;
 
-    // Normalize the final color
-
-    FragColor = vec4(finalColor, texColor.a); // Set final color with transparency
+    FragColor = vec4(finalColor, texColor.a);
 }

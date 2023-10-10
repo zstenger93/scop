@@ -2,17 +2,20 @@
 
 #include "includes/headers.hpp"
 
-std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl &mtl,
-												Faces &face) {
+std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl &mtl, Faces &face,
+												std::vector<glm::vec3> &glmNormals,
+												std::vector<Normal> &normal, std::vector<Uv> &uv) {
 	std::vector<std::vector<int>> faces;
 	std::vector<Vertex> vertices;
 	std::vector<std::vector<Vertex>> triangles;
-	std::vector<Uv> uv;
-	std::vector<Normal> normal;
+
+	if (normal.size() > 0)
+		for (const auto &n : normal) {
+			glmNormals.push_back(glm::vec3(n.normalX, n.normalY, n.normalZ));
+		}
 
 	loadFromObjFile(filePath, faces, vertices, mtl, face, uv, normal);
-	if (uv.size() == 0)
-		normalizeTextureCoordinates(vertices);
+	if (uv.size() == 0) normalizeTextureCoordinates(vertices);
 	for (const auto &face : faces) {
 		if (face.size() >= 3) {
 			std::vector<Vertex> triangle;
@@ -116,8 +119,6 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 				std::cerr << "Invalid face with " << faceIndices.size() << " Ignoring.\n";
 		}
 	}
-	std::cout << uv.size() << std::endl;
-	std::cout << normal.size() << std::endl;
 	objFile.close();
 }
 

@@ -1,6 +1,6 @@
 # Blender v2.71 (sub 0) OBJ File: ''
 # www.blender.org
-mtllib teapot2.mtl
+mtllib 42.mtl
 o teapot
 v 1.368074 1.109826 -0.227403
 v 1.381968 1.074389 -0.229712

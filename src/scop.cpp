@@ -21,13 +21,17 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 int main(int argc, char **argv) {
 	Mtl mtl;
 	Faces face;
+	std::vector<Uv> uv;
+	std::vector<Normal> normal;
 	RenderMode renderMode = FILLED;
+	std::vector<glm::vec3> glmNormals;
 	std::vector<float> Triangles, unpreaparedSquares, Squares;
 
 	initGLFW();
 	GLFWwindow *window = createWindow();
 	Shader shader(argv[2], argv[3]);
-	std::vector<std::vector<Vertex>> objects = processObjFile(argv[4], mtl, face);
+	std::vector<std::vector<Vertex>> objects =
+		processObjFile(argv[4], mtl, face, glmNormals, normal, uv);
 
 	GLuint NsLoc = glGetUniformLocation(shader.ID, "Ns");
 	GLuint KaLoc = glGetUniformLocation(shader.ID, "Ka");
@@ -52,6 +56,16 @@ int main(int argc, char **argv) {
 
 	unsigned int VAO_triangles, VBO_triangles, VAO_squares, VBO_squares;
 	createVaoVbo(VAO_triangles, VAO_squares, VBO_triangles, VBO_squares, Squares, Triangles);
+	if (normal.size() > 0) {
+		GLuint normalVBO;
+		glGenBuffers(1, &normalVBO);
+		glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
+		glBufferData(GL_ARRAY_BUFFER, glmNormals.size() * sizeof(glm::vec3), glmNormals.data(),
+					 GL_STATIC_DRAW);
+		glEnableVertexAttribArray(2);
+		glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
+	}
 
 	unsigned int texture;
 	createTexture(texture, argv[1]);

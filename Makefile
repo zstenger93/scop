@@ -8,7 +8,7 @@ GLAD = glad.o
 GLADLIB = gcc -c src/includes/glad/glad.c -Ilibs
 
 # change the files here for the cases
-TEXTURE_NAME = skull
+TEXTURE_NAME = ok
 EXEC = ./scop
 VERTEX_SOURCE = ../src/shader/vertexSource.vertex
 FRAGMENT_SOURCE = ../src/shader/fragmentSource.fragment

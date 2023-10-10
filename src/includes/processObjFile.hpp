@@ -14,7 +14,9 @@
 void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> &faces,
 					 std::vector<Vertex> &vertices, Mtl &mtl, Faces &face, std::vector<Uv> &uv,
 					 std::vector<Normal> &normal);
-std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl &mtl, Faces &face);
+std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl &mtl, Faces &face,
+												std::vector<glm::vec3> &glmNormals,
+												std::vector<Normal> &normal, std::vector<Uv> &uv);
 void normalizeTextureCoordinates(std::vector<Vertex> &vertices);
 void separateTrianglesAndSquares(const std::vector<std::vector<Vertex>> &objects,
 								 std::vector<float> &Triangles, std::vector<float> &Squares);
