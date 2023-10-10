@@ -34,9 +34,15 @@ Have at least OpenGL 3 or above or leave the page now and run for the sake of yo
 
 ## Object Files
 
+It's possible to have different layouts, not all the values are necessary
+
 ## .mtl Files
 
+Values for material and lighting calculations
+
 ## Input Handling
+
+Make yourself a favor, plan and save all the values in a structured way, then start playing with them
 
 ## Creating Triangles
 
