@@ -1,5 +1,7 @@
 #include "includes/processObjFile.hpp"
 
+#include "includes/headers.hpp"
+
 std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath) {
 	std::vector<std::vector<int>> faces;
 	std::vector<Vertex> vertices;
@@ -26,17 +28,56 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 		std::cerr << "Error opening the file: " << filePath << std::endl;
 		return;
 	}
-	std::string line;
+	std::string line, mLine;
 	while (std::getline(objFile, line)) {
-		std::string prefix;
+		std::string prefix, fileName;
 		std::istringstream stream(line);
 		std::vector<int> faceIndices;
 		Vertex vertex;
 		char slash;
 		int index;
+		Object window;
+		Mtl mtl;
 
 		stream >> prefix;
-		if (prefix == "v") {
+		if (prefix == "o") {
+			stream >> window.name;
+		} else if (prefix == "mtllib") {
+			stream >> fileName;
+			std::string file = "../resources/" + fileName;
+			std::ifstream mtlFile(file);
+			if (!mtlFile.is_open()) {
+				std::cerr << "Error opening the file: " << file << std::endl;
+				return;
+			}
+			while (std::getline(mtlFile, mLine)) {
+				std::istringstream stream(mLine);
+				stream >> prefix;
+				if (prefix == "Ns") {
+					stream >> mtl.Ns;
+				} else if (prefix == "Ka") {
+					stream >> mtl.ka.r >> mtl.ka.g >> mtl.ka.b;
+				} else if (prefix == "Kd") {
+					stream >> mtl.kd.r >> mtl.kd.g >> mtl.kd.b;
+				} else if (prefix == "Ks") {
+					stream >> mtl.ks.r >> mtl.ks.g >> mtl.ks.b;
+				} else if (prefix == "Ni") {
+					stream >> mtl.Ni;
+				} else if (prefix == "d") {
+					stream >> mtl.d;
+				} else if (prefix == "illum") {
+					stream >> mtl.illum;
+				}
+			}
+			mtlFile.close();
+			std::cout << mtl.Ns << std::endl;
+			std::cout << mtl.ka.r << " " << mtl.ka.g << " " << mtl.ka.b << std::endl;
+			std::cout << mtl.kd.r << " " << mtl.kd.g << " " << mtl.kd.b << std::endl;
+			std::cout << mtl.ks.r << " " << mtl.ks.g << " " << mtl.ks.b << std::endl;
+			std::cout << mtl.Ni << std::endl;
+			std::cout << mtl.d << std::endl;
+			std::cout << mtl.illum << std::endl;
+		} else if (prefix == "v") {
 			stream >> vertex.x >> vertex.y >> vertex.z;
 			vertex.texX = vertex.x;
 			vertex.texY = vertex.y;
@@ -94,9 +135,7 @@ void separateTrianglesAndSquares(const std::vector<std::vector<Vertex>> &objects
 				Squares.push_back(vertex.texY);
 			}
 		} else
-			;
-			// std::cerr << "Invalid shape detected! Shape must have 3 or 4 vertices. " << shape.size()
-			// 		  << std::endl;
+			std::cerr << "Invalid shape detected! " << shape.size() << std::endl;
 	}
 }
 

@@ -31,8 +31,28 @@ struct Vertex {
 	float x, y, z, texX, texY;
 };
 
-struct Normal {
+struct Ka {
+	float r, g, b;
+};
 
+struct Kd {
+	float r, g, b;
+};
+
+struct Ks {
+	float r, g, b;
+};
+
+struct Mtl {
+	Ka ka;
+	Kd kd;
+	Ks ks;
+	float Ns, Ni, d;
+	int illum;
+};
+
+struct Object {
+	std::string name;
 };
 
 #endif
