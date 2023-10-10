@@ -46,6 +46,8 @@ Make yourself a favor, plan and save all the values in a structured way, then st
 
 ## Creating Triangles
 
+One face contains 3 or 4 indexes and each of them marks the index of an x, y and z coordinate for one point of a triangle or square. Combining these coordinates from a face will result one triangle or square.
+
 ## Color
 
 ## UV Coordinates
