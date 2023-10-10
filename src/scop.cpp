@@ -19,13 +19,32 @@
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 int main(int argc, char **argv) {
+	Mtl mtl;
 	RenderMode renderMode = FILLED;
 	std::vector<float> Triangles, unpreaparedSquares, Squares;
 
 	initGLFW();
 	GLFWwindow *window = createWindow();
 	Shader shader(argv[2], argv[3]);
-	std::vector<std::vector<Vertex>> objects = processObjFile(argv[4]);
+	std::vector<std::vector<Vertex>> objects = processObjFile(argv[4], mtl);
+
+	GLuint NsLoc = glGetUniformLocation(shader.ID, "Ns");
+	GLuint KaLoc = glGetUniformLocation(shader.ID, "Ka");
+	GLuint KdLoc = glGetUniformLocation(shader.ID, "Kd");
+	GLuint KsLoc = glGetUniformLocation(shader.ID, "Ks");
+	GLuint NiLoc = glGetUniformLocation(shader.ID, "Ni");
+	GLuint dLoc = glGetUniformLocation(shader.ID, "d");
+	GLuint illumLoc = glGetUniformLocation(shader.ID, "illum");
+
+	// Set uniform values
+	glUseProgram(shader.ID);
+	glUniform1f(NsLoc, mtl.Ns);
+	glUniform3f(KaLoc, mtl.ka.r, mtl.ka.g, mtl.ka.b);
+	glUniform3f(KdLoc, mtl.kd.r, mtl.kd.g, mtl.kd.b);
+	glUniform3f(KsLoc, mtl.ks.r, mtl.ks.g, mtl.ks.b);
+	glUniform1f(NiLoc, mtl.Ni);
+	glUniform1f(dLoc, mtl.d);
+	glUniform1i(illumLoc, mtl.illum);
 
 	separateTrianglesAndSquares(objects, Triangles, unpreaparedSquares);
 	Squares = convertSquaresToTriangles(unpreaparedSquares);

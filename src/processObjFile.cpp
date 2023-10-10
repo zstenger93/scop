@@ -2,12 +2,12 @@
 
 #include "includes/headers.hpp"
 
-std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath) {
+std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl &mtl) {
 	std::vector<std::vector<int>> faces;
 	std::vector<Vertex> vertices;
 	std::vector<std::vector<Vertex>> triangles;
 
-	loadFromObjFile(filePath, faces, vertices);
+	loadFromObjFile(filePath, faces, vertices, mtl);
 	normalizeTextureCoordinates(vertices);
 
 	for (const auto &face : faces) {
@@ -22,12 +22,19 @@ std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath) {
 }
 
 void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> &faces,
-					 std::vector<Vertex> &vertices) {
+					 std::vector<Vertex> &vertices, Mtl &mtl) {
 	std::ifstream objFile(filePath);
 	if (!objFile.is_open()) {
 		std::cerr << "Error opening the file: " << filePath << std::endl;
 		return;
 	}
+	mtl.illum = 0;
+	mtl.Ns = 0;
+	mtl.Ni = 0;
+	mtl.ka.r = 0, mtl.ka.g = 0, mtl.ka.b = 0;
+	mtl.kd.r = 0, mtl.kd.g = 0, mtl.kd.b = 0;
+	mtl.ks.r = 0, mtl.ks.g = 0, mtl.ks.b = 0;
+
 	std::string line, mLine;
 	while (std::getline(objFile, line)) {
 		std::string prefix, fileName;
@@ -37,7 +44,6 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 		char slash;
 		int index;
 		Object window;
-		Mtl mtl;
 
 		stream >> prefix;
 		if (prefix == "o") {
