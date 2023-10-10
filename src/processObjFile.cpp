@@ -10,11 +10,11 @@ std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl
 	std::vector<std::vector<Vertex>> triangles;
 
 	if (normal.size() > 0)
-		for (const auto &n : normal) {
+		for (const auto &n : normal)
 			glmNormals.push_back(glm::vec3(n.normalX, n.normalY, n.normalZ));
-		}
 
 	loadFromObjFile(filePath, faces, vertices, mtl, face, uv, normal);
+	if (vertices.size() == 0) return triangles;
 	if (uv.size() == 0) normalizeTextureCoordinates(vertices);
 	for (const auto &face : faces) {
 		if (face.size() >= 3) {
@@ -41,14 +41,10 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 		std::cerr << "Error opening the file: " << filePath << std::endl;
 		return;
 	}
-	mtl.illum = 0;
-	mtl.Ns = 0;
-	mtl.Ni = 0;
-	mtl.ka.r = 0, mtl.ka.g = 0, mtl.ka.b = 0;
-	mtl.kd.r = 0, mtl.kd.g = 0, mtl.kd.b = 0;
-	mtl.ks.r = 0, mtl.ks.g = 0, mtl.ks.b = 0;
 
-	std::string line, mLine;
+	initMtl(mtl);
+
+	std::string line;
 	while (std::getline(objFile, line)) {
 		std::string prefix, fileName;
 		std::istringstream stream(line);
@@ -64,37 +60,9 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 		if (prefix == "o") {
 			stream >> window.name;
 		} else if (prefix == "mtllib") {
-			stream >> fileName;
-			std::string file = "../resources/" + fileName;
-			std::ifstream mtlFile(file);
-			if (mtlFile.is_open()) {
-				while (std::getline(mtlFile, mLine)) {
-					std::istringstream stream(mLine);
-					stream >> prefix;
-					if (prefix == "Ns") {
-						stream >> mtl.Ns;
-					} else if (prefix == "Ka") {
-						stream >> mtl.ka.r >> mtl.ka.g >> mtl.ka.b;
-					} else if (prefix == "Kd") {
-						stream >> mtl.kd.r >> mtl.kd.g >> mtl.kd.b;
-					} else if (prefix == "Ks") {
-						stream >> mtl.ks.r >> mtl.ks.g >> mtl.ks.b;
-					} else if (prefix == "Ni") {
-						stream >> mtl.Ni;
-					} else if (prefix == "d") {
-						stream >> mtl.d;
-					} else if (prefix == "illum") {
-						stream >> mtl.illum;
-					}
-				}
-				mtlFile.close();
-			} else
-				std::cerr << "Error opening the file: " << file << std::endl;
+			saveMtlAttributes(stream, mtl, prefix, fileName);
 		} else if (prefix == "v") {
-			stream >> vertex.x >> vertex.y >> vertex.z;
-			vertex.texX = vertex.x;
-			vertex.texY = vertex.y;
-			vertices.push_back(vertex);
+			saveVertexCoordinates(stream, vertex, vertices);
 		} else if (prefix == "vn") {
 			stream >> normalVal.normalX >> normalVal.normalY >> normalVal.normalZ;
 			normal.push_back(normalVal);
@@ -106,7 +74,6 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 				faceIndices.push_back(index);
 				if (stream.peek() == '/') {
 					stream.ignore();
-					// Ignore textureCoordinateIndex and normalIndex for now
 					stream.ignore(256, '/');
 					stream.ignore(256, ' ');
 				} else {
@@ -120,6 +87,55 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 		}
 	}
 	objFile.close();
+}
+
+void saveMtlAttributes(std::istringstream &stream, Mtl &mtl, std::string &prefix,
+					   std::string fileName) {
+	stream >> fileName;
+	std::string mLine;
+	std::string file = "../resources/" + fileName;
+	std::ifstream mtlFile(file);
+	if (mtlFile.is_open()) {
+		while (std::getline(mtlFile, mLine)) {
+			std::istringstream stream(mLine);
+			stream >> prefix;
+			if (prefix == "Ns") {
+				stream >> mtl.Ns;
+			} else if (prefix == "Ka") {
+				stream >> mtl.ka.r >> mtl.ka.g >> mtl.ka.b;
+			} else if (prefix == "Kd") {
+				stream >> mtl.kd.r >> mtl.kd.g >> mtl.kd.b;
+			} else if (prefix == "Ks") {
+				stream >> mtl.ks.r >> mtl.ks.g >> mtl.ks.b;
+			} else if (prefix == "Ni") {
+				stream >> mtl.Ni;
+			} else if (prefix == "d") {
+				stream >> mtl.d;
+			} else if (prefix == "illum") {
+				stream >> mtl.illum;
+			}
+		}
+		mtlFile.close();
+	} else
+		std::cerr << "Error opening the file: " << file << std::endl;
+}
+
+void initMtl(Mtl &mtl) {
+	mtl.illum = 0;
+	mtl.Ns = 0;
+	mtl.Ni = 0;
+	mtl.ka.r = 0, mtl.ka.g = 0, mtl.ka.b = 0;
+	mtl.kd.r = 0, mtl.kd.g = 0, mtl.kd.b = 0;
+	mtl.ks.r = 0, mtl.ks.g = 0, mtl.ks.b = 0;
+	mtl.d = 1;
+}
+
+void saveVertexCoordinates(std::istringstream &stream, Vertex &vertex,
+						   std::vector<Vertex> &vertices) {
+	stream >> vertex.x >> vertex.y >> vertex.z;
+	vertex.texX = vertex.x;
+	vertex.texY = vertex.y;
+	vertices.push_back(vertex);
 }
 
 void normalizeTextureCoordinates(std::vector<Vertex> &vertices) {

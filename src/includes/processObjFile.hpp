@@ -22,7 +22,8 @@ void separateTrianglesAndSquares(const std::vector<std::vector<Vertex>> &objects
 								 std::vector<float> &Triangles, std::vector<float> &Squares);
 std::vector<float> convertSquaresToTriangles(const std::vector<float> &Squares);
 
-// void loadFromObjFile(const std::string &filePath, std::vector<std::vector<Faces>> &faces,
-//                      std::vector<glm::vec3> &vertices, std::vector<glm::vec2> &textureCoords,
-//                      std::vector<glm::vec3> &normals, Mtl &mtl);
+void initMtl(Mtl &mtl);
+void saveMtlAttributes(std::istringstream &stream, Mtl &mtl, std::string &prefix, std::string fileName);
+void saveVertexCoordinates(std::istringstream &stream, Vertex &vertex, std::vector<Vertex> &vertices);
+
 #endif
