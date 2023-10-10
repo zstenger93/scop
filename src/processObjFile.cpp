@@ -12,24 +12,10 @@ std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl
 	if (normal.size() > 0)
 		for (const auto &n : normal)
 			glmNormals.push_back(glm::vec3(n.normalX, n.normalY, n.normalZ));
-
 	loadFromObjFile(filePath, faces, vertices, mtl, face, uv, normal, w);
 	if (vertices.size() == 0) return triangles;
 	if (uv.size() == 0) normalizeTextureCoordinates(vertices);
-	for (const auto &face : faces) {
-		if (face.size() >= 3) {
-			std::vector<Vertex> triangle;
-			for (int index : face) {
-				if (uv.size() > 0) {
-					vertices[index - 1].texX = uv[index - 1].u;
-					vertices[index - 1].texY = uv[index - 1].v;
-				}
-				triangle.push_back(vertices[index - 1]);
-			}
-			triangles.push_back(triangle);
-		} else
-			std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
-	}
+	triangleAssembly(vertices, faces, uv, triangles);
 	return triangles;
 }
 
@@ -148,6 +134,24 @@ void normalizeTextureCoordinates(std::vector<Vertex> &vertices) {
 			acos(vertex.y / sqrt(vertex.x * vertex.x + vertex.y * vertex.y + vertex.z * vertex.z));
 		vertex.texX = (theta + M_PI) / (2.0f * M_PI);
 		vertex.texY = phi / M_PI;
+	}
+}
+
+void triangleAssembly(std::vector<Vertex> &vertices, std::vector<std::vector<int>> &faces,
+					  std::vector<Uv> &uv, std::vector<std::vector<Vertex>> &triangles) {
+	for (const auto &face : faces) {
+		if (face.size() >= 3) {
+			std::vector<Vertex> triangle;
+			for (int index : face) {
+				if (uv.size() > 0) {
+					vertices[index - 1].texX = uv[index - 1].u;
+					vertices[index - 1].texY = uv[index - 1].v;
+				}
+				triangle.push_back(vertices[index - 1]);
+			}
+			triangles.push_back(triangle);
+		} else
+			std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
 	}
 }
 

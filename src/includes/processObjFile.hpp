@@ -21,12 +21,13 @@ void normalizeTextureCoordinates(std::vector<Vertex> &vertices);
 void separateTrianglesAndSquares(const std::vector<std::vector<Vertex>> &objects,
 								 std::vector<float> &Triangles, std::vector<float> &Squares);
 std::vector<float> convertSquaresToTriangles(const std::vector<float> &Squares);
-
 void initMtl(Mtl &mtl);
 void saveMtlAttributes(std::istringstream &stream, Mtl &mtl, std::string &prefix,
 					   std::string fileName);
 void saveVertexCoordinates(std::istringstream &stream, Vertex &vertex,
 						   std::vector<Vertex> &vertices);
 void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &faces);
+void triangleAssembly(std::vector<Vertex> &vertices, std::vector<std::vector<int>> &faces,
+					  std::vector<Uv> &uv, std::vector<std::vector<Vertex>> &triangles);
 
 #endif

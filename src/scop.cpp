@@ -1,20 +1,13 @@
 #include <OpenGL/OpenGL.h>
 
-#include "includes/headers.hpp"
-#include "includes/stb_image.hpp"
-#define STB_IMAGE_IMPLEMENTATION
-#include "includes/shader.hpp"
-#define STB_IMAGE_IMPLEMENTATION
 #include "includes/glfw.hpp"
-#define STB_IMAGE_IMPLEMENTATION
-#include "includes/processObjFile.hpp"
-#define STB_IMAGE_IMPLEMENTATION
-#include "includes/texture.hpp"
-#define STB_IMAGE_IMPLEMENTATION
+#include "includes/headers.hpp"
 #include "includes/object.hpp"
-#define STB_IMAGE_IMPLEMENTATION
+#include "includes/processObjFile.hpp"
 #include "includes/render.hpp"
-#define STB_IMAGE_IMPLEMENTATION
+#include "includes/shader.hpp"
+#include "includes/stb_image.hpp"
+#include "includes/texture.hpp"
 
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
@@ -34,23 +27,7 @@ int main(int argc, char **argv) {
 	GLFWwindow *window = createWindow(w);
 	Shader shader(argv[2], argv[3]);
 
-	// get rid of these later
-	GLuint NsLoc = glGetUniformLocation(shader.ID, "Ns");
-	GLuint KaLoc = glGetUniformLocation(shader.ID, "Ka");
-	GLuint KdLoc = glGetUniformLocation(shader.ID, "Kd");
-	GLuint KsLoc = glGetUniformLocation(shader.ID, "Ks");
-	GLuint NiLoc = glGetUniformLocation(shader.ID, "Ni");
-	GLuint dLoc = glGetUniformLocation(shader.ID, "d");
-	GLuint illumLoc = glGetUniformLocation(shader.ID, "illum");
-
-	glUseProgram(shader.ID);
-	glUniform1f(NsLoc, mtl.Ns);
-	glUniform3f(KaLoc, mtl.ka.r, mtl.ka.g, mtl.ka.b);
-	glUniform3f(KdLoc, mtl.kd.r, mtl.kd.g, mtl.kd.b);
-	glUniform3f(KsLoc, mtl.ks.r, mtl.ks.g, mtl.ks.b);
-	glUniform1f(NiLoc, mtl.Ni);
-	glUniform1f(dLoc, mtl.d);
-	glUniform1i(illumLoc, mtl.illum);
+	passMtlInfoToFragmentShader(shader, mtl);
 
 	separateTrianglesAndSquares(objects, Triangles, unpreaparedSquares);
 	Squares = convertSquaresToTriangles(unpreaparedSquares);

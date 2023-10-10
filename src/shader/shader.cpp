@@ -109,6 +109,25 @@ void Shader::setTexture_OR_setColor(Shader &shader, int &version, glm::vec3 &col
 	shader.setVec3("objectColor", color);
 }
 
+void passMtlInfoToFragmentShader(Shader &shader, Mtl &mtl) {
+	GLuint NsLoc = glGetUniformLocation(shader.ID, "Ns");
+	GLuint KaLoc = glGetUniformLocation(shader.ID, "Ka");
+	GLuint KdLoc = glGetUniformLocation(shader.ID, "Kd");
+	GLuint KsLoc = glGetUniformLocation(shader.ID, "Ks");
+	GLuint NiLoc = glGetUniformLocation(shader.ID, "Ni");
+	GLuint dLoc = glGetUniformLocation(shader.ID, "d");
+	GLuint illumLoc = glGetUniformLocation(shader.ID, "illum");
+
+	glUseProgram(shader.ID);
+	glUniform1f(NsLoc, mtl.Ns);
+	glUniform3f(KaLoc, mtl.ka.r, mtl.ka.g, mtl.ka.b);
+	glUniform3f(KdLoc, mtl.kd.r, mtl.kd.g, mtl.kd.b);
+	glUniform3f(KsLoc, mtl.ks.r, mtl.ks.g, mtl.ks.b);
+	glUniform1f(NiLoc, mtl.Ni);
+	glUniform1f(dLoc, mtl.d);
+	glUniform1i(illumLoc, mtl.illum);
+}
+
 void Shader::checkCompileErrors(unsigned int shader, std::string type) {
 	int success;
 	char infoLog[1024];
