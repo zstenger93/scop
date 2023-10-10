@@ -10,7 +10,7 @@
 */
 
 void initGLFW();
-GLFWwindow *createWindow();
+GLFWwindow *createWindow(Object &w);
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int heigth);
 void mouse_callback(GLFWwindow *window, double xpos, double ypos);

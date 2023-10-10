@@ -21,18 +21,20 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 int main(int argc, char **argv) {
 	Mtl mtl;
 	Faces face;
+	Object w;
 	std::vector<Uv> uv;
 	std::vector<Normal> normal;
 	RenderMode renderMode = FILLED;
 	std::vector<glm::vec3> glmNormals;
 	std::vector<float> Triangles, unpreaparedSquares, Squares;
-	std::vector<std::vector<Vertex>> objects =
-		processObjFile(argv[4], mtl, face, glmNormals, normal, uv);
 
 	initGLFW();
-	GLFWwindow *window = createWindow();
+	std::vector<std::vector<Vertex>> objects =
+		processObjFile(argv[4], mtl, face, glmNormals, w, normal, uv);
+	GLFWwindow *window = createWindow(w);
 	Shader shader(argv[2], argv[3]);
 
+	// get rid of these later
 	GLuint NsLoc = glGetUniformLocation(shader.ID, "Ns");
 	GLuint KaLoc = glGetUniformLocation(shader.ID, "Ka");
 	GLuint KdLoc = glGetUniformLocation(shader.ID, "Kd");
@@ -41,7 +43,6 @@ int main(int argc, char **argv) {
 	GLuint dLoc = glGetUniformLocation(shader.ID, "d");
 	GLuint illumLoc = glGetUniformLocation(shader.ID, "illum");
 
-	// Set uniform values
 	glUseProgram(shader.ID);
 	glUniform1f(NsLoc, mtl.Ns);
 	glUniform3f(KaLoc, mtl.ka.r, mtl.ka.g, mtl.ka.b);

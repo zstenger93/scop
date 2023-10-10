@@ -3,7 +3,7 @@
 #include "includes/headers.hpp"
 
 std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl &mtl, Faces &face,
-												std::vector<glm::vec3> &glmNormals,
+												std::vector<glm::vec3> &glmNormals, Object &w,
 												std::vector<Normal> &normal, std::vector<Uv> &uv) {
 	std::vector<std::vector<int>> faces;
 	std::vector<Vertex> vertices;
@@ -13,7 +13,7 @@ std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl
 		for (const auto &n : normal)
 			glmNormals.push_back(glm::vec3(n.normalX, n.normalY, n.normalZ));
 
-	loadFromObjFile(filePath, faces, vertices, mtl, face, uv, normal);
+	loadFromObjFile(filePath, faces, vertices, mtl, face, uv, normal, w);
 	if (vertices.size() == 0) return triangles;
 	if (uv.size() == 0) normalizeTextureCoordinates(vertices);
 	for (const auto &face : faces) {
@@ -35,13 +35,12 @@ std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl
 
 void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> &faces,
 					 std::vector<Vertex> &vertices, Mtl &mtl, Faces &face, std::vector<Uv> &uv,
-					 std::vector<Normal> &normal) {
+					 std::vector<Normal> &normal, Object &w) {
 	std::ifstream objFile(filePath);
 	if (!objFile.is_open()) {
 		std::cerr << "Error opening the file: " << filePath << std::endl;
 		return;
 	}
-
 	initMtl(mtl);
 
 	std::string line;
@@ -50,13 +49,12 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 		std::istringstream stream(line);
 		Vertex vertex;
 		char slash;
-		Object window;
 		Uv uvVal;
 		Normal normalVal;
 
 		stream >> prefix;
 		if (prefix == "o") {
-			stream >> window.name;
+			stream >> w.name;
 		} else if (prefix == "mtllib") {
 			saveMtlAttributes(stream, mtl, prefix, fileName);
 		} else if (prefix == "v") {
