@@ -34,7 +34,19 @@ Have at least OpenGL 3 or above or leave the page now and run for the sake of yo
 
 ## Object Files
 
-It's possible to have different layouts, not all the values are necessary
+It's possible to have different layouts, not all the values are necessary.
+
+Faces can be stored different ways like
+
+```
+f 4 9 7 1
+```
+
+or
+
+```
+f 23/123/123 321/3213/213 43/45/12
+```
 
 ## .mtl Files
 
