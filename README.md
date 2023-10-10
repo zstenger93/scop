@@ -34,6 +34,9 @@ Have at least OpenGL 3 or above or leave the page now and run for the sake of yo
 
 ## UV Coordinates
 
+## UV Normalizing
+
+## Normals
 
 
 ## Keys
