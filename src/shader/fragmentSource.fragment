@@ -37,7 +37,6 @@ void main() {
     finalColor *= d; // Transparency: 1.0 means fully opaque, 0.0 means fully transparent
 
     // Normalize the final color
-    // finalColor = normalize(finalColor);
 
     FragColor = vec4(finalColor, texColor.a); // Set final color with transparency
 }

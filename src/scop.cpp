@@ -20,13 +20,14 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 int main(int argc, char **argv) {
 	Mtl mtl;
+	Faces face;
 	RenderMode renderMode = FILLED;
 	std::vector<float> Triangles, unpreaparedSquares, Squares;
 
 	initGLFW();
 	GLFWwindow *window = createWindow();
 	Shader shader(argv[2], argv[3]);
-	std::vector<std::vector<Vertex>> objects = processObjFile(argv[4], mtl);
+	std::vector<std::vector<Vertex>> objects = processObjFile(argv[4], mtl, face);
 
 	GLuint NsLoc = glGetUniformLocation(shader.ID, "Ns");
 	GLuint KaLoc = glGetUniformLocation(shader.ID, "Ka");

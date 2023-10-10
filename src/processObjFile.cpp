@@ -2,18 +2,27 @@
 
 #include "includes/headers.hpp"
 
-std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl &mtl) {
+std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl &mtl,
+												Faces &face) {
 	std::vector<std::vector<int>> faces;
 	std::vector<Vertex> vertices;
 	std::vector<std::vector<Vertex>> triangles;
+	std::vector<Uv> uv;
+	std::vector<Normal> normal;
 
-	loadFromObjFile(filePath, faces, vertices, mtl);
-	normalizeTextureCoordinates(vertices);
-
+	loadFromObjFile(filePath, faces, vertices, mtl, face, uv, normal);
+	if (uv.size() == 0)
+		normalizeTextureCoordinates(vertices);
 	for (const auto &face : faces) {
 		if (face.size() >= 3) {
 			std::vector<Vertex> triangle;
-			for (int index : face) triangle.push_back(vertices[index - 1]);
+			for (int index : face) {
+				if (uv.size() > 0) {
+					vertices[index - 1].texX = uv[index - 1].u;
+					vertices[index - 1].texY = uv[index - 1].v;
+				}
+				triangle.push_back(vertices[index - 1]);
+			}
 			triangles.push_back(triangle);
 		} else
 			std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
@@ -22,7 +31,8 @@ std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl
 }
 
 void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> &faces,
-					 std::vector<Vertex> &vertices, Mtl &mtl) {
+					 std::vector<Vertex> &vertices, Mtl &mtl, Faces &face, std::vector<Uv> &uv,
+					 std::vector<Normal> &normal) {
 	std::ifstream objFile(filePath);
 	if (!objFile.is_open()) {
 		std::cerr << "Error opening the file: " << filePath << std::endl;
@@ -44,6 +54,8 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 		char slash;
 		int index;
 		Object window;
+		Uv uvVal;
+		Normal normalVal;
 
 		stream >> prefix;
 		if (prefix == "o") {
@@ -52,44 +64,40 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 			stream >> fileName;
 			std::string file = "../resources/" + fileName;
 			std::ifstream mtlFile(file);
-			if (!mtlFile.is_open()) {
-				std::cerr << "Error opening the file: " << file << std::endl;
-				return;
-			}
-			while (std::getline(mtlFile, mLine)) {
-				std::istringstream stream(mLine);
-				stream >> prefix;
-				if (prefix == "Ns") {
-					stream >> mtl.Ns;
-				} else if (prefix == "Ka") {
-					stream >> mtl.ka.r >> mtl.ka.g >> mtl.ka.b;
-				} else if (prefix == "Kd") {
-					stream >> mtl.kd.r >> mtl.kd.g >> mtl.kd.b;
-				} else if (prefix == "Ks") {
-					stream >> mtl.ks.r >> mtl.ks.g >> mtl.ks.b;
-				} else if (prefix == "Ni") {
-					stream >> mtl.Ni;
-				} else if (prefix == "d") {
-					stream >> mtl.d;
-				} else if (prefix == "illum") {
-					stream >> mtl.illum;
+			if (mtlFile.is_open()) {
+				while (std::getline(mtlFile, mLine)) {
+					std::istringstream stream(mLine);
+					stream >> prefix;
+					if (prefix == "Ns") {
+						stream >> mtl.Ns;
+					} else if (prefix == "Ka") {
+						stream >> mtl.ka.r >> mtl.ka.g >> mtl.ka.b;
+					} else if (prefix == "Kd") {
+						stream >> mtl.kd.r >> mtl.kd.g >> mtl.kd.b;
+					} else if (prefix == "Ks") {
+						stream >> mtl.ks.r >> mtl.ks.g >> mtl.ks.b;
+					} else if (prefix == "Ni") {
+						stream >> mtl.Ni;
+					} else if (prefix == "d") {
+						stream >> mtl.d;
+					} else if (prefix == "illum") {
+						stream >> mtl.illum;
+					}
 				}
-			}
-			mtlFile.close();
-			std::cout << mtl.Ns << std::endl;
-			std::cout << mtl.ka.r << " " << mtl.ka.g << " " << mtl.ka.b << std::endl;
-			std::cout << mtl.kd.r << " " << mtl.kd.g << " " << mtl.kd.b << std::endl;
-			std::cout << mtl.ks.r << " " << mtl.ks.g << " " << mtl.ks.b << std::endl;
-			std::cout << mtl.Ni << std::endl;
-			std::cout << mtl.d << std::endl;
-			std::cout << mtl.illum << std::endl;
+				mtlFile.close();
+			} else
+				std::cerr << "Error opening the file: " << file << std::endl;
 		} else if (prefix == "v") {
 			stream >> vertex.x >> vertex.y >> vertex.z;
 			vertex.texX = vertex.x;
 			vertex.texY = vertex.y;
 			vertices.push_back(vertex);
 		} else if (prefix == "vn") {
+			stream >> normalVal.normalX >> normalVal.normalY >> normalVal.normalZ;
+			normal.push_back(normalVal);
 		} else if (prefix == "vt") {
+			stream >> uvVal.u >> uvVal.v >> uvVal.w;
+			uv.push_back(uvVal);
 		} else if (prefix == "f") {
 			while (stream >> index) {
 				faceIndices.push_back(index);
@@ -108,6 +116,8 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 				std::cerr << "Invalid face with " << faceIndices.size() << " Ignoring.\n";
 		}
 	}
+	std::cout << uv.size() << std::endl;
+	std::cout << normal.size() << std::endl;
 	objFile.close();
 }
 

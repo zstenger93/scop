@@ -25,10 +25,23 @@
 #define WINDOW_WIDTH 3200
 #define WINDOW_HEIGTH 1800
 
+
 enum RenderMode { WIREFRAME, POINTS, FILLED };
 
 struct Vertex {
-	float x, y, z, texX, texY;
+	float x, y, z, texX, texY, normalX, normalY, normalZ;
+};
+
+struct Faces {
+	int vertex, uv, normal;
+};
+
+struct Uv {
+	float u, v, w;
+};
+
+struct Normal {
+	float normalX, normalY, normalZ;
 };
 
 struct Ka {
@@ -41,6 +54,13 @@ struct Kd {
 
 struct Ks {
 	float r, g, b;
+};
+
+struct Light {
+    Ka ambientIntensity;
+    Kd diffuseIntensity;
+    Ks specularIntensity;
+    Normal lightDirection;
 };
 
 struct Mtl {
