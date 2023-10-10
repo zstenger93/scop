@@ -8,11 +8,21 @@
 
 [Setup](#setup)
 
-[Object Files](#object_files)
+[Object Files](#object-files)
 
-[.mtl Files](#.mtl_files)
+[.mtl Files](#.mtl-files)
 
-[Input Handling](#input_handling)
+[Input Handling](#input-handling)
+
+[Creating Triangle](#creating-triangles)
+
+[Color](#color)
+
+[UV Coordinates](#uv-coordinates)
+
+[UV Normalizing](#uv-normalizing)
+
+[Normals](#normals)
 
 [Keys](#keys)
 
