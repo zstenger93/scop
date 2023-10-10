@@ -8,6 +8,12 @@
 
 [Setup](#setup)
 
+[Object Files](#object_files)
+
+[.mtl Files](#.mtl_files)
+
+[Input Handling](#input_handling)
+
 [Keys](#keys)
 
 [Resources](#resources)
@@ -15,6 +21,20 @@
 ## Setup
 
 Have at least OpenGL 3 or above or leave the page now and run for the sake of your sanity.
+
+## Object Files
+
+## .mtl Files
+
+## Input Handling
+
+## Creating Triangles
+
+## Color
+
+## UV Coordinates
+
+
 
 ## Keys
 
