@@ -25,5 +25,6 @@ std::vector<float> convertSquaresToTriangles(const std::vector<float> &Squares);
 void initMtl(Mtl &mtl);
 void saveMtlAttributes(std::istringstream &stream, Mtl &mtl, std::string &prefix, std::string fileName);
 void saveVertexCoordinates(std::istringstream &stream, Vertex &vertex, std::vector<Vertex> &vertices);
+void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &faces);
 
 #endif

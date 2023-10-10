@@ -48,10 +48,8 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 	while (std::getline(objFile, line)) {
 		std::string prefix, fileName;
 		std::istringstream stream(line);
-		std::vector<int> faceIndices;
 		Vertex vertex;
 		char slash;
-		int index;
 		Object window;
 		Uv uvVal;
 		Normal normalVal;
@@ -70,23 +68,20 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 			stream >> uvVal.u >> uvVal.v >> uvVal.w;
 			uv.push_back(uvVal);
 		} else if (prefix == "f") {
-			while (stream >> index) {
-				faceIndices.push_back(index);
-				if (stream.peek() == '/') {
-					stream.ignore();
-					stream.ignore(256, '/');
-					stream.ignore(256, ' ');
-				} else {
-					stream.ignore(256, ' ');
-				}
-			}
-			if (faceIndices.size() >= 3) {
-				faces.push_back(faceIndices);
-			} else
-				std::cerr << "Invalid face with " << faceIndices.size() << " Ignoring.\n";
+			saveFaceIndexes(stream, faces);
 		}
 	}
 	objFile.close();
+}
+
+void initMtl(Mtl &mtl) {
+	mtl.illum = 0;
+	mtl.Ns = 0;
+	mtl.Ni = 0;
+	mtl.ka.r = 0, mtl.ka.g = 0, mtl.ka.b = 0;
+	mtl.kd.r = 0, mtl.kd.g = 0, mtl.kd.b = 0;
+	mtl.ks.r = 0, mtl.ks.g = 0, mtl.ks.b = 0;
+	mtl.d = 1;
 }
 
 void saveMtlAttributes(std::istringstream &stream, Mtl &mtl, std::string &prefix,
@@ -120,22 +115,32 @@ void saveMtlAttributes(std::istringstream &stream, Mtl &mtl, std::string &prefix
 		std::cerr << "Error opening the file: " << file << std::endl;
 }
 
-void initMtl(Mtl &mtl) {
-	mtl.illum = 0;
-	mtl.Ns = 0;
-	mtl.Ni = 0;
-	mtl.ka.r = 0, mtl.ka.g = 0, mtl.ka.b = 0;
-	mtl.kd.r = 0, mtl.kd.g = 0, mtl.kd.b = 0;
-	mtl.ks.r = 0, mtl.ks.g = 0, mtl.ks.b = 0;
-	mtl.d = 1;
-}
-
 void saveVertexCoordinates(std::istringstream &stream, Vertex &vertex,
 						   std::vector<Vertex> &vertices) {
 	stream >> vertex.x >> vertex.y >> vertex.z;
 	vertex.texX = vertex.x;
 	vertex.texY = vertex.y;
 	vertices.push_back(vertex);
+}
+
+void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &faces) {
+	int index;
+	std::vector<int> faceIndices;
+
+	while (stream >> index) {
+		faceIndices.push_back(index);
+		if (stream.peek() == '/') {
+			stream.ignore();
+			stream.ignore(256, '/');
+			stream.ignore(256, ' ');
+		} else {
+			stream.ignore(256, ' ');
+		}
+	}
+	if (faceIndices.size() >= 3) {
+		faces.push_back(faceIndices);
+	} else
+		std::cerr << "Invalid face with " << faceIndices.size() << " Ignoring.\n";
 }
 
 void normalizeTextureCoordinates(std::vector<Vertex> &vertices) {

@@ -1,4 +1,5 @@
 #include "includes/glfw.hpp"
+#include "includes/headers.hpp"
 
 void initGLFW() {
 	glfwInit();
@@ -11,7 +12,8 @@ void initGLFW() {
 }
 
 GLFWwindow *createWindow() {
-	GLFWwindow *window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGTH, "windowtitle", NULL, NULL);
+	Object Window;
+	GLFWwindow *window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGTH, Window.name.c_str(), NULL, NULL);
 	if (window == NULL) {
 		std::cout << "Failed to create the window" << std::endl;
 		glfwTerminate();
