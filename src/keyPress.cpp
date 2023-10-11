@@ -62,9 +62,8 @@ void keyPressHandler_SetColorVersion(GLFWwindow *window, int &version) {
 		version++;
 		if (version > 3) version = 1;
 		bKeyPressed = true;
-	} else if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE) {
+	} else if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE)
 		bKeyPressed = false;
-	}
 }
 
 float rotationX = 0.0f;

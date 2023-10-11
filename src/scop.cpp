@@ -16,6 +16,7 @@ int main(int argc, char **argv) {
 	Faces face;
 	Object w;
 	std::vector<Uv> uv;
+	unsigned int texture;
 	std::vector<Normal> normal;
 	RenderMode renderMode = FILLED;
 	std::vector<glm::vec3> glmNormals;
@@ -28,7 +29,6 @@ int main(int argc, char **argv) {
 	Shader shader(argv[2], argv[3]);
 
 	passMtlInfoToFragmentShader(shader, mtl);
-
 	separateTrianglesAndSquares(objects, Triangles, unpreaparedSquares);
 	Squares = convertSquaresToTriangles(unpreaparedSquares);
 
@@ -36,12 +36,9 @@ int main(int argc, char **argv) {
 	createVaoVbo(VAO_triangles, VAO_squares, VBO_triangles, VBO_squares, normalVBO, Squares,
 				 Triangles, glmNormals);
 
-	unsigned int texture;
 	createTexture(texture, argv[1]);
-
 	renderingLoop(window, shader, camera, renderMode, texture, VAO_triangles, VAO_squares,
 				  Triangles, Squares);
-
 	glDeleteVertexArrays(1, &VAO_triangles);
 	glDeleteBuffers(1, &VBO_triangles);
 	glDeleteVertexArrays(1, &VAO_squares);
