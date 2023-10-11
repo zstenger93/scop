@@ -32,18 +32,9 @@ int main(int argc, char **argv) {
 	separateTrianglesAndSquares(objects, Triangles, unpreaparedSquares);
 	Squares = convertSquaresToTriangles(unpreaparedSquares);
 
-	unsigned int VAO_triangles, VBO_triangles, VAO_squares, VBO_squares;
-	createVaoVbo(VAO_triangles, VAO_squares, VBO_triangles, VBO_squares, Squares, Triangles);
-	if (normal.size() > 0) {
-		GLuint normalVBO;
-		glGenBuffers(1, &normalVBO);
-		glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
-		glBufferData(GL_ARRAY_BUFFER, glmNormals.size() * sizeof(glm::vec3), glmNormals.data(),
-					 GL_STATIC_DRAW);
-		glEnableVertexAttribArray(2);
-		glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
-		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
-	}
+	GLuint VAO_triangles, VBO_triangles, VAO_squares, VBO_squares, normalVBO;
+	createVaoVbo(VAO_triangles, VAO_squares, VBO_triangles, VBO_squares, normalVBO, Squares,
+				 Triangles, glmNormals);
 
 	unsigned int texture;
 	createTexture(texture, argv[1]);

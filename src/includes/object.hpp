@@ -3,8 +3,8 @@
 
 #include "headers.hpp"
 
-void createVaoVbo(unsigned int &VAO_triangles, unsigned int &VAO_squares, unsigned int &VBO_triangles,
-				  unsigned int &VBO_squares, std::vector<float> &Squares,
-				  std::vector<float> &Triangles);
+void createVaoVbo(GLuint &VAO_triangles, GLuint &VAO_squares, GLuint &VBO_triangles,
+				  GLuint &VBO_squares, GLuint &normalVBO, std::vector<float> &Squares,
+				  std::vector<float> &Triangles, std::vector<glm::vec3> &glmNormals);
 
 #endif
