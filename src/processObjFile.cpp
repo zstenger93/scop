@@ -22,14 +22,13 @@ std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl
 void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> &faces,
 					 std::vector<Vertex> &vertices, Mtl &mtl, Faces &face, std::vector<Uv> &uv,
 					 std::vector<Normal> &normal, Object &w) {
+	std::string line;
 	std::ifstream objFile(filePath);
 	if (!objFile.is_open()) {
 		std::cerr << "Error opening the file: " << filePath << std::endl;
 		return;
 	}
 	initMtl(mtl);
-
-	std::string line;
 	while (std::getline(objFile, line)) {
 		std::string prefix, fileName;
 		std::istringstream stream(line);
@@ -71,8 +70,7 @@ void initMtl(Mtl &mtl) {
 void saveMtlAttributes(std::istringstream &stream, Mtl &mtl, std::string &prefix,
 					   std::string fileName) {
 	stream >> fileName;
-	std::string mLine;
-	std::string file = "../resources/" + fileName;
+	std::string mLine, file = "../resources/" + fileName;
 	std::ifstream mtlFile(file);
 	if (mtlFile.is_open()) {
 		while (std::getline(mtlFile, mLine)) {
@@ -117,9 +115,8 @@ void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &
 			stream.ignore();
 			stream.ignore(256, '/');
 			stream.ignore(256, ' ');
-		} else {
+		} else
 			stream.ignore(256, ' ');
-		}
 	}
 	if (faceIndices.size() >= 3) {
 		faces.push_back(faceIndices);
@@ -211,7 +208,6 @@ std::vector<float> convertSquaresToTriangles(const std::vector<float> &Squares) 
 
 		triangles.insert(triangles.end(), {x1, y1, z1, texX1, texY1, x2, y2, z2, texX2, texY2, x3,
 										   y3, z3, texX3, texY3});
-
 		triangles.insert(triangles.end(), {x1, y1, z1, texX1, texY1, x3, y3, z3, texX3, texY3, x4,
 										   y4, z4, texX4, texY4});
 	}
