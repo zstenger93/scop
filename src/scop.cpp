@@ -33,9 +33,9 @@ int main(int argc, char **argv) {
 	Squares = convertSquaresToTriangles(unpreaparedSquares);
 
 	GLuint VAO_triangles, VBO_triangles, VAO_squares, VBO_squares, normalVBO;
+
 	createVaoVbo(VAO_triangles, VAO_squares, VBO_triangles, VBO_squares, normalVBO, Squares,
 				 Triangles, glmNormals);
-
 	createTexture(texture, argv[1]);
 	renderingLoop(window, shader, camera, renderMode, texture, VAO_triangles, VAO_squares,
 				  Triangles, Squares);

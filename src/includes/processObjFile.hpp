@@ -13,7 +13,8 @@
 
 void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> &faces,
 					 std::vector<Vertex> &vertices, Mtl &mtl, Faces &face, std::vector<Uv> &uv,
-					 std::vector<Normal> &normal, Object &w);
+					 std::vector<Normal> &normal, Object &w,
+					 std::vector<std::vector<int>> &uv_index);
 std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl &mtl, Faces &face,
 												std::vector<glm::vec3> &glmNormals, Object &w,
 												std::vector<Normal> &normal, std::vector<Uv> &uv);
@@ -26,8 +27,10 @@ void saveMtlAttributes(std::istringstream &stream, Mtl &mtl, std::string &prefix
 					   std::string fileName);
 void saveVertexCoordinates(std::istringstream &stream, Vertex &vertex,
 						   std::vector<Vertex> &vertices);
-void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &faces);
+void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &faces,
+					 std::vector<std::vector<int>> &uv_index);
 void triangleAssembly(std::vector<Vertex> &vertices, std::vector<std::vector<int>> &faces,
-					  std::vector<Uv> &uv, std::vector<std::vector<Vertex>> &triangles);
+					  std::vector<Uv> &uv, std::vector<std::vector<Vertex>> &triangles,
+					  std::vector<std::vector<int>> &uv_index);
 
 #endif

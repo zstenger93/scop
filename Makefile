@@ -7,8 +7,8 @@ GLEWSHIT = -I/Users/${USER}/.brew/Cellar/glew/2.2.0_1/include -L/Users/${USER}/.
 GLAD = glad.o
 GLADLIB = gcc -c src/includes/glad/glad.c -Ilibs
 
-# change the files here for the cases
-TEXTURE_NAME = uvmap
+# change the files here for the texures
+TEXTURE_NAME = skull
 EXEC = ./scop
 VERTEX_SOURCE = ../src/shader/vertexSource.vertex
 FRAGMENT_SOURCE = ../src/shader/fragmentSource.fragment
@@ -23,6 +23,7 @@ OBJECT_ALIENANIMAL = ../resources/alienanimal.obj
 OBJECT_BUILDING = ../resources/building.obj
 OBJECT_STARWARS = ../resources/sw.obj
 OBJECT_HEILBRONN = ../resources/hb.obj
+OBJECT_CAMEL = ../resources/Camel.obj
 
 REBUILD = make re
 RM		= rm -rf
@@ -113,7 +114,11 @@ hb:
 	@${REBUILD}
 	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_HEILBRONN}
 
-.PHONY: all clean fclean re test
+wp:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_CAMEL}
+
+.PHONY: all clean fclean re 42 tp sp sk ax am an bf sw hb wp
 
 COLOR_END = \033[0;39m
 CYAN3 = \033[1;4;96m

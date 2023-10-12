@@ -6,22 +6,24 @@ std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl
 												std::vector<glm::vec3> &glmNormals, Object &w,
 												std::vector<Normal> &normal, std::vector<Uv> &uv) {
 	std::vector<std::vector<int>> faces;
+	std::vector<std::vector<int>> uv_index;
 	std::vector<Vertex> vertices;
 	std::vector<std::vector<Vertex>> triangles;
 
 	if (normal.size() > 0)
 		for (const auto &n : normal)
 			glmNormals.push_back(glm::vec3(n.normalX, n.normalY, n.normalZ));
-	loadFromObjFile(filePath, faces, vertices, mtl, face, uv, normal, w);
+	loadFromObjFile(filePath, faces, vertices, mtl, face, uv, normal, w, uv_index);
 	if (vertices.size() == 0) return triangles;
 	normalizeTextureCoordinates(vertices);
-	triangleAssembly(vertices, faces, uv, triangles);
+	triangleAssembly(vertices, faces, uv, triangles, uv_index);
 	return triangles;
 }
 
 void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> &faces,
 					 std::vector<Vertex> &vertices, Mtl &mtl, Faces &face, std::vector<Uv> &uv,
-					 std::vector<Normal> &normal, Object &w) {
+					 std::vector<Normal> &normal, Object &w,
+					 std::vector<std::vector<int>> &uv_index) {
 	std::string line;
 	std::ifstream objFile(filePath);
 	if (!objFile.is_open()) {
@@ -51,7 +53,7 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 			stream >> uvVal.u >> uvVal.v >> uvVal.w;
 			uv.push_back(uvVal);
 		} else if (prefix == "f") {
-			saveFaceIndexes(stream, faces);
+			saveFaceIndexes(stream, faces, uv_index);
 		}
 	}
 	objFile.close();
@@ -105,24 +107,52 @@ void saveVertexCoordinates(std::istringstream &stream, Vertex &vertex,
 	vertices.push_back(vertex);
 }
 
-void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &faces) {
+void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &faces,
+					 std::vector<std::vector<int>> &uv_index) {
 	int index;
 	std::vector<int> faceIndices;
+	std::vector<int> uv_indexes;
 
 	while (stream >> index) {
 		faceIndices.push_back(index);
+
+		int uvIndex;
 		if (stream.peek() == '/') {
 			stream.ignore();
-			stream.ignore(256, '/');
+			stream >> uvIndex;
+			uv_indexes.push_back(uvIndex);
 			stream.ignore(256, ' ');
-		} else
+		} else {
 			stream.ignore(256, ' ');
+		}
 	}
+
 	if (faceIndices.size() >= 3) {
 		faces.push_back(faceIndices);
-	} else
+		uv_index.push_back(uv_indexes);
+	} else {
 		std::cerr << "Invalid face with " << faceIndices.size() << " Ignoring.\n";
+	}
 }
+
+// void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &faces,
+// std::vector<std::vector<int>> &uv_index) { 	int index; 	std::vector<int> faceIndices;
+// 	std::vector<int> uv_indexes;
+
+// 	while (stream >> index) {
+// 		faceIndices.push_back(index);
+// 		if (stream.peek() == '/') {
+// 			stream.ignore();
+// 			stream.ignore(256, '/');
+// 			stream.ignore(256, ' ');
+// 		} else
+// 			stream.ignore(256, ' ');
+// 	}
+// 	if (faceIndices.size() >= 3) {
+// 		faces.push_back(faceIndices);
+// 	} else
+// 		std::cerr << "Invalid face with " << faceIndices.size() << " Ignoring.\n";
+// }
 
 void normalizeTextureCoordinates(std::vector<Vertex> &vertices) {
 	for (auto &vertex : vertices) {
@@ -134,23 +164,50 @@ void normalizeTextureCoordinates(std::vector<Vertex> &vertices) {
 	}
 }
 
+
 void triangleAssembly(std::vector<Vertex> &vertices, std::vector<std::vector<int>> &faces,
-					  std::vector<Uv> &uv, std::vector<std::vector<Vertex>> &triangles) {
-	for (const auto &face : faces) {
-		if (face.size() >= 3) {
-			std::vector<Vertex> triangle;
-			for (int index : face) {
-				if (uv.size() > 0) {
-					vertices[index - 1].texX = uv[index - 1].u;
-					vertices[index - 1].texY = uv[index - 1].v;
-				}
-				triangle.push_back(vertices[index - 1]);
-			}
-			triangles.push_back(triangle);
-		} else
-			std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
-	}
+                      std::vector<Uv> &uv, std::vector<std::vector<Vertex>> &triangles,
+                      std::vector<std::vector<int>> &uv_index) {
+    for (size_t i = 0; i < faces.size(); ++i) {
+        const auto &face = faces[i];
+        const auto &uvIndices = uv_index[i];
+
+        if (face.size() >= 3 && uvIndices.size() >= 3) {
+            std::vector<Vertex> triangle;
+            for (size_t j = 0; j < face.size(); ++j) {
+                int index = face[j];
+                int uvIndex = uvIndices[j];
+                if (uvIndex > 0 && uvIndex <= static_cast<int>(uv.size())) {
+                    vertices[index - 1].texX = uv[uvIndex - 1].u;
+                    vertices[index - 1].texY = uv[uvIndex - 1].v;
+                }
+                triangle.push_back(vertices[index - 1]);
+            }
+            triangles.push_back(triangle);
+        } else {
+            std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
+        }
+    }
 }
+
+// void triangleAssembly(std::vector<Vertex> &vertices, std::vector<std::vector<int>> &faces,
+// 					  std::vector<Uv> &uv, std::vector<std::vector<Vertex>> &triangles,
+// 					  std::vector<std::vector<int>> &uv_index) {
+// 	for (const auto &face : faces) {
+// 		if (face.size() >= 3) {
+// 			std::vector<Vertex> triangle;
+// 			for (int index : face) {
+// 				if (uv.size() > 0) {
+// 					vertices[index - 1].texX = uv[index - 1].u;
+// 					vertices[index - 1].texY = uv[index - 1].v;
+// 				}
+// 				triangle.push_back(vertices[index - 1]);
+// 			}
+// 			triangles.push_back(triangle);
+// 		} else
+// 			std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
+// 	}
+// }
 
 void separateTrianglesAndSquares(const std::vector<std::vector<Vertex>> &objects,
 								 std::vector<float> &Triangles, std::vector<float> &Squares) {
