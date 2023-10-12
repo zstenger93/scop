@@ -3,9 +3,9 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "includes/stb_image.h"
 
-void createTexture(unsigned int &texture, char *textureSource) {
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
+void createTexture(Object &object, char *textureSource) {
+	glGenTextures(1, &object.texture);
+	glBindTexture(GL_TEXTURE_2D, object.texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -22,10 +22,9 @@ void createTexture(unsigned int &texture, char *textureSource) {
 	stbi_image_free(data);
 }
 
-void draw(unsigned int &VAO_triangles, unsigned int &VAO_squares, std::vector<float> &Triangles,
-		  std::vector<float> &Squares) {
-	glBindVertexArray(VAO_triangles);
-	glDrawArrays(GL_TRIANGLES, 0, Triangles.size());
-	glBindVertexArray(VAO_squares);
-	glDrawArrays(GL_TRIANGLES, 0, Squares.size());
+void draw(Object &object) {
+	glBindVertexArray(object.VAO_triangles);
+	glDrawArrays(GL_TRIANGLES, 0, object.Triangles.size());
+	glBindVertexArray(object.VAO_squares);
+	glDrawArrays(GL_TRIANGLES, 0, object.Squares.size());
 }

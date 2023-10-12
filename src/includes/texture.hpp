@@ -2,9 +2,9 @@
 #define TEXTURE_HPP
 
 #include "headers.hpp"
+#include "object.hpp"
 
-void createTexture(unsigned int &texture, char *textureSource);
-void draw(unsigned int &VAO_triangles, unsigned int &VAO_squares, std::vector<float> &Triangles,
-		  std::vector<float> &Squares);
+void createTexture(Object &object, char *textureSource);
+void draw(Object &object);
 
 #endif

@@ -13,23 +13,19 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 int main(int argc, char **argv) {
 	Object object;
-	unsigned int texture;
 
 	initGLFW();
 	processObjFile(argv[4], object);
+
 	GLFWwindow *window = createWindow(object);
 	Shader shader(argv[2], argv[3]);
 
 	passMtlInfoToFragmentShader(shader, object.mtl);
 	separateTrianglesAndSquares(object);
 	convertSquaresToTriangles(object);
-
-	
-
 	createVaoVbo(object);
-	createTexture(texture, argv[1]);
-	renderingLoop(window, shader, camera, object.renderMode, texture, object.VAO_triangles, object.VAO_squares,
-				  object.Triangles, object.Squares);
+	createTexture(object, argv[1]);
+	renderingLoop(window, shader, camera, object);
 	glDeleteVertexArrays(1, &object.VAO_triangles);
 	glDeleteBuffers(1, &object.VBO_triangles);
 	glDeleteVertexArrays(1, &object.VAO_squares);
