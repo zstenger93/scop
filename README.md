@@ -42,6 +42,8 @@
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull1.png">
 
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull_color.png">
+
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/camel.png">
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/camel_wire.png">

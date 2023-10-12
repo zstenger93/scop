@@ -23,5 +23,7 @@ void saveMtlAttributes(Object &object, std::istringstream &stream, std::string &
 void saveVertexCoordinates(std::istringstream &stream, Object &object);
 void saveFaceIndexes(std::istringstream &stream, Object &object);
 void triangleAssembly(Object &object);
+void assemblySlashMode(Object &object);
+void assemblyNormalMode(Object &object);
 
 #endif

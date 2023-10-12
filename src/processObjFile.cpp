@@ -125,41 +125,45 @@ void normalizeTextureCoordinates(Object &object) {
 
 void triangleAssembly(Object &object) {
 	if (object.hasSlash == true) {
-		for (size_t i = 0; i < object.faces.size(); ++i) {
-			const auto &face = object.faces[i];
-			const auto &uvIndices = object.uv_index[i];
+		assemblySlashMode(object);
+	} else
+		assemblyNormalMode(object);
+}
 
-			if (face.size() >= 3 && uvIndices.size() >= 3) {
-				std::vector<Vertex> triangle;
-				for (size_t j = 0; j < face.size(); ++j) {
-					int index = face[j];
-					int uvIndex = uvIndices[j];
-					if (uvIndex > 0 && uvIndex <= static_cast<int>(object.uv.size())) {
-						object.vertices[index - 1].texX = object.uv[uvIndex - 1].u;
-						object.vertices[index - 1].texY = object.uv[uvIndex - 1].v;
-					}
-					triangle.push_back(object.vertices[index - 1]);
-				}
-				object.triangles.push_back(triangle);
-			} else
-				std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
-		}
+void assemblySlashMode(Object &object) {
+	for (size_t i = 0; i < object.faces.size(); ++i) {
+		const auto &face = object.faces[i], &uvIndices = object.uv_index[i];
 
-	} else {
-		for (const auto &face : object.faces) {
-			if (face.size() >= 3) {
-				std::vector<Vertex> triangle;
-				for (int index : face) {
-					if (object.uv.size() > 0) {
-						object.vertices[index - 1].texX = object.uv[index - 1].u;
-						object.vertices[index - 1].texY = object.uv[index - 1].v;
-					}
-					triangle.push_back(object.vertices[index - 1]);
+		if (face.size() >= 3 && uvIndices.size() >= 3) {
+			std::vector<Vertex> triangle;
+			for (size_t j = 0; j < face.size(); ++j) {
+				int index = face[j], uvIndex = uvIndices[j];
+				if (uvIndex > 0 && uvIndex <= static_cast<int>(object.uv.size())) {
+					object.vertices[index - 1].texX = object.uv[uvIndex - 1].u;
+					object.vertices[index - 1].texY = object.uv[uvIndex - 1].v;
 				}
-				object.triangles.push_back(triangle);
-			} else
-				std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
-		}
+				triangle.push_back(object.vertices[index - 1]);
+			}
+			object.triangles.push_back(triangle);
+		} else
+			std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
+	}
+}
+
+void assemblyNormalMode(Object &object) {
+	for (const auto &face : object.faces) {
+		if (face.size() >= 3) {
+			std::vector<Vertex> triangle;
+			for (int index : face) {
+				if (object.uv.size() > 0) {
+					object.vertices[index - 1].texX = object.uv[index - 1].u;
+					object.vertices[index - 1].texY = object.uv[index - 1].v;
+				}
+				triangle.push_back(object.vertices[index - 1]);
+			}
+			object.triangles.push_back(triangle);
+		} else
+			std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
 	}
 }
 
