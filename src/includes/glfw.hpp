@@ -3,6 +3,7 @@
 
 #include "camera.hpp"
 #include "headers.hpp"
+#include "object.hpp"
 
 /*
     setting up GLFW and creating the first window, other
@@ -10,7 +11,7 @@
 */
 
 void initGLFW();
-GLFWwindow *createWindow(Object &w);
+GLFWwindow *createWindow(Object &object);
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int heigth);
 void mouse_callback(GLFWwindow *window, double xpos, double ypos);

@@ -14,7 +14,8 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 int main(int argc, char **argv) {
 	Mtl mtl;
 	Faces face;
-	Object w;
+	// Object w;
+	Object object;
 	std::vector<Uv> uv;
 	unsigned int texture;
 	std::vector<Normal> normal;
@@ -24,9 +25,11 @@ int main(int argc, char **argv) {
 
 	initGLFW();
 	std::vector<std::vector<Vertex>> objects =
-		processObjFile(argv[4], mtl, face, glmNormals, w, normal, uv);
-	GLFWwindow *window = createWindow(w);
+		processObjFile(argv[4], mtl, face, object, uv);
+	GLFWwindow *window = createWindow(object);
 	Shader shader(argv[2], argv[3]);
+
+	// std::cout << object.normals[0].x << " "  << object.normals[0].y << " "  << object.normals[0].z << " " << std::endl;
 
 	passMtlInfoToFragmentShader(shader, mtl);
 	separateTrianglesAndSquares(objects, Triangles, unpreaparedSquares);

@@ -8,7 +8,8 @@ GLAD = glad.o
 GLADLIB = gcc -c src/includes/glad/glad.c -Ilibs
 
 # change the files here for the texures
-TEXTURE_NAME = colors
+TEXTURE_NAME= colors
+
 EXEC = ./scop
 VERTEX_SOURCE = ../src/shader/vertexSource.vertex
 FRAGMENT_SOURCE = ../src/shader/fragmentSource.fragment

@@ -71,8 +71,8 @@ struct Mtl {
 	int illum;
 };
 
-struct Object {
-	std::string name;
-};
+// struct Object {
+// 	std::string name;
+// };
 
 #endif

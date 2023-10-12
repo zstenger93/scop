@@ -3,27 +3,25 @@
 #include "includes/headers.hpp"
 
 std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl &mtl, Faces &face,
-												std::vector<glm::vec3> &glmNormals, Object &w,
-												std::vector<Normal> &normal, std::vector<Uv> &uv) {
+												Object &object, std::vector<Uv> &uv) {
 	std::vector<std::vector<int>> faces;
 	std::vector<std::vector<int>> uv_index;
 	std::vector<Vertex> vertices;
 	std::vector<std::vector<Vertex>> triangles;
 
-	if (normal.size() > 0)
-		for (const auto &n : normal)
-			glmNormals.push_back(glm::vec3(n.normalX, n.normalY, n.normalZ));
-	loadFromObjFile(filePath, faces, vertices, mtl, face, uv, normal, w, uv_index);
+	// if (normal.size() > 0)
+	// 	for (const auto &n : normal)
+	// 		glmNormals.push_back(glm::vec3(n.normalX, n.normalY, n.normalZ));
+	loadFromObjFile(filePath, faces, vertices, mtl, face, uv, object, uv_index);
 	if (vertices.size() == 0) return triangles;
 	normalizeTextureCoordinates(vertices);
-	triangleAssembly(vertices, faces, uv, triangles, uv_index);
+	triangleAssembly(vertices, faces, uv, triangles, uv_index, object);
 	return triangles;
 }
 
 void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> &faces,
 					 std::vector<Vertex> &vertices, Mtl &mtl, Faces &face, std::vector<Uv> &uv,
-					 std::vector<Normal> &normal, Object &w,
-					 std::vector<std::vector<int>> &uv_index) {
+					 Object &object, std::vector<std::vector<int>> &uv_index) {
 	std::string line;
 	std::ifstream objFile(filePath);
 	if (!objFile.is_open()) {
@@ -37,23 +35,23 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 		Vertex vertex;
 		char slash;
 		Uv uvVal;
-		Normal normalVal;
+		float normalX, normalY, normalZ;
 
 		stream >> prefix;
 		if (prefix == "o") {
-			stream >> w.name;
+			stream >> object.name;
 		} else if (prefix == "mtllib") {
 			saveMtlAttributes(stream, mtl, prefix, fileName);
 		} else if (prefix == "v") {
 			saveVertexCoordinates(stream, vertex, vertices);
 		} else if (prefix == "vn") {
-			stream >> normalVal.normalX >> normalVal.normalY >> normalVal.normalZ;
-			normal.push_back(normalVal);
+			stream >> normalX >> normalY >> normalZ;
+			object.normals.push_back(glm::vec3(normalX, normalY, normalZ));
 		} else if (prefix == "vt") {
 			stream >> uvVal.u >> uvVal.v >> uvVal.w;
 			uv.push_back(uvVal);
 		} else if (prefix == "f") {
-			saveFaceIndexes(stream, faces, uv_index);
+			saveFaceIndexes(stream, faces, uv_index, object);
 		}
 	}
 	objFile.close();
@@ -108,17 +106,16 @@ void saveVertexCoordinates(std::istringstream &stream, Vertex &vertex,
 }
 
 void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &faces,
-					 std::vector<std::vector<int>> &uv_index) {
-	int index;
-	std::vector<int> faceIndices;
-	std::vector<int> uv_indexes;
+					 std::vector<std::vector<int>> &uv_index, Object &object) {
+	int index, uvIndex;
+	std::vector<int> faceIndices, uv_indexes;
 
 	while (stream >> index) {
 		faceIndices.push_back(index);
 
-		int uvIndex;
 		if (stream.peek() == '/') {
 			stream.ignore();
+			object.hasSlash = true;
 			stream >> uvIndex;
 			uv_indexes.push_back(uvIndex);
 			stream.ignore(256, ' ');
@@ -129,7 +126,7 @@ void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &
 
 	if (faceIndices.size() >= 3) {
 		faces.push_back(faceIndices);
-		uv_index.push_back(uv_indexes);
+		if (object.hasSlash == true) uv_index.push_back(uv_indexes);
 	} else {
 		std::cerr << "Invalid face with " << faceIndices.size() << " Ignoring.\n";
 	}
@@ -145,30 +142,47 @@ void normalizeTextureCoordinates(std::vector<Vertex> &vertices) {
 	}
 }
 
-
 void triangleAssembly(std::vector<Vertex> &vertices, std::vector<std::vector<int>> &faces,
-                      std::vector<Uv> &uv, std::vector<std::vector<Vertex>> &triangles,
-                      std::vector<std::vector<int>> &uv_index) {
-    for (size_t i = 0; i < faces.size(); ++i) {
-        const auto &face = faces[i];
-        const auto &uvIndices = uv_index[i];
+					  std::vector<Uv> &uv, std::vector<std::vector<Vertex>> &triangles,
+					  std::vector<std::vector<int>> &uv_index, Object &object) {
+	if (object.hasSlash == true) {
+		for (size_t i = 0; i < faces.size(); ++i) {
+			const auto &face = faces[i];
+			const auto &uvIndices = uv_index[i];
 
-        if (face.size() >= 3 && uvIndices.size() >= 3) {
-            std::vector<Vertex> triangle;
-            for (size_t j = 0; j < face.size(); ++j) {
-                int index = face[j];
-                int uvIndex = uvIndices[j];
-                if (uvIndex > 0 && uvIndex <= static_cast<int>(uv.size())) {
-                    vertices[index - 1].texX = uv[uvIndex - 1].u;
-                    vertices[index - 1].texY = uv[uvIndex - 1].v;
-                }
-                triangle.push_back(vertices[index - 1]);
-            }
-            triangles.push_back(triangle);
-        } else {
-            std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
-        }
-    }
+			if (face.size() >= 3 && uvIndices.size() >= 3) {
+				std::vector<Vertex> triangle;
+				for (size_t j = 0; j < face.size(); ++j) {
+					int index = face[j];
+					int uvIndex = uvIndices[j];
+					if (uvIndex > 0 && uvIndex <= static_cast<int>(uv.size())) {
+						vertices[index - 1].texX = uv[uvIndex - 1].u;
+						vertices[index - 1].texY = uv[uvIndex - 1].v;
+					}
+					triangle.push_back(vertices[index - 1]);
+				}
+				triangles.push_back(triangle);
+			} else {
+				std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
+			}
+		}
+
+	} else {
+		for (const auto &face : faces) {
+			if (face.size() >= 3) {
+				std::vector<Vertex> triangle;
+				for (int index : face) {
+					if (uv.size() > 0) {
+						vertices[index - 1].texX = uv[index - 1].u;
+						vertices[index - 1].texY = uv[index - 1].v;
+					}
+					triangle.push_back(vertices[index - 1]);
+				}
+				triangles.push_back(triangle);
+			} else
+				std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
+		}
+	}
 }
 
 void separateTrianglesAndSquares(const std::vector<std::vector<Vertex>> &objects,
