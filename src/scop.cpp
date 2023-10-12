@@ -12,35 +12,28 @@
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 int main(int argc, char **argv) {
-	Mtl mtl;
-	Faces face;
-	// Object w;
+	
 	Object object;
-	std::vector<Uv> uv;
 	unsigned int texture;
-	std::vector<Normal> normal;
-	RenderMode renderMode = FILLED;
-	std::vector<glm::vec3> glmNormals;
+	
 	std::vector<float> Triangles, unpreaparedSquares, Squares;
 
 	initGLFW();
 	std::vector<std::vector<Vertex>> objects =
-		processObjFile(argv[4], mtl, face, object, uv);
+		processObjFile(argv[4], object.mtl, object, object.uv);
 	GLFWwindow *window = createWindow(object);
 	Shader shader(argv[2], argv[3]);
 
-	// std::cout << object.normals[0].x << " "  << object.normals[0].y << " "  << object.normals[0].z << " " << std::endl;
-
-	passMtlInfoToFragmentShader(shader, mtl);
+	passMtlInfoToFragmentShader(shader, object.mtl);
 	separateTrianglesAndSquares(objects, Triangles, unpreaparedSquares);
 	Squares = convertSquaresToTriangles(unpreaparedSquares);
 
 	GLuint VAO_triangles, VBO_triangles, VAO_squares, VBO_squares, normalVBO;
 
 	createVaoVbo(VAO_triangles, VAO_squares, VBO_triangles, VBO_squares, normalVBO, Squares,
-				 Triangles, glmNormals);
+				 Triangles, object.normals);
 	createTexture(texture, argv[1]);
-	renderingLoop(window, shader, camera, renderMode, texture, VAO_triangles, VAO_squares,
+	renderingLoop(window, shader, camera, object.renderMode, texture, VAO_triangles, VAO_squares,
 				  Triangles, Squares);
 	glDeleteVertexArrays(1, &VAO_triangles);
 	glDeleteBuffers(1, &VBO_triangles);

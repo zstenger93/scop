@@ -5,9 +5,15 @@
 
 class Object {
    public:
-   std::string name;
-   bool hasSlash = false;
-	std::vector<glm::vec3> normals;
+	Mtl mtl;
+	std::string name;
+	bool hasSlash = false;
+	RenderMode renderMode = FILLED;
+	std::vector<glm::vec3> normals; // vn aka normals for light calculations
+	std::vector<Uv> uv; // vt aka uv coordinates 
+
+
+	std::vector<std::vector<int>> uv_index; // indexes for uv coordinates from each face
 };
 
 void createVaoVbo(GLuint &VAO_triangles, GLuint &VAO_squares, GLuint &VBO_triangles,

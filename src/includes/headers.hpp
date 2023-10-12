@@ -32,9 +32,9 @@ struct Vertex {
 	float x, y, z, texX, texY, normalX, normalY, normalZ;
 };
 
-struct Faces {
-	int vertex, uv, normal;
-};
+// struct Faces {
+// 	int vertex, uv, normal;
+// };
 
 struct Uv {
 	float u, v, w;
@@ -70,9 +70,5 @@ struct Mtl {
 	float Ns, Ni, d;
 	int illum;
 };
-
-// struct Object {
-// 	std::string name;
-// };
 
 #endif

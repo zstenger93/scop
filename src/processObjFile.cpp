@@ -2,26 +2,23 @@
 
 #include "includes/headers.hpp"
 
-std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl &mtl, Faces &face,
+std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl &mtl,
 												Object &object, std::vector<Uv> &uv) {
 	std::vector<std::vector<int>> faces;
-	std::vector<std::vector<int>> uv_index;
+	
 	std::vector<Vertex> vertices;
 	std::vector<std::vector<Vertex>> triangles;
 
-	// if (normal.size() > 0)
-	// 	for (const auto &n : normal)
-	// 		glmNormals.push_back(glm::vec3(n.normalX, n.normalY, n.normalZ));
-	loadFromObjFile(filePath, faces, vertices, mtl, face, uv, object, uv_index);
+	loadFromObjFile(filePath, faces, vertices, mtl, uv, object);
 	if (vertices.size() == 0) return triangles;
 	normalizeTextureCoordinates(vertices);
-	triangleAssembly(vertices, faces, uv, triangles, uv_index, object);
+	triangleAssembly(vertices, faces, uv, triangles, object.uv_index, object);
 	return triangles;
 }
 
 void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> &faces,
-					 std::vector<Vertex> &vertices, Mtl &mtl, Faces &face, std::vector<Uv> &uv,
-					 Object &object, std::vector<std::vector<int>> &uv_index) {
+					 std::vector<Vertex> &vertices, Mtl &mtl, std::vector<Uv> &uv,
+					 Object &object) {
 	std::string line;
 	std::ifstream objFile(filePath);
 	if (!objFile.is_open()) {
@@ -51,7 +48,7 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 			stream >> uvVal.u >> uvVal.v >> uvVal.w;
 			uv.push_back(uvVal);
 		} else if (prefix == "f") {
-			saveFaceIndexes(stream, faces, uv_index, object);
+			saveFaceIndexes(stream, faces, object);
 		}
 	}
 	objFile.close();
@@ -105,8 +102,7 @@ void saveVertexCoordinates(std::istringstream &stream, Vertex &vertex,
 	vertices.push_back(vertex);
 }
 
-void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &faces,
-					 std::vector<std::vector<int>> &uv_index, Object &object) {
+void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &faces, Object &object) {
 	int index, uvIndex;
 	std::vector<int> faceIndices, uv_indexes;
 
@@ -126,7 +122,7 @@ void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &
 
 	if (faceIndices.size() >= 3) {
 		faces.push_back(faceIndices);
-		if (object.hasSlash == true) uv_index.push_back(uv_indexes);
+		if (object.hasSlash == true) object.uv_index.push_back(uv_indexes);
 	} else {
 		std::cerr << "Invalid face with " << faceIndices.size() << " Ignoring.\n";
 	}
