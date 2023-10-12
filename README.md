@@ -36,6 +36,8 @@
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/alienanimal.png">
 
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/alien.png">
+
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull.png">
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull_wire.png">
