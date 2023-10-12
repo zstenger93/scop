@@ -15,6 +15,7 @@
 
 #include "camera.hpp"
 #include "headers.hpp"
+#include "object.hpp"
 
 class Shader {
    public:
@@ -44,6 +45,6 @@ class Shader {
 	void checkCompileErrors(unsigned int shader, std::string type);
 };
 
-void passMtlInfoToFragmentShader(Shader &shader, Mtl &mtl);
+void passMtlInfoToFragmentShader(Shader &shader, Object &object);
 
 #endif

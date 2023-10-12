@@ -16,6 +16,8 @@ uniform vec3 Ks;
 uniform float Ni;
 uniform float d;
 uniform int illum;
+uniform vec3 LightPos;
+uniform vec4 modelViewProjectionMatrix;
 
 void main() {
     vec4 texColor = texture(texture1, TexCoord);

@@ -32,8 +32,11 @@ class Camera {
 	float MouseSensitivity;
 	float Zoom;
 
+	float nearPlane = 0.1f;
+	float farPlane = 1500.0f;
+
 	float lastX = WINDOW_WIDTH / 2.0f;
-	float lastY = WINDOW_HEIGTH / 2.0f;
+	float lastY = WINDOW_HEIGHT / 2.0f;
 	bool firstMouse = true;
 	float deltaTime = 0.0f;
 	float lastFrame = 0.0f;
@@ -47,6 +50,7 @@ class Camera {
 	void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true);
 	void ProcessMouseScroll(float yoffset);
 	void fps(Camera &camera);
+	glm::mat4 getViewMatrix();
 
    private:
 	void updateCameraVectors();

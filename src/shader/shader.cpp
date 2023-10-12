@@ -1,5 +1,7 @@
 #include "../includes/shader.hpp"
 
+#include <OpenGL/OpenGL.h>
+
 Shader::Shader(const char *vertexPath, const char *fragmentPath) {
 	std::string vertexCode;
 	std::string fragmentCode;
@@ -78,9 +80,14 @@ void Shader::setMat4(const std::string &name, const glm::mat4 &mat) const {
 }
 
 void Shader::setPerspective(Camera &camera, Shader &shader) {
-	glm::mat4 projection = glm::perspective(
-		glm::radians(camera.Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGTH, 0.1f, 1500.0f);
-	shader.setMat4("projection", projection);
+	glm::mat4 modelMatrix = glm::mat4(1.0f);
+	glm::mat4 projectionMatrix =
+		glm::perspective(glm::radians(camera.Zoom),
+						 static_cast<float>(WINDOW_WIDTH) / static_cast<float>(WINDOW_HEIGHT),
+						 camera.nearPlane, camera.farPlane);
+	glm::mat4 viewMatrix = camera.GetViewMatrix();
+	glm::mat4 modelViewProjectionMatrix = projectionMatrix * viewMatrix * modelMatrix;
+	shader.setMat4("modelViewProjectionMatrix", modelViewProjectionMatrix);
 }
 
 void Shader::setView(Camera &camera, Shader &shader) {
@@ -109,7 +116,7 @@ void Shader::setTexture_OR_setColor(Shader &shader, int &version, glm::vec3 &col
 	shader.setVec3("objectColor", color);
 }
 
-void passMtlInfoToFragmentShader(Shader &shader, Mtl &mtl) {
+void passMtlInfoToFragmentShader(Shader &shader, Object &object) {
 	GLuint NsLoc = glGetUniformLocation(shader.ID, "Ns");
 	GLuint KaLoc = glGetUniformLocation(shader.ID, "Ka");
 	GLuint KdLoc = glGetUniformLocation(shader.ID, "Kd");
@@ -117,15 +124,18 @@ void passMtlInfoToFragmentShader(Shader &shader, Mtl &mtl) {
 	GLuint NiLoc = glGetUniformLocation(shader.ID, "Ni");
 	GLuint dLoc = glGetUniformLocation(shader.ID, "d");
 	GLuint illumLoc = glGetUniformLocation(shader.ID, "illum");
+	GLuint lightPosLoc = glGetUniformLocation(shader.ID, "LightPos");
 
 	glUseProgram(shader.ID);
-	glUniform1f(NsLoc, mtl.Ns);
-	glUniform3f(KaLoc, mtl.ka.r, mtl.ka.g, mtl.ka.b);
-	glUniform3f(KdLoc, mtl.kd.r, mtl.kd.g, mtl.kd.b);
-	glUniform3f(KsLoc, mtl.ks.r, mtl.ks.g, mtl.ks.b);
-	glUniform1f(NiLoc, mtl.Ni);
-	glUniform1f(dLoc, mtl.d);
-	glUniform1i(illumLoc, mtl.illum);
+	glUniform1f(NsLoc, object.mtl.Ns);
+	glUniform3f(KaLoc, object.mtl.ka.r, object.mtl.ka.g, object.mtl.ka.b);
+	glUniform3f(KdLoc, object.mtl.kd.r, object.mtl.kd.g, object.mtl.kd.b);
+	glUniform3f(KsLoc, object.mtl.ks.r, object.mtl.ks.g, object.mtl.ks.b);
+	glUniform1f(NiLoc, object.mtl.Ni);
+	glUniform1f(dLoc, object.mtl.d);
+	glUniform1i(illumLoc, object.mtl.illum);
+	glUniform3f(lightPosLoc, object.lightSourcePos.x, object.lightSourcePos.y,
+				object.lightSourcePos.z);
 }
 
 void Shader::checkCompileErrors(unsigned int shader, std::string type) {

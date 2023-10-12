@@ -14,7 +14,7 @@ void initGLFW() {
 
 GLFWwindow *createWindow(Object &object) {
 	GLFWwindow *window =
-		glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGTH, object.windowName.c_str(), NULL, NULL);
+		glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, object.windowName.c_str(), NULL, NULL);
 	if (window == NULL) {
 		std::cout << "Failed to create the window" << std::endl;
 		glfwTerminate();

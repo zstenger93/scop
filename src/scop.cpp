@@ -1,5 +1,6 @@
 #include <OpenGL/OpenGL.h>
 
+#include "includes/camera.hpp"
 #include "includes/glfw.hpp"
 #include "includes/headers.hpp"
 #include "includes/object.hpp"
@@ -20,7 +21,7 @@ int main(int argc, char **argv) {
 	GLFWwindow *window = createWindow(object);
 	Shader shader(argv[2], argv[3]);
 
-	passMtlInfoToFragmentShader(shader, object.mtl);
+	passMtlInfoToFragmentShader(shader, object);
 	separateTrianglesAndSquares(object);
 	convertSquaresToTriangles(object);
 	createVaoVbo(object);

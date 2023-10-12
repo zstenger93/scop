@@ -30,6 +30,4 @@ class Object {
 
 void createVaoVbo(Object &object);
 
-void colorCalculation(Object &object, Camera &camera);
-
 #endif
