@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
 
 	initGLFW();
 	std::vector<std::vector<Vertex>> objects =
-		processObjFile(argv[4], object.mtl, object, object.uv);
+		processObjFile(argv[4], object);
 	GLFWwindow *window = createWindow(object);
 	Shader shader(argv[2], argv[3]);
 

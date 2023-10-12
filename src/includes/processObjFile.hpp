@@ -12,23 +12,17 @@
 #include "headers.hpp"
 #include "object.hpp"
 
-void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> &faces,
-					 std::vector<Vertex> &vertices, Mtl &mtl, std::vector<Uv> &uv, Object &object);
-std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl &mtl,
-												Object &object, std::vector<Uv> &uv);
-void normalizeTextureCoordinates(std::vector<Vertex> &vertices);
+std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Object &object);
+void loadFromObjFile(const std::string &filePath, Object &object);
+void normalizeTextureCoordinates(Object &object);
 void separateTrianglesAndSquares(const std::vector<std::vector<Vertex>> &objects,
 								 std::vector<float> &Triangles, std::vector<float> &Squares);
 std::vector<float> convertSquaresToTriangles(const std::vector<float> &Squares);
-void initMtl(Mtl &mtl);
-void saveMtlAttributes(std::istringstream &stream, Mtl &mtl, std::string &prefix,
+void initMtl(Object &object);
+void saveMtlAttributes(Object &object, std::istringstream &stream, std::string &prefix,
 					   std::string fileName);
-void saveVertexCoordinates(std::istringstream &stream, Vertex &vertex,
-						   std::vector<Vertex> &vertices);
-void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &faces,
-					 Object &object);
-void triangleAssembly(std::vector<Vertex> &vertices, std::vector<std::vector<int>> &faces,
-					  std::vector<Uv> &uv, std::vector<std::vector<Vertex>> &triangles,
-					  std::vector<std::vector<int>> &uv_index, Object &object);
+void saveVertexCoordinates(std::istringstream &stream, Object &object);
+void saveFaceIndexes(std::istringstream &stream, Object &object);
+void triangleAssembly(std::vector<std::vector<Vertex>> &triangles, Object &object);
 
 #endif

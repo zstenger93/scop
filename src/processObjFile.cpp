@@ -2,35 +2,27 @@
 
 #include "includes/headers.hpp"
 
-std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl &mtl,
-												Object &object, std::vector<Uv> &uv) {
-	std::vector<std::vector<int>> faces;
-	
-	std::vector<Vertex> vertices;
+std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Object &object) {
 	std::vector<std::vector<Vertex>> triangles;
 
-	loadFromObjFile(filePath, faces, vertices, mtl, uv, object);
-	if (vertices.size() == 0) return triangles;
-	normalizeTextureCoordinates(vertices);
-	triangleAssembly(vertices, faces, uv, triangles, object.uv_index, object);
+	loadFromObjFile(filePath, object);
+	if (object.vertices.size() == 0) return triangles;
+	normalizeTextureCoordinates(object);
+	triangleAssembly(triangles, object);
 	return triangles;
 }
 
-void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> &faces,
-					 std::vector<Vertex> &vertices, Mtl &mtl, std::vector<Uv> &uv,
-					 Object &object) {
+void loadFromObjFile(const std::string &filePath, Object &object) {
 	std::string line;
 	std::ifstream objFile(filePath);
 	if (!objFile.is_open()) {
 		std::cerr << "Error opening the file: " << filePath << std::endl;
 		return;
 	}
-	initMtl(mtl);
+	initMtl(object);
 	while (std::getline(objFile, line)) {
 		std::string prefix, fileName;
 		std::istringstream stream(line);
-		Vertex vertex;
-		char slash;
 		Uv uvVal;
 		float normalX, normalY, normalZ;
 
@@ -38,33 +30,33 @@ void loadFromObjFile(const std::string &filePath, std::vector<std::vector<int>> 
 		if (prefix == "o") {
 			stream >> object.name;
 		} else if (prefix == "mtllib") {
-			saveMtlAttributes(stream, mtl, prefix, fileName);
+			saveMtlAttributes(object, stream, prefix, fileName);
 		} else if (prefix == "v") {
-			saveVertexCoordinates(stream, vertex, vertices);
+			saveVertexCoordinates(stream, object);
 		} else if (prefix == "vn") {
 			stream >> normalX >> normalY >> normalZ;
 			object.normals.push_back(glm::vec3(normalX, normalY, normalZ));
 		} else if (prefix == "vt") {
 			stream >> uvVal.u >> uvVal.v >> uvVal.w;
-			uv.push_back(uvVal);
+			object.uv.push_back(uvVal);
 		} else if (prefix == "f") {
-			saveFaceIndexes(stream, faces, object);
+			saveFaceIndexes(stream, object);
 		}
 	}
 	objFile.close();
 }
 
-void initMtl(Mtl &mtl) {
-	mtl.illum = 0;
-	mtl.Ns = 0;
-	mtl.Ni = 0;
-	mtl.ka.r = 0, mtl.ka.g = 0, mtl.ka.b = 0;
-	mtl.kd.r = 0, mtl.kd.g = 0, mtl.kd.b = 0;
-	mtl.ks.r = 0, mtl.ks.g = 0, mtl.ks.b = 0;
-	mtl.d = 1;
+void initMtl(Object &object) {
+	object.mtl.illum = 0;
+	object.mtl.Ns = 0;
+	object.mtl.Ni = 0;
+	object.mtl.ka.r = 0, object.mtl.ka.g = 0, object.mtl.ka.b = 0;
+	object.mtl.kd.r = 0, object.mtl.kd.g = 0, object.mtl.kd.b = 0;
+	object.mtl.ks.r = 0, object.mtl.ks.g = 0, object.mtl.ks.b = 0;
+	object.mtl.d = 1;
 }
 
-void saveMtlAttributes(std::istringstream &stream, Mtl &mtl, std::string &prefix,
+void saveMtlAttributes(Object &object, std::istringstream &stream, std::string &prefix,
 					   std::string fileName) {
 	stream >> fileName;
 	std::string mLine, file = "../resources/" + fileName;
@@ -74,19 +66,19 @@ void saveMtlAttributes(std::istringstream &stream, Mtl &mtl, std::string &prefix
 			std::istringstream stream(mLine);
 			stream >> prefix;
 			if (prefix == "Ns") {
-				stream >> mtl.Ns;
+				stream >> object.mtl.Ns;
 			} else if (prefix == "Ka") {
-				stream >> mtl.ka.r >> mtl.ka.g >> mtl.ka.b;
+				stream >> object.mtl.ka.r >> object.mtl.ka.g >> object.mtl.ka.b;
 			} else if (prefix == "Kd") {
-				stream >> mtl.kd.r >> mtl.kd.g >> mtl.kd.b;
+				stream >> object.mtl.kd.r >> object.mtl.kd.g >> object.mtl.kd.b;
 			} else if (prefix == "Ks") {
-				stream >> mtl.ks.r >> mtl.ks.g >> mtl.ks.b;
+				stream >> object.mtl.ks.r >> object.mtl.ks.g >> object.mtl.ks.b;
 			} else if (prefix == "Ni") {
-				stream >> mtl.Ni;
+				stream >> object.mtl.Ni;
 			} else if (prefix == "d") {
-				stream >> mtl.d;
+				stream >> object.mtl.d;
 			} else if (prefix == "illum") {
-				stream >> mtl.illum;
+				stream >> object.mtl.illum;
 			}
 		}
 		mtlFile.close();
@@ -94,42 +86,38 @@ void saveMtlAttributes(std::istringstream &stream, Mtl &mtl, std::string &prefix
 		std::cerr << "Error opening the file: " << file << std::endl;
 }
 
-void saveVertexCoordinates(std::istringstream &stream, Vertex &vertex,
-						   std::vector<Vertex> &vertices) {
+void saveVertexCoordinates(std::istringstream &stream, Object &object) {
+	Vertex vertex;
 	stream >> vertex.x >> vertex.y >> vertex.z;
 	vertex.texX = vertex.x;
 	vertex.texY = vertex.y;
-	vertices.push_back(vertex);
+	object.vertices.push_back(vertex);
 }
 
-void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &faces, Object &object) {
+void saveFaceIndexes(std::istringstream &stream, Object &object) {
 	int index, uvIndex;
 	std::vector<int> faceIndices, uv_indexes;
 
 	while (stream >> index) {
 		faceIndices.push_back(index);
-
 		if (stream.peek() == '/') {
 			stream.ignore();
 			object.hasSlash = true;
 			stream >> uvIndex;
 			uv_indexes.push_back(uvIndex);
 			stream.ignore(256, ' ');
-		} else {
+		} else
 			stream.ignore(256, ' ');
-		}
 	}
-
 	if (faceIndices.size() >= 3) {
-		faces.push_back(faceIndices);
+		object.faces.push_back(faceIndices);
 		if (object.hasSlash == true) object.uv_index.push_back(uv_indexes);
-	} else {
+	} else
 		std::cerr << "Invalid face with " << faceIndices.size() << " Ignoring.\n";
-	}
 }
 
-void normalizeTextureCoordinates(std::vector<Vertex> &vertices) {
-	for (auto &vertex : vertices) {
+void normalizeTextureCoordinates(Object &object) {
+	for (auto &vertex : object.vertices) {
 		float theta = atan2(vertex.z, vertex.x);
 		float phi =
 			acos(vertex.y / sqrt(vertex.x * vertex.x + vertex.y * vertex.y + vertex.z * vertex.z));
@@ -138,41 +126,38 @@ void normalizeTextureCoordinates(std::vector<Vertex> &vertices) {
 	}
 }
 
-void triangleAssembly(std::vector<Vertex> &vertices, std::vector<std::vector<int>> &faces,
-					  std::vector<Uv> &uv, std::vector<std::vector<Vertex>> &triangles,
-					  std::vector<std::vector<int>> &uv_index, Object &object) {
+void triangleAssembly(std::vector<std::vector<Vertex>> &triangles, Object &object) {
 	if (object.hasSlash == true) {
-		for (size_t i = 0; i < faces.size(); ++i) {
-			const auto &face = faces[i];
-			const auto &uvIndices = uv_index[i];
+		for (size_t i = 0; i < object.faces.size(); ++i) {
+			const auto &face = object.faces[i];
+			const auto &uvIndices = object.uv_index[i];
 
 			if (face.size() >= 3 && uvIndices.size() >= 3) {
 				std::vector<Vertex> triangle;
 				for (size_t j = 0; j < face.size(); ++j) {
 					int index = face[j];
 					int uvIndex = uvIndices[j];
-					if (uvIndex > 0 && uvIndex <= static_cast<int>(uv.size())) {
-						vertices[index - 1].texX = uv[uvIndex - 1].u;
-						vertices[index - 1].texY = uv[uvIndex - 1].v;
+					if (uvIndex > 0 && uvIndex <= static_cast<int>(object.uv.size())) {
+						object.vertices[index - 1].texX = object.uv[uvIndex - 1].u;
+						object.vertices[index - 1].texY = object.uv[uvIndex - 1].v;
 					}
-					triangle.push_back(vertices[index - 1]);
+					triangle.push_back(object.vertices[index - 1]);
 				}
 				triangles.push_back(triangle);
-			} else {
+			} else
 				std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
-			}
 		}
 
 	} else {
-		for (const auto &face : faces) {
+		for (const auto &face : object.faces) {
 			if (face.size() >= 3) {
 				std::vector<Vertex> triangle;
 				for (int index : face) {
-					if (uv.size() > 0) {
-						vertices[index - 1].texX = uv[index - 1].u;
-						vertices[index - 1].texY = uv[index - 1].v;
+					if (object.uv.size() > 0) {
+						object.vertices[index - 1].texX = object.uv[index - 1].u;
+						object.vertices[index - 1].texY = object.uv[index - 1].v;
 					}
-					triangle.push_back(vertices[index - 1]);
+					triangle.push_back(object.vertices[index - 1]);
 				}
 				triangles.push_back(triangle);
 			} else
