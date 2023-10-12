@@ -72,7 +72,7 @@ f 4 9 7 1
 or
 
 ```
-f 23/123/123 321/3213/213 43/45/12
+f 23/123/123 321/3213/213 43/45/12 423/3423/432
 ```
 
 ## .mtl Files
@@ -89,11 +89,19 @@ One face contains 3 or 4 indexes and each of them marks the index of an x, y and
 
 ## Color
 
+you can use normal colors, or the uv coordinates
+
 ## UV Coordinates
+
+Don't have to normalize these usually if taken from the object file
 
 ## UV Normalizing
 
+In case you don't have them, you need to calculate it yourself
+
 ## Normals
+
+Normals are used for lighting calculations
 
 ## Keys
 
