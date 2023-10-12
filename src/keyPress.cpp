@@ -55,7 +55,7 @@ void keyPressHandler_SetColor(GLFWwindow *window, glm::vec3 &color) {
 	}
 }
 
-void keyPressHandler_SetColorVersion(GLFWwindow *window, int &version) {
+void keyPressHandler_SetColorVersion(GLFWwindow *window, int &version, Object &object) {
 	static bool bKeyPressed = false;
 
 	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS && !bKeyPressed) {
@@ -64,6 +64,8 @@ void keyPressHandler_SetColorVersion(GLFWwindow *window, int &version) {
 		bKeyPressed = true;
 	} else if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE)
 		bKeyPressed = false;
+	if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS) object.mtl.illum = 1;
+	if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS) object.mtl.illum = 2;
 }
 
 float rotationX = 0.0f;

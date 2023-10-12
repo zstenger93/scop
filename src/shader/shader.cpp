@@ -85,13 +85,14 @@ void Shader::setPerspective(Camera &camera, Shader &shader) {
 		glm::perspective(glm::radians(camera.Zoom),
 						 static_cast<float>(WINDOW_WIDTH) / static_cast<float>(WINDOW_HEIGHT),
 						 camera.nearPlane, camera.farPlane);
-	glm::mat4 viewMatrix = camera.GetViewMatrix();
+	glm::mat4 viewMatrix = camera.getViewMatrix();
 	glm::mat4 modelViewProjectionMatrix = projectionMatrix * viewMatrix * modelMatrix;
 	shader.setMat4("modelViewProjectionMatrix", modelViewProjectionMatrix);
+	shader.setMat4("projection", projectionMatrix);
 }
 
 void Shader::setView(Camera &camera, Shader &shader) {
-	glm::mat4 view = camera.GetViewMatrix();
+	glm::mat4 view = camera.getViewMatrix();
 	shader.setMat4("view", view);
 }
 
@@ -110,8 +111,9 @@ void Shader::settings(RenderMode &renderMode, unsigned int &texture) {
 	glBindTexture(GL_TEXTURE_2D, texture);
 }
 
-void Shader::setTexture_OR_setColor(Shader &shader, int &version, glm::vec3 &color) {
+void Shader::setTexture_OR_setColor(Shader &shader, int &version, glm::vec3 &color, int &light) {
 	shader.setInt("useTexture", version);
+	shader.setInt("useLight", light);
 	shader.setInt("texture", 0);
 	shader.setVec3("objectColor", color);
 }
