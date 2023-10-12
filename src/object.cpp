@@ -42,3 +42,8 @@ void createVaoVbo(Object &object) {
 		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
 	}
 }
+
+void colorCalculation(Object &object, Camera &camera) {
+	glm::vec3 ambient(object.mtl.ka.r, object.mtl.ka.g, object.mtl.ka.b);
+	object.ambientColor = ambient * object.ambientLightIntensity;
+}

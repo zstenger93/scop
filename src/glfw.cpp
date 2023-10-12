@@ -1,4 +1,5 @@
 #include "includes/glfw.hpp"
+
 #include "includes/headers.hpp"
 
 void initGLFW() {
@@ -11,8 +12,9 @@ void initGLFW() {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 }
 
-GLFWwindow *createWindow(Object &w) {
-	GLFWwindow *window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGTH, w.name.c_str(), NULL, NULL);
+GLFWwindow *createWindow(Object &object) {
+	GLFWwindow *window =
+		glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGTH, object.windowName.c_str(), NULL, NULL);
 	if (window == NULL) {
 		std::cout << "Failed to create the window" << std::endl;
 		glfwTerminate();

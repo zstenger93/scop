@@ -3,6 +3,9 @@
 #include "includes/headers.hpp"
 
 void processObjFile(const std::string &filePath, Object &object) {
+	object.lightSourcePos.x = 1.2f;
+	object.lightSourcePos.x = 1.0f;
+	object.lightSourcePos.x = 2.0f;
 	loadFromObjFile(filePath, object);
 	if (object.vertices.size() == 0) return;
 	normalizeTextureCoordinates(object);
@@ -25,7 +28,7 @@ void loadFromObjFile(const std::string &filePath, Object &object) {
 
 		stream >> prefix;
 		if (prefix == "o") {
-			stream >> object.name;
+			stream >> object.windowName;
 		} else if (prefix == "mtllib") {
 			saveMtlAttributes(object, stream, prefix, fileName);
 		} else if (prefix == "v") {
