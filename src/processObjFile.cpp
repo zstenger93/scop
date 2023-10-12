@@ -135,25 +135,6 @@ void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &
 	}
 }
 
-// void saveFaceIndexes(std::istringstream &stream, std::vector<std::vector<int>> &faces,
-// std::vector<std::vector<int>> &uv_index) { 	int index; 	std::vector<int> faceIndices;
-// 	std::vector<int> uv_indexes;
-
-// 	while (stream >> index) {
-// 		faceIndices.push_back(index);
-// 		if (stream.peek() == '/') {
-// 			stream.ignore();
-// 			stream.ignore(256, '/');
-// 			stream.ignore(256, ' ');
-// 		} else
-// 			stream.ignore(256, ' ');
-// 	}
-// 	if (faceIndices.size() >= 3) {
-// 		faces.push_back(faceIndices);
-// 	} else
-// 		std::cerr << "Invalid face with " << faceIndices.size() << " Ignoring.\n";
-// }
-
 void normalizeTextureCoordinates(std::vector<Vertex> &vertices) {
 	for (auto &vertex : vertices) {
 		float theta = atan2(vertex.z, vertex.x);
@@ -189,25 +170,6 @@ void triangleAssembly(std::vector<Vertex> &vertices, std::vector<std::vector<int
         }
     }
 }
-
-// void triangleAssembly(std::vector<Vertex> &vertices, std::vector<std::vector<int>> &faces,
-// 					  std::vector<Uv> &uv, std::vector<std::vector<Vertex>> &triangles,
-// 					  std::vector<std::vector<int>> &uv_index) {
-// 	for (const auto &face : faces) {
-// 		if (face.size() >= 3) {
-// 			std::vector<Vertex> triangle;
-// 			for (int index : face) {
-// 				if (uv.size() > 0) {
-// 					vertices[index - 1].texX = uv[index - 1].u;
-// 					vertices[index - 1].texY = uv[index - 1].v;
-// 				}
-// 				triangle.push_back(vertices[index - 1]);
-// 			}
-// 			triangles.push_back(triangle);
-// 		} else
-// 			std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
-// 	}
-// }
 
 void separateTrianglesAndSquares(const std::vector<std::vector<Vertex>> &objects,
 								 std::vector<float> &Triangles, std::vector<float> &Squares) {
