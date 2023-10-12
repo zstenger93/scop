@@ -32,9 +32,9 @@
 
 ## How it Looks
 
-<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull1.jpeg">
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull1.png">
 
-<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/42.jpeg">
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/42.png">
 
 ## Setup
 
