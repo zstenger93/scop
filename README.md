@@ -1,10 +1,12 @@
 <h1 align="center">📖 42 SCOP</h1>
 
-<img align=center src="https://github.com/zstenger93/scop/blob/master/textures/nutshell.jpeg">
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/nutshell.jpeg">
 
 <h2 align="center">Rendering engine with OpenGL for object files</h2>
 
 ## Menu
+
+[How it Looks](#how-it-looks)
 
 [Setup](#setup)
 
@@ -27,6 +29,12 @@
 [Keys](#keys)
 
 [Resources](#resources)
+
+## How it Looks
+
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull1.jpeg">
+
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/42.jpeg">
 
 ## Setup
 
@@ -67,7 +75,6 @@ One face contains 3 or 4 indexes and each of them marks the index of an x, y and
 ## UV Normalizing
 
 ## Normals
-
 
 ## Keys
 

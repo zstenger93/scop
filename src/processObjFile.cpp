@@ -14,7 +14,7 @@ std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Mtl
 			glmNormals.push_back(glm::vec3(n.normalX, n.normalY, n.normalZ));
 	loadFromObjFile(filePath, faces, vertices, mtl, face, uv, normal, w);
 	if (vertices.size() == 0) return triangles;
-	if (normal.size() == 0) normalizeTextureCoordinates(vertices);
+	normalizeTextureCoordinates(vertices);
 	triangleAssembly(vertices, faces, uv, triangles);
 	return triangles;
 }
