@@ -2,14 +2,11 @@
 
 #include "includes/headers.hpp"
 
-std::vector<std::vector<Vertex>> processObjFile(const std::string &filePath, Object &object) {
-	std::vector<std::vector<Vertex>> triangles;
-
+void processObjFile(const std::string &filePath, Object &object) {
 	loadFromObjFile(filePath, object);
-	if (object.vertices.size() == 0) return triangles;
+	if (object.vertices.size() == 0) return;
 	normalizeTextureCoordinates(object);
-	triangleAssembly(triangles, object);
-	return triangles;
+	triangleAssembly(object);
 }
 
 void loadFromObjFile(const std::string &filePath, Object &object) {
@@ -126,7 +123,7 @@ void normalizeTextureCoordinates(Object &object) {
 	}
 }
 
-void triangleAssembly(std::vector<std::vector<Vertex>> &triangles, Object &object) {
+void triangleAssembly(Object &object) {
 	if (object.hasSlash == true) {
 		for (size_t i = 0; i < object.faces.size(); ++i) {
 			const auto &face = object.faces[i];
@@ -143,7 +140,7 @@ void triangleAssembly(std::vector<std::vector<Vertex>> &triangles, Object &objec
 					}
 					triangle.push_back(object.vertices[index - 1]);
 				}
-				triangles.push_back(triangle);
+				object.triangles.push_back(triangle);
 			} else
 				std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
 		}
@@ -159,31 +156,30 @@ void triangleAssembly(std::vector<std::vector<Vertex>> &triangles, Object &objec
 					}
 					triangle.push_back(object.vertices[index - 1]);
 				}
-				triangles.push_back(triangle);
+				object.triangles.push_back(triangle);
 			} else
 				std::cerr << "Invalid face with less than 3 indices encountered. Ignoring.\n";
 		}
 	}
 }
 
-void separateTrianglesAndSquares(const std::vector<std::vector<Vertex>> &objects,
-								 std::vector<float> &Triangles, std::vector<float> &Squares) {
-	for (const auto &shape : objects) {
+void separateTrianglesAndSquares(Object &object) {
+	for (const auto &shape : object.triangles) {
 		if (shape.size() == 3) {
 			for (const auto &vertex : shape) {
-				Triangles.push_back(vertex.x);
-				Triangles.push_back(vertex.y);
-				Triangles.push_back(vertex.z);
-				Triangles.push_back(vertex.texX);
-				Triangles.push_back(vertex.texY);
+				object.Triangles.push_back(vertex.x);
+				object.Triangles.push_back(vertex.y);
+				object.Triangles.push_back(vertex.z);
+				object.Triangles.push_back(vertex.texX);
+				object.Triangles.push_back(vertex.texY);
 			}
 		} else if (shape.size() == 4) {
 			for (const auto &vertex : shape) {
-				Squares.push_back(vertex.x);
-				Squares.push_back(vertex.y);
-				Squares.push_back(vertex.z);
-				Squares.push_back(vertex.texX);
-				Squares.push_back(vertex.texY);
+				object.Squares.push_back(vertex.x);
+				object.Squares.push_back(vertex.y);
+				object.Squares.push_back(vertex.z);
+				object.Squares.push_back(vertex.texX);
+				object.Squares.push_back(vertex.texY);
 			}
 		} else
 			std::cerr << "Invalid shape detected! " << shape.size() << std::endl;
@@ -191,39 +187,39 @@ void separateTrianglesAndSquares(const std::vector<std::vector<Vertex>> &objects
 }
 
 // our daily sponsor is deprecated functions, no i haven't spent on this one day at all, noo..
-std::vector<float> convertSquaresToTriangles(const std::vector<float> &Squares) {
+void convertSquaresToTriangles(Object &object) {
 	std::vector<float> triangles;
 
-	for (size_t i = 0; i < Squares.size(); i += 20) {
-		if (Squares.size() == 0) break;
-		float x1 = Squares[i];
-		float y1 = Squares[i + 1];
-		float z1 = Squares[i + 2];
-		float texX1 = Squares[i + 3];
-		float texY1 = Squares[i + 4];
+	for (size_t i = 0; i < object.Squares.size(); i += 20) {
+		if (object.Squares.size() == 0) break;
+		float x1 = object.Squares[i];
+		float y1 = object.Squares[i + 1];
+		float z1 = object.Squares[i + 2];
+		float texX1 = object.Squares[i + 3];
+		float texY1 = object.Squares[i + 4];
 
-		float x2 = Squares[i + 5];
-		float y2 = Squares[i + 6];
-		float z2 = Squares[i + 7];
-		float texX2 = Squares[i + 8];
-		float texY2 = Squares[i + 9];
+		float x2 = object.Squares[i + 5];
+		float y2 = object.Squares[i + 6];
+		float z2 = object.Squares[i + 7];
+		float texX2 = object.Squares[i + 8];
+		float texY2 = object.Squares[i + 9];
 
-		float x3 = Squares[i + 10];
-		float y3 = Squares[i + 11];
-		float z3 = Squares[i + 12];
-		float texX3 = Squares[i + 13];
-		float texY3 = Squares[i + 14];
+		float x3 = object.Squares[i + 10];
+		float y3 = object.Squares[i + 11];
+		float z3 = object.Squares[i + 12];
+		float texX3 = object.Squares[i + 13];
+		float texY3 = object.Squares[i + 14];
 
-		float x4 = Squares[i + 15];
-		float y4 = Squares[i + 16];
-		float z4 = Squares[i + 17];
-		float texX4 = Squares[i + 18];
-		float texY4 = Squares[i + 19];
+		float x4 = object.Squares[i + 15];
+		float y4 = object.Squares[i + 16];
+		float z4 = object.Squares[i + 17];
+		float texX4 = object.Squares[i + 18];
+		float texY4 = object.Squares[i + 19];
 
 		triangles.insert(triangles.end(), {x1, y1, z1, texX1, texY1, x2, y2, z2, texX2, texY2, x3,
 										   y3, z3, texX3, texY3});
 		triangles.insert(triangles.end(), {x1, y1, z1, texX1, texY1, x3, y3, z3, texX3, texY3, x4,
 										   y4, z4, texX4, texY4});
 	}
-	return triangles;
+	object.Squares = triangles;
 }

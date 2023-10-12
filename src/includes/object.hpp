@@ -15,10 +15,12 @@ class Object {
 	std::vector<Vertex> vertices; // triangle ad square coordinates
 	std::vector<std::vector<int>> faces;	 // contains each from the obj file
 	std::vector<std::vector<int>> uv_index;	 // indexes for uv coordinates from each face
+	std::vector<std::vector<Vertex>> triangles; //contains all shapes for now
+	std::vector<float> Triangles, unpreaparedSquares, Squares; // converting squares to triangles
+
+	GLuint VAO_triangles, VBO_triangles, VAO_squares, VBO_squares, normalVBO;
 };
 
-void createVaoVbo(GLuint &VAO_triangles, GLuint &VAO_squares, GLuint &VBO_triangles,
-				  GLuint &VBO_squares, GLuint &normalVBO, std::vector<float> &Squares,
-				  std::vector<float> &Triangles, std::vector<glm::vec3> &glmNormals);
+void createVaoVbo(Object &object);
 
 #endif

@@ -1,15 +1,13 @@
 #include "includes/object.hpp"
 
-void createVaoVbo(GLuint &VAO_triangles, GLuint &VAO_squares, GLuint &VBO_triangles,
-				  GLuint &VBO_squares, GLuint &normalVBO, std::vector<float> &Squares,
-				  std::vector<float> &Triangles, std::vector<glm::vec3> &glmNormals) {
+void createVaoVbo(Object &object) {
 	// Initialize VAOs and VBOs for triangles and squares
 	// Generate VAO and VBO for triangles
-	glGenVertexArrays(1, &VAO_triangles);
-	glGenBuffers(1, &VBO_triangles);
-	glBindVertexArray(VAO_triangles);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO_triangles);
-	glBufferData(GL_ARRAY_BUFFER, Triangles.size() * sizeof(float), Triangles.data(),
+	glGenVertexArrays(1, &object.VAO_triangles);
+	glGenBuffers(1, &object.VBO_triangles);
+	glBindVertexArray(object.VAO_triangles);
+	glBindBuffer(GL_ARRAY_BUFFER, object.VBO_triangles);
+	glBufferData(GL_ARRAY_BUFFER, object.Triangles.size() * sizeof(float), object.Triangles.data(),
 				 GL_STATIC_DRAW);
 	// Specify vertex attribute pointers for triangles
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)0);
@@ -20,11 +18,12 @@ void createVaoVbo(GLuint &VAO_triangles, GLuint &VAO_squares, GLuint &VBO_triang
 	glBindVertexArray(0);
 
 	// Generate VAO and VBO for squares
-	glGenVertexArrays(1, &VAO_squares);
-	glGenBuffers(1, &VBO_squares);
-	glBindVertexArray(VAO_squares);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO_squares);
-	glBufferData(GL_ARRAY_BUFFER, Squares.size() * sizeof(float), Squares.data(), GL_STATIC_DRAW);
+	glGenVertexArrays(1, &object.VAO_squares);
+	glGenBuffers(1, &object.VBO_squares);
+	glBindVertexArray(object.VAO_squares);
+	glBindBuffer(GL_ARRAY_BUFFER, object.VBO_squares);
+	glBufferData(GL_ARRAY_BUFFER, object.Squares.size() * sizeof(float), object.Squares.data(),
+				 GL_STATIC_DRAW);
 	// Specify vertex attribute pointers for squares
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)0);
 	glEnableVertexAttribArray(0);
@@ -33,13 +32,13 @@ void createVaoVbo(GLuint &VAO_triangles, GLuint &VAO_squares, GLuint &VBO_triang
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	if (glmNormals.size() > 0) {
-		glGenBuffers(1, &normalVBO);
-		glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
-		glBufferData(GL_ARRAY_BUFFER, glmNormals.size() * sizeof(glm::vec3), glmNormals.data(),
-					 GL_STATIC_DRAW);
+	if (object.normals.size() > 0) {
+		glGenBuffers(1, &object.normalVBO);
+		glBindBuffer(GL_ARRAY_BUFFER, object.normalVBO);
+		glBufferData(GL_ARRAY_BUFFER, object.normals.size() * sizeof(glm::vec3),
+					 object.normals.data(), GL_STATIC_DRAW);
 		glEnableVertexAttribArray(2);
-		glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
+		glBindBuffer(GL_ARRAY_BUFFER, object.normalVBO);
 		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
 	}
 }

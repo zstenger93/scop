@@ -12,33 +12,28 @@
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 int main(int argc, char **argv) {
-	
 	Object object;
 	unsigned int texture;
-	
-	std::vector<float> Triangles, unpreaparedSquares, Squares;
 
 	initGLFW();
-	std::vector<std::vector<Vertex>> objects =
-		processObjFile(argv[4], object);
+	processObjFile(argv[4], object);
 	GLFWwindow *window = createWindow(object);
 	Shader shader(argv[2], argv[3]);
 
 	passMtlInfoToFragmentShader(shader, object.mtl);
-	separateTrianglesAndSquares(objects, Triangles, unpreaparedSquares);
-	Squares = convertSquaresToTriangles(unpreaparedSquares);
+	separateTrianglesAndSquares(object);
+	convertSquaresToTriangles(object);
 
-	GLuint VAO_triangles, VBO_triangles, VAO_squares, VBO_squares, normalVBO;
+	
 
-	createVaoVbo(VAO_triangles, VAO_squares, VBO_triangles, VBO_squares, normalVBO, Squares,
-				 Triangles, object.normals);
+	createVaoVbo(object);
 	createTexture(texture, argv[1]);
-	renderingLoop(window, shader, camera, object.renderMode, texture, VAO_triangles, VAO_squares,
-				  Triangles, Squares);
-	glDeleteVertexArrays(1, &VAO_triangles);
-	glDeleteBuffers(1, &VBO_triangles);
-	glDeleteVertexArrays(1, &VAO_squares);
-	glDeleteBuffers(1, &VBO_squares);
+	renderingLoop(window, shader, camera, object.renderMode, texture, object.VAO_triangles, object.VAO_squares,
+				  object.Triangles, object.Squares);
+	glDeleteVertexArrays(1, &object.VAO_triangles);
+	glDeleteBuffers(1, &object.VBO_triangles);
+	glDeleteVertexArrays(1, &object.VAO_squares);
+	glDeleteBuffers(1, &object.VBO_squares);
 	glfwTerminate();
 	return 0;
 }
