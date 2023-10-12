@@ -8,7 +8,7 @@ GLAD = glad.o
 GLADLIB = gcc -c src/includes/glad/glad.c -Ilibs
 
 # change the files here for the texures
-TEXTURE_NAME = skull
+TEXTURE_NAME = camel
 EXEC = ./scop
 VERTEX_SOURCE = ../src/shader/vertexSource.vertex
 FRAGMENT_SOURCE = ../src/shader/fragmentSource.fragment
@@ -114,7 +114,7 @@ hb:
 	@${REBUILD}
 	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_HEILBRONN}
 
-wp:
+cm:
 	@${REBUILD}
 	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_CAMEL}
 

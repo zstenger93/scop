@@ -34,6 +34,10 @@
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/teapot.png">
 
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull.png">
+
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull_wire.png">
+
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull1.png">
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull2.png">
@@ -41,6 +45,11 @@
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/42.png">
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/sw.png">
+
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/camel.png">
+
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/camel_wire.png">
+
 
 ## Setup
 
