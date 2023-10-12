@@ -1,7 +1,7 @@
 #include "includes/texture.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "includes/stb_image.hpp"
+#include "includes/stb_image.h"
 
 void createTexture(unsigned int &texture, char *textureSource) {
 	glGenTextures(1, &texture);

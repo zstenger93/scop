@@ -6,7 +6,7 @@
 #include "includes/processObjFile.hpp"
 #include "includes/render.hpp"
 #include "includes/shader.hpp"
-#include "includes/stb_image.hpp"
+#include "includes/stb_image.h"
 #include "includes/texture.hpp"
 
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
