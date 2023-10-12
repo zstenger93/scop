@@ -4,7 +4,7 @@ out vec4 FragColor;
 
 in vec2 TexCoord;
 in vec3 FragNormal;
-flat in vec3 FragPos; // Fragment position in world space
+in vec3 FragPos;
 
 uniform sampler2D texture1;
 uniform int useTexture;
@@ -21,6 +21,7 @@ uniform int illum;
 uniform vec3 LightPos;
 
 void main() {
+
     vec4 texColor = texture(texture1, TexCoord);
 
     vec3 finalColor;
@@ -35,9 +36,7 @@ void main() {
         finalColor = objectColor;
     }
 
-    // Apply transparency
     finalColor *= d;
 
-    // Output final color
     FragColor = vec4(finalColor, texColor.a);
 }

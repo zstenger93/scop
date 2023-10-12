@@ -6,7 +6,7 @@ layout (location = 2) in vec3 aNormal;
 
 out vec2 TexCoord;
 out vec3 FragNormal;
-flat out vec3 FragPos; // Use flat interpolation for the vertex position
+out vec3 FragPos;
 
 uniform mat4 model;
 uniform mat4 view;
@@ -14,17 +14,12 @@ uniform mat4 projection;
 uniform mat4 modelViewProjectionMatrix;
 
 void main() {
-    vec4 clipPos = modelViewProjectionMatrix * vec4(aPos, 1.0);
 
-    // Calculate fragment position in world space
-    FragPos = clipPos.xyz / clipPos.w;
+    FragNormal = aNormal;
 
-    // Calculate normal in world space
-    FragNormal = mat3(transpose(inverse(mat3(modelViewProjectionMatrix)))) * aNormal;
+    gl_Position = projection * view * model * vec4(aPos, 1.0);
 
-    // Pass clip space position
-    gl_Position = clipPos;
+	FragPos = vec3(model * vec4(aPos, 1.0));
 
-    // Pass texture coordinates to fragment shader
     TexCoord = vec2(aTexCoord.x, aTexCoord.y);
 }
