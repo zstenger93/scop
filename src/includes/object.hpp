@@ -24,8 +24,6 @@ class Object {
 		normalVBO;	// vertex arrays and buffers maybe for elements arrays later
 
 	glm::vec3 lightSourcePos;
-	float ambientLightIntensity = 1.0f, diffuseLightIntensity = 1.0f, specularLightIntensity = 1.0f;
-	glm::vec3 ambientColor, diffuseColor, specularColor;
 };
 
 void createVaoVbo(Object &object);
