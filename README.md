@@ -91,6 +91,8 @@ One face contains 3 or 4 indexes and each of them marks the index of an x, y and
 
 ## UV Coordinates
 
+Usually provided in the .obj file as well
+
 ## UV Normalizing
 
 ## Normals
