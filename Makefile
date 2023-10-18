@@ -7,6 +7,7 @@ GLEWSHIT = -I/Users/${USER}/.brew/Cellar/glew/2.2.0_1/include -L/Users/${USER}/.
 GLAD = glad.o
 GLADLIB = gcc -c src/includes/glad/glad.c -Ilibs
 
+# maybe adding multiple texture option later
 # change the files here for the texures
 TEXTURE_NAME= ok
 
