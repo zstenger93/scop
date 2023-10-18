@@ -93,7 +93,7 @@ you can use normal colors, or the uv coordinates
 
 ## UV Coordinates
 
-Don't have to normalize these usually if taken from the object file
+Usually provided in the .obj file as well
 
 ## UV Normalizing
 
