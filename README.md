@@ -196,6 +196,8 @@ Handling keypress events as:
 						- color
 						- mixture between texture and color
 						- light on
+			T:		changes the texture to the next
+			Y:		changes the texture to the previous
 ```
 
 ## Resources
