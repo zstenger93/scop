@@ -3,9 +3,9 @@
 #include "includes/headers.hpp"
 
 void processObjFile(const std::string &filePath, Object &object) {
-	object.lightSourcePos.x = 1.0f;
-	object.lightSourcePos.y = 0.0f;
-	object.lightSourcePos.z = 0.0f;
+	object.lightSourcePos.x = 5.0f;
+	object.lightSourcePos.y = 1.0f;
+	object.lightSourcePos.z = 0.7f;
 	loadFromObjFile(filePath, object);
 	if (object.vertices.size() == 0) return;
 	normalizeTextureCoordinates(object);

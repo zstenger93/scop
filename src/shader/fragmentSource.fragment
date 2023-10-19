@@ -26,7 +26,7 @@ void main() {
 
 	vec3 lighting;
 	vec3 lightColor = vec3(1.0, 1.0, 1.0);
-	float diffuseStrength = max(0.0, dot(LightPos, FragPos));
+	float diffuseStrength = max(0.0, dot(LightPos, normalize(FragPos)));
 	vec3 diffuse = diffuseStrength * Kd;
 
     vec3 finalColor;
