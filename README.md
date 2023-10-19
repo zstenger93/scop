@@ -36,6 +36,14 @@ Teapot with uv map texture
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/teapot.png">
 
+Object which for I created the .obj file manually
+
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/hb.png">
+
+With wireframe
+
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/hb_w.png">
+
 An alien animal with colorful texture
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/alienanimal.png">
@@ -79,15 +87,6 @@ Polygon mode WIREFRAME
 For Star Wars fans
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/sw.png">
-
-Object which for I created the .obj file manually
-
-<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/hb.png">
-
-With wireframe
-
-<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/hb_w.png">
-
 
 ## Setup
 
