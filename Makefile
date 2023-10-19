@@ -27,6 +27,9 @@ OBJECT_STARWARS = ../resources/sw.obj
 OBJECT_HEILBRONN = ../resources/hb.obj
 OBJECT_CAMEL = ../resources/Camel.obj
 OBJECT_CASTLE = ../resources/castle.obj
+OBJECT_TREX = ../resources/trex.obj
+OBJECT_PUMPKIN = ../resources/pumpkin.obj
+OBJECT_HOUSE = ../resources/ohouse.obj
 
 REBUILD = make re
 RM		= rm -rf
@@ -51,7 +54,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "$(YELLOW)Compiling..$(COLOR_END)"
-	@${GLAD_LIB}
+	@${GLADLIB}
 	@$(CC) $(CFLAGS) $(GLEWSHIT) $(INCLUDES) ${GLAD} $(LDFLAGS) $(OBJS) -o $(NAME)
 	@echo "$(GREEN)The project is compiled..$(COLOR_END)"
 
@@ -124,6 +127,14 @@ cm:
 cs:
 	@${REBUILD}
 	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_CASTLE}
+
+tx:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_TREX}
+
+hs:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_HOUSE}
 
 .PHONY: all clean fclean re 42 tp sp sk ax am an bf sw hb wp
 
