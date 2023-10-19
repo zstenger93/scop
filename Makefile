@@ -9,7 +9,7 @@ GLADLIB = gcc -c src/includes/glad/glad.c -Ilibs
 
 # maybe adding multiple texture option later
 # change the files here for the texures
-TEXTURE_NAME= ok
+TEXTURE_NAME= colors
 
 EXEC = ./scop
 VERTEX_SOURCE = ../src/shader/vertexSource.vertex

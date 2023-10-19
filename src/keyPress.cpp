@@ -34,6 +34,7 @@ void keyPressHandler_PolygonModes(GLFWwindow *window, RenderMode &renderMode) {
 }
 
 void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version) {
+	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) version = 3;
 	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) version = 2;
 	if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS) version = 1;
 }
@@ -60,7 +61,7 @@ void keyPressHandler_SetColorVersion(GLFWwindow *window, int &version, Object &o
 
 	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS && !bKeyPressed) {
 		version++;
-		if (version > 3) version = 1;
+		if (version > 4) version = 1;
 		bKeyPressed = true;
 	} else if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE)
 		bKeyPressed = false;
