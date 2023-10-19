@@ -7,14 +7,16 @@ GLEWSHIT = -I/Users/${USER}/.brew/Cellar/glew/2.2.0_1/include -L/Users/${USER}/.
 GLAD = glad.o
 GLADLIB = gcc -c src/includes/glad/glad.c -Ilibs
 
-# maybe adding multiple texture option later
-# change the files here for the texures
+# Maybe adding multiple texture option later in code
+# Change the files here for the texures
 TEXTURE_NAME= colors
 
 EXEC = ./scop
 VERTEX_SOURCE = ../src/shader/vertexSource.vertex
 FRAGMENT_SOURCE = ../src/shader/fragmentSource.fragment
 TEXTURE = ../textures/${TEXTURE_NAME}.jpeg
+
+# Objects
 OBJECT_42 = ../resources/42.obj
 OBJECT_TEAPOT = ../resources/teapot.obj
 OBJECT_SPIDER = ../resources/spider.obj
