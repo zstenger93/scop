@@ -20,6 +20,10 @@ class Object {
 	std::vector<std::vector<Vertex> > triangles;  // contains all shapes for now
 	std::vector<float> Triangles, unpreaparedSquares, Squares;	// converting squares to triangles
 
+	std::vector<char *> textures;
+	int textureType = 1;
+
+	
 	GLuint VAO_triangles, VBO_triangles, VAO_squares, VBO_squares,
 		normalVBO;	// vertex arrays and buffers maybe for elements arrays later
 

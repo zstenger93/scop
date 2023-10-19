@@ -10,7 +10,6 @@
 
 void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, Object &object) {
 	int version = 1;
-	int texture = 1;
 	int light = 2;
 	glm::vec3 color(1.0f, 0.0f, 0.0f);
 	while (!glfwWindowShouldClose(window)) {
@@ -20,7 +19,7 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, Object &o
 		keyPressHandler_PolygonModes(window, object.renderMode);
 		glm::mat4 model =
 			keyPressHandler_ObjectCenterRotation(window, object.Triangles, object.Squares, model);
-		keyPressHandler_Color_OR_Texture(window, version, texture);
+		keyPressHandler_Color_OR_Texture(window, version, object);
 		keyPressHandler_SetColor(window, color);
 		keyPressHandler_SetColorVersion(window, version, object);
 		shader.settings(object.renderMode, object.texture);

@@ -33,10 +33,22 @@ void keyPressHandler_PolygonModes(GLFWwindow *window, RenderMode &renderMode) {
 		renderMode = FILLED;
 }
 
-void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version, int &texture) {
+void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version, Object &object) {
 	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) version = 3;
 	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) version = 2;
 	if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS) version = 1;
+	if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS) {
+		if (object.textures.size() == object.textureType)
+			object.textureType = 1;
+		else
+			object.textureType += 1;
+	}
+	if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS) {
+		if (object.textureType == 1)
+			object.textureType = object.textures.size();
+		else
+			object.textureType -= 1;
+	}
 }
 
 float colorChange = 0.05f;
