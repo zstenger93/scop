@@ -14,7 +14,17 @@ TEXTURE_NAME= colors
 EXEC = ./scop
 VERTEX_SOURCE = ../src/shader/vertexSource.vertex
 FRAGMENT_SOURCE = ../src/shader/fragmentSource.fragment
-TEXTURE = ../textures/${TEXTURE_NAME}.jpeg
+
+# Textures
+TEXTURE_OK = ../textures/ok.jpeg
+TEXTURE_COLORS = ../textures/colors.jpeg
+TEXTURE_SKULL = ../textures/skull.jpeg
+TEXTURE_CAMEL = ../textures/camel.jpeg
+TEXTURE_UVMAP = ../textures/uvmap.jpeg
+TEXTURE_TREX = ../textures/trex.jpeg
+TEXTURE_PARROT = ../textures/parrot.jpeg
+TEXTURE_PUMPKIN = ../textures/pumpkin.jpeg
+TEXTURE_TCP = ../textures/tcp.jpeg
 
 # Objects
 OBJECT_42 = ../resources/42.obj
