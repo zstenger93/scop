@@ -18,13 +18,12 @@ TEXTURE_SKULL = ../textures/skull.jpeg
 TEXTURE_CAMEL = ../textures/camel.jpeg
 TEXTURE_UVMAP = ../textures/uvmap.jpeg
 TEXTURE_TREX = ../textures/trex.jpeg
-TEXTURE_PARROT = ../textures/parrot.jpeg
-TEXTURE_PUMPKIN = ../textures/pumpkin.jpeg
-TEXTURE_TCP = ../textures/tcp.jpeg
+# TEXTURE_PARROT = ../textures/parrot.png
+# TEXTURE_PUMPKIN = ../textures/pumpkin.png
+# TEXTURE_TCP = ../textures/tcp.jpeg
 
 TEXTURES = ${TEXTURE_OK} ${TEXTURE_COLORS} ${TEXTURE_CAMEL} \
 		   ${TEXTURE_SKULL} ${TEXTURE_TREX} ${TEXTURE_UVMAP} \
-		   ${TEXTURE_PARROT} ${TEXTURE_PUMPKIN} ${TEXTURE_TCP} \
 
 # Objects
 OBJECT_42 = ../resources/42.obj

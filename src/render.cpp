@@ -13,6 +13,7 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, Object &o
 	int light = 2;
 	glm::vec3 color(1.0f, 0.0f, 0.0f);
 	while (!glfwWindowShouldClose(window)) {
+		createTexture(object);
 		camera.fps(camera);
 		keyPressHandler_Camera_wasdSpaceX(window, camera);
 		keyPressHandler_Camera_Speed(window, camera);

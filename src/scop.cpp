@@ -26,7 +26,6 @@ int main(int argc, char **argv) {
 	separateTrianglesAndSquares(object);
 	convertSquaresToTriangles(object);
 	createVaoVbo(object);
-	createTexture(object);
 	renderingLoop(window, shader, camera, object);
 	glDeleteVertexArrays(1, &object.VAO_triangles);
 	glDeleteBuffers(1, &object.VBO_triangles);
