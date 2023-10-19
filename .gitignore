@@ -1,4 +1,3 @@
 *.DS_Store
 scop
 *objects
-*glad.o
