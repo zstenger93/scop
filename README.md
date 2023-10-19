@@ -132,7 +132,11 @@ Make yourself a favor, plan and save all the values in a structured way, then st
 
 ## Creating Triangles
 
-One face contains 3 or 4 indexes and each of them marks the index of an x, y and z coordinate for one point of a triangle or square. Combining these coordinates from a face will result one triangle or square.
+One face contains 3 or 4 indexes and each of them marks the index of an x, y and z coordinate for one point of a triangle or square.
+
+Combining these coordinates from a face will result one triangle or square.
+
+In case of squares I calculated 2 triangle from each square because I couldn't make the deprecated GL_QUADS to draw at that point.
 
 ## Color
 
@@ -140,15 +144,15 @@ you can use normal colors, or the uv coordinates
 
 ## UV Coordinates
 
-Usually provided in the .obj file as well, adn these are the coordinates for the actual texture for the object
+Usually provided in the .obj file as well, adn these are the coordinates for the actual texture for the object.
 
 ## UV Normalizing
 
-In case you don't have them, you need to calculate it yourself
+In case you don't have them, you need to calculate it yourself, or better say, you can try lmao
 
 ## Normals
 
-Normals are used for lighting calculations, still cannot make an actual sense of it
+Normals are used for lighting calculations, still cannot make an actual sense of it, since the only thing I've got with them is black screen
 
 ## Light
 
