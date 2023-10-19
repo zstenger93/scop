@@ -36,6 +36,8 @@
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/alienanimal.png">
 
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/alien_light_on.png">
+
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/alien.png">
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull.png">
@@ -130,6 +132,7 @@ Handling keypress events as:
 			2:		points
 			3:		filled
 		Switching beteewen texture and color:
+			Z:		basic lighting on
 			C:		color mode
 				4:	changing the value of R
 				5:	changing the value of G
