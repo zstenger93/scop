@@ -92,6 +92,14 @@ For Star Wars fans
 
 Have at least OpenGL 3 or above or leave the page now and run for the sake of your sanity.
 
+You will also need:
+```
+	- stb_image.h
+	- GLFW
+	- Specific GLAD headers based on OpenGL version
+	- GLM
+```
+
 ## Object Files
 
 It's possible to have different layouts, not all the values are necessary.
