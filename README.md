@@ -140,7 +140,7 @@ you can use normal colors, or the uv coordinates
 
 ## UV Coordinates
 
-Usually provided in the .obj file as well
+Usually provided in the .obj file as well, adn these are the coordinates for the actual texture for the object
 
 ## UV Normalizing
 
