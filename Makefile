@@ -30,6 +30,9 @@ OBJECT_CASTLE = ../resources/castle.obj
 OBJECT_TREX = ../resources/trex.obj
 OBJECT_PUMPKIN = ../resources/pumpkin.obj
 OBJECT_HOUSE = ../resources/ohouse.obj
+OBJECT_PARROT = ../resources/parrot.obj
+OBJECT_TCP = ../resources/tcp.obj
+OBJECT_PLANE = ../resources/pyramids.obj
 
 REBUILD = make re
 RM		= rm -rf
@@ -135,6 +138,18 @@ tx:
 hs:
 	@${REBUILD}
 	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_HOUSE}
+
+pr:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_PARROT}
+
+tc:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_TCP}
+
+pl:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_PLANE}
 
 .PHONY: all clean fclean re 42 tp sp sk ax am an bf sw hb wp
 
