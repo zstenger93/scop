@@ -14,6 +14,8 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 int main(int argc, char **argv) {
 	Object object;
+	std::vector<char *> textures;
+	textures.push_back(argv[1]);
 
 	initGLFW();
 	processObjFile(argv[4], object);
@@ -25,7 +27,7 @@ int main(int argc, char **argv) {
 	separateTrianglesAndSquares(object);
 	convertSquaresToTriangles(object);
 	createVaoVbo(object);
-	createTexture(object, argv[1]);
+	createTexture(object, textures);
 	renderingLoop(window, shader, camera, object);
 	glDeleteVertexArrays(1, &object.VAO_triangles);
 	glDeleteBuffers(1, &object.VBO_triangles);

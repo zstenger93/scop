@@ -33,7 +33,7 @@ void keyPressHandler_PolygonModes(GLFWwindow *window, RenderMode &renderMode) {
 		renderMode = FILLED;
 }
 
-void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version) {
+void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version, int &texture) {
 	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) version = 3;
 	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) version = 2;
 	if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS) version = 1;

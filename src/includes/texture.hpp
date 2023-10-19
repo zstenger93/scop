@@ -4,7 +4,7 @@
 #include "headers.hpp"
 #include "object.hpp"
 
-void createTexture(Object &object, char *textureSource);
+void createTexture(Object &object, std::vector<char *> textureSource);
 void draw(Object &object);
 
 #endif
