@@ -26,6 +26,8 @@
 
 [Normals](#normals)
 
+[Light](#light)
+
 [Keys](#keys)
 
 [Resources](#resources)
@@ -143,6 +145,11 @@ In case you don't have them, you need to calculate it yourself
 ## Normals
 
 Normals are used for lighting calculations
+
+## Light
+
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/light.png">
+
 
 ## Keys
 
