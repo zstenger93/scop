@@ -118,9 +118,13 @@ or
 f 23/123/123 321/3213/213 43/45/12 423/3423/432
 ```
 
+(there are more)
+
 ## .mtl Files
 
 Values for material and lighting calculations
+
+Can be more than one texture file for example and all with different material attributes, but I handle one with this project..
 
 ## Input Handling
 
@@ -144,12 +148,11 @@ In case you don't have them, you need to calculate it yourself
 
 ## Normals
 
-Normals are used for lighting calculations
+Normals are used for lighting calculations, still cannot make an actual sense of it
 
 ## Light
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/light.png">
-
 
 ## Keys
 
