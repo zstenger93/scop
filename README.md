@@ -80,6 +80,14 @@ For Star Wars fans
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/sw.png">
 
+Object which for I created the .obj file manually
+
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/hb.png">
+
+With wireframe
+
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/hb_w.png">
+
 
 ## Setup
 
