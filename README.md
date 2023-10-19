@@ -195,6 +195,6 @@ Handling keypress events as:
 
 ## Resources
 
-Can't get any better than the videos and explanations from this site
+This site provides a good general explanation what can you do with this project
 
 https://learnopengl.com/Introduction
