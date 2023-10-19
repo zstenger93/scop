@@ -32,27 +32,51 @@
 
 ## How it Looks
 
+Teapot with uv map texture
+
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/teapot.png">
+
+An alien animal with colorful texture
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/alienanimal.png">
 
+With basic light on
+
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/alien_light_on.png">
+
+Polygon mode POINTS
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/alien.png">
 
+Skull with it's texture on
+
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull.png">
+
+Polygon mode WIREFRAME
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull_wire.png">
 
+A cool result with messed up uv mapping
+
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull1.png">
+
+Just because it looks cool
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull_color.png">
 
+Camel with it's texture
+
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/camel.png">
+
+Polygon mode WIREFRAME
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/camel_wire.png">
 
+42 logo with wireframe
+
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/42.png">
+
+For Star Wars fans
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/sw.png">
 
