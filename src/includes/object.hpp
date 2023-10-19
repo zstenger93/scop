@@ -31,5 +31,6 @@ class Object {
 };
 
 void createVaoVbo(Object &object);
+void saveTextures(Object &object, char **argv);
 
 #endif

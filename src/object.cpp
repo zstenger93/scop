@@ -1,5 +1,7 @@
 #include "includes/object.hpp"
 
+#include <__config>
+
 void createVaoVbo(Object &object) {
 	// Initialize VAOs and VBOs for triangles and squares
 	// Generate VAO and VBO for triangles
@@ -41,4 +43,14 @@ void createVaoVbo(Object &object) {
 		glBindBuffer(GL_ARRAY_BUFFER, object.normalVBO);
 		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
 	}
+}
+
+void saveTextures(Object &object, char **argv) {
+	int i = 4;
+
+	if (argv[4] == nullptr) {
+		std::cout << "No texture has been provided." << std::endl;
+		exit(1);
+	}
+	while (argv[i++] != nullptr) object.textures.push_back(argv[i]);
 }

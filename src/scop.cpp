@@ -15,13 +15,12 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 int main(int argc, char **argv) {
 	Object object;
 	
-	object.textures.push_back(argv[1]);
-
 	initGLFW();
-	processObjFile(argv[4], object);
+	processObjFile(argv[3], object);
+	saveTextures(object, argv);
 
 	GLFWwindow *window = createWindow(object);
-	Shader shader(argv[2], argv[3]);
+	Shader shader(argv[1], argv[2]);
 
 	passMtlInfoToFragmentShader(shader, object);
 	separateTrianglesAndSquares(object);
