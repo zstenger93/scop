@@ -36,7 +36,7 @@ Teapot with uv map texture
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/teapot.png">
 
-Object which for I created the .obj file manually
+Object which for I created the .obj file manually (yes I like the pain)
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/hb.png">
 
