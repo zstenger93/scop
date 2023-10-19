@@ -34,28 +34,29 @@ void keyPressHandler_PolygonModes(GLFWwindow *window, RenderMode &renderMode) {
 }
 
 void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version, Object &object) {
-	static bool keyPressed = false;
+	static bool tKeyPressed = false;
+	static bool yKeyPressed = false;
 
 	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) version = 3;
 	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) version = 2;
 	if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS) version = 1;
-	if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS && !keyPressed) {
-		if (object.textures.size() == object.textureType && !keyPressed)
+	if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS && !tKeyPressed) {
+		if (object.textures.size() == object.textureType + 1 && !tKeyPressed)
 			object.textureType = 0;
-		else if (!keyPressed)
+		else if (!tKeyPressed)
 			object.textureType += 1;
-		keyPressed = true;
+		tKeyPressed = true;
 	} else if (glfwGetKey(window, GLFW_KEY_T) == GLFW_RELEASE) {
-		keyPressed = false;
+		tKeyPressed = false;
 	}
-	if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS && !keyPressed) {
-		if (object.textureType == 0 && !keyPressed)
-			object.textureType = object.textures.size();
-		else if (!keyPressed)
+	if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS && !yKeyPressed) {
+		if (object.textureType == 0 && !yKeyPressed)
+			object.textureType = object.textures.size() - 1;
+		else if (!yKeyPressed)
 			object.textureType -= 1;
-		keyPressed = true;
+		yKeyPressed = true;
 	} else if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_RELEASE) {
-		keyPressed = false;
+		yKeyPressed = false;
 	}
 }
 

@@ -52,5 +52,5 @@ void saveTextures(Object &object, char **argv) {
 		std::cout << "No texture has been provided." << std::endl;
 		exit(1);
 	}
-	while (argv[i++] != nullptr) object.textures.push_back(argv[i]);
+	while (argv[i] != nullptr) object.textures.push_back(argv[i++]);
 }
