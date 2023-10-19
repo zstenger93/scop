@@ -162,7 +162,7 @@ pl:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_PLANE} ${TEXTURES}
 
-.PHONY: all clean fclean re 42 tp sp sk ax am an bf sw hb wp
+.PHONY: all clean fclean re 42 tp sp sk ax am an bf sw hb cm cs tx hs pr tc pl
 
 COLOR_END = \033[0;39m
 CYAN3 = \033[1;4;96m
