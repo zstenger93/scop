@@ -26,6 +26,7 @@ OBJECT_BUILDING = ../resources/building.obj
 OBJECT_STARWARS = ../resources/sw.obj
 OBJECT_HEILBRONN = ../resources/hb.obj
 OBJECT_CAMEL = ../resources/Camel.obj
+OBJECT_CASTLE = ../resources/castle.obj
 
 REBUILD = make re
 RM		= rm -rf
@@ -119,6 +120,10 @@ hb:
 cm:
 	@${REBUILD}
 	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_CAMEL}
+
+cs:
+	@${REBUILD}
+	@${EXEC} ${TEXTURE} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_CASTLE}
 
 .PHONY: all clean fclean re 42 tp sp sk ax am an bf sw hb wp
 

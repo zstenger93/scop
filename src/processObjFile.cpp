@@ -4,8 +4,8 @@
 
 void processObjFile(const std::string &filePath, Object &object) {
 	object.lightSourcePos.x = 5.0f;
-	object.lightSourcePos.y = 1.0f;
-	object.lightSourcePos.z = 0.7f;
+	object.lightSourcePos.y = 0.25f;
+	object.lightSourcePos.z = 2.2f;
 	loadFromObjFile(filePath, object);
 	if (object.vertices.size() == 0) return;
 	normalizeTextureCoordinates(object);
