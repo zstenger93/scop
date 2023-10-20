@@ -115,12 +115,12 @@ Handling keypress events as:
 		Light:
 			Z:		lighting on
 			to controll it's position:
-				Q:			LightPos.x -+ 0.25;
-				E:			LightPos.x ++ 0.25;
-				R:			LightPos.y -+ 0.25;
-				F:			LightPos.y ++ 0.25;
-				G:			LightPos.z -+ 0.25;
-				H:			LightPos.z ++ 0.25;
+				Q:		LightPos.x -+ 0.25;
+				E:		LightPos.x ++ 0.25;
+				R:		LightPos.y -+ 0.25;
+				F:		LightPos.y ++ 0.25;
+				G:		LightPos.z -+ 0.25;
+				H:		LightPos.z ++ 0.25;
 
 ```
 
