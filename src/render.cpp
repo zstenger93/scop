@@ -24,6 +24,7 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, Object &o
 		keyPressHandler_Color_OR_Texture(window, version, object);
 		keyPressHandler_SetColor(window, color);
 		keyPressHandler_SetColorVersion(window, version, object);
+		keyPressHandler_SetLight(window, shader, object);
 		shader.settings(object.renderMode, object.texture);
 		shader.use();
 		shader.setTexture_OR_setColor(shader, version, color, light);

@@ -50,5 +50,6 @@ void keyPressHandler_SetColorVersion(GLFWwindow *window, int &version, Object &o
 glm::mat4 keyPressHandler_ObjectCenterRotation(GLFWwindow *window, std::vector<float> &Triangles,
 											   std::vector<float> &Squares, glm::mat4 &model);
 glm::vec3 calculateCenter(const std::vector<float> &triangles);
+void keyPressHandler_SetLight(GLFWwindow *window, Shader &shader, Object &object);
 
 #endif

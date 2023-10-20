@@ -100,7 +100,6 @@ Handling keypress events as:
 			2:		points
 			3:		filled
 		Switching beteewen texture and color:
-			Z:		basic lighting on
 			C:		color mode
 				4:	changing the value of R
 				5:	changing the value of G
@@ -113,6 +112,16 @@ Handling keypress events as:
 						- light on
 			T:		changes the texture to the next
 			Y:		changes the texture to the previous
+		Light:
+			Z:		lighting on
+			to controll it's position:
+				Q:			LightPos.x -+ 0.25;
+				E:			LightPos.x ++ 0.25;
+				R:			LightPos.y -+ 0.25;
+				F:			LightPos.y ++ 0.25;
+				G:			LightPos.z -+ 0.25;
+				H:			LightPos.z ++ 0.25;
+
 ```
 
 ## How it Looks

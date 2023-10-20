@@ -131,3 +131,30 @@ glm::vec3 calculateCenter(const std::vector<float> &triangles) {
 	}
 	return sum / static_cast<float>(totalVertices);
 }
+
+void keyPressHandler_SetLight(GLFWwindow *window, Shader &shader, Object &object) {
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+		object.lightSourcePos.x -= 0.25;
+		shader.setVec3("LightPos", object.lightSourcePos);
+	}
+	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
+		object.lightSourcePos.x += 0.25;
+		shader.setVec3("LightPos", object.lightSourcePos);
+	}
+	if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
+		object.lightSourcePos.y -= 0.25;
+		shader.setVec3("LightPos", object.lightSourcePos);
+	}
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
+		object.lightSourcePos.y += 0.25;
+		shader.setVec3("LightPos", object.lightSourcePos);
+	}
+	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS) {
+		object.lightSourcePos.z -= 0.25;
+		shader.setVec3("LightPos", object.lightSourcePos);
+	}
+	if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS) {
+		object.lightSourcePos.z += 0.25;
+		shader.setVec3("LightPos", object.lightSourcePos);
+	}
+}
