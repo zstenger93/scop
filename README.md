@@ -46,6 +46,10 @@ With wireframe
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/hb_w.png">
 
+Plane with wireframe
+
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/plane.png">
+
 An alien animal with colorful texture
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/alienanimal.png">
@@ -74,6 +78,10 @@ Just because it looks cool
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/skull_color.png">
 
+Book of dreams
+
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/book.png">
+
 Camel with it's texture
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/camel.png">
@@ -85,6 +93,10 @@ Polygon mode WIREFRAME
 42 logo with wireframe
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/42.png">
+
+T-rex
+
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/trex.png">
 
 For Star Wars fans
 
