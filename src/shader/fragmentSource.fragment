@@ -32,6 +32,8 @@ void main() {
 	vec3 diffuse = diffuseStrength * Kd;
 
 	vec3 ambient = Ka;
+	float strength = 0.2;
+	float transparency = d;
 
     vec3 finalColor;
 	if (useTexture == 1) {
@@ -39,7 +41,7 @@ void main() {
 	} else if (useTexture == 2) {
 		finalColor = objectColor;
 	} else if (useTexture == 3) {
-		lighting = ambient * 0.2 + diffuse;
+		lighting = ambient * strength + diffuse;
 		finalColor = texColor.rgb * lighting;
 	} else if (useTexture == 4) {
 		vec3 mixedColor = mix(texColor.rgb, objectColor, 0.15);
@@ -47,6 +49,6 @@ void main() {
 	} else {
 		finalColor = objectColor;
 	}
-	finalColor *= d;
+	finalColor *= transparency;
     FragColor = vec4(finalColor, texColor.a);
 }

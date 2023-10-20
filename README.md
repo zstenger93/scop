@@ -137,7 +137,7 @@ An alien animal with colorful texture
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/alienanimal.png">
 
-With basic light on
+With basic light on and ambient at 0.0
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/alien_light_on.png">
 
