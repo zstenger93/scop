@@ -39,7 +39,7 @@ void main() {
 	} else if (useTexture == 2) {
 		finalColor = objectColor;
 	} else if (useTexture == 3) {
-		lighting = ambient + diffuse;
+		lighting = ambient * 0.2 + diffuse;
 		finalColor = texColor.rgb * lighting;
 	} else if (useTexture == 4) {
 		vec3 mixedColor = mix(texColor.rgb, objectColor, 0.15);
