@@ -16,7 +16,7 @@ uniform mat4 modelViewProjectionMatrix;
 
 void main() {
 
-    FragNormal = normalize(aNormal.xyz);
+    FragNormal = normalize(aNormal);
 
     gl_Position = projection * view * model * vec4(aPos, 1.0);
 
