@@ -8,6 +8,8 @@ GLAD = glad.o
 GLADLIB = gcc -c src/includes/glad/glad.c -Ilibs
 
 EXEC = ./scop
+
+# Vertex and Fragment shader source files
 VERTEX_SOURCE = ../src/shader/vertexSource.vertex
 FRAGMENT_SOURCE = ../src/shader/fragmentSource.fragment
 
@@ -18,12 +20,11 @@ TEXTURE_SKULL = ../textures/skull.jpeg
 TEXTURE_CAMEL = ../textures/camel.jpeg
 TEXTURE_UVMAP = ../textures/uvmap.jpeg
 TEXTURE_TREX = ../textures/trex.jpeg
-# TEXTURE_PARROT = ../textures/parrot.png
-# TEXTURE_PUMPKIN = ../textures/pumpkin.png
-# TEXTURE_TCP = ../textures/tcp.jpeg
+TEXTURE_PUMPKIN = ../textures/pumpkin.png
 
 TEXTURES = ${TEXTURE_OK} ${TEXTURE_COLORS} ${TEXTURE_CAMEL} \
 		   ${TEXTURE_SKULL} ${TEXTURE_TREX} ${TEXTURE_UVMAP} \
+		   ${TEXTURE_PARROT} ${TEXTURE_PUMPKIN} ${TEXTURE_TCP} \
 
 # Objects
 OBJECT_42 = ../resources/42.obj
@@ -161,6 +162,10 @@ tc:
 pl:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_PLANE} ${TEXTURES}
+
+pk:
+	@${REBUILD}
+	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_PUMPKIN} ${TEXTURES}
 
 .PHONY: all clean fclean re 42 tp sp sk ax am an bf sw hb cm cs tx hs pr tc pl
 

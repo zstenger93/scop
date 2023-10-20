@@ -6,9 +6,13 @@
 
 ## Menu
 
-[How it Looks](#how-it-looks)
-
 [Setup](#setup)
+
+[How to use](#how-to-use)
+
+[Keys](#keys)
+
+[How it Looks](#how-it-looks)
 
 [Object Files](#object-files)
 
@@ -28,9 +32,74 @@
 
 [Light](#light)
 
-[Keys](#keys)
-
 [Resources](#resources)
+
+## Setup
+
+Have at least OpenGL 3 or above or leave the page now and run for the sake of your sanity.
+
+You will also need:
+```
+	- stb_image.h
+	- GLFW
+	- Specific GLAD headers based on OpenGL version
+	- GLM
+```
+
+## How to use
+
+In the Makefile there are quite a few options to play around with eg:
+
+```
+make sk
+make sx
+make pl
+make cs
+```
+
+and so on, feel free to explore. Each one of them will launch with the corresponding object
+
+## Keys
+
+```
+Handling keypress events as:
+		Camera movement:
+			W:		move camera forward
+			A:		move camera left
+			S:		move camera backwards
+			D:		move camera right
+			X:		move camera down
+			SPACE:		move camera up
+			8:		incrase camera movement speed
+			9:		decrase camera movement speed
+		Object Rotation:
+			I:		rotates the object left on X axis
+			K:		rotates the object right on X axis
+			J:		rotates the object left on Y axis
+			L:		rotates the object right on Y axis
+			U:		rotates the object left on Z axis
+			O:		rotates the object right on Z axis
+			M:		incrases the speed
+			N:		reduces the speed
+		Polygon Mode:
+			1: 		wireframe
+			2:		points
+			3:		filled
+		Switching beteewen texture and color:
+			Z:		basic lighting on
+			C:		color mode
+				4:	changing the value of R
+				5:	changing the value of G
+				6:	changing the value of B
+			V:		texture mode
+			B:		texture versions
+						- texture
+						- color
+						- mixture between texture and color
+						- light on
+			T:		changes the texture to the next
+			Y:		changes the texture to the previous
+```
 
 ## How it Looks
 
@@ -102,18 +171,6 @@ For Star Wars fans
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/sw.png">
 
-## Setup
-
-Have at least OpenGL 3 or above or leave the page now and run for the sake of your sanity.
-
-You will also need:
-```
-	- stb_image.h
-	- GLFW
-	- Specific GLAD headers based on OpenGL version
-	- GLM
-```
-
 ## Object Files
 
 It's possible to have different layouts, not all the values are necessary.
@@ -170,50 +227,10 @@ Normals are used for lighting calculations, still cannot make an actual sense of
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/light.png">
 
-## Keys
-
-```
-Handling keypress events as:
-		Camera movement:
-			W:		move camera forward
-			A:		move camera left
-			S:		move camera backwards
-			D:		move camera right
-			X:		move camera down
-			SPACE:		move camera up
-			8:		incrase camera movement speed
-			9:		decrase camera movement speed
-		Object Rotation:
-			I:		rotates the object left on X axis
-			K:		rotates the object right on X axis
-			J:		rotates the object left on Y axis
-			L:		rotates the object right on Y axis
-			U:		rotates the object left on Z axis
-			O:		rotates the object right on Z axis
-			M:		incrases the speed
-			N:		reduces the speed
-		Polygon Mode:
-			1: 		wireframe
-			2:		points
-			3:		filled
-		Switching beteewen texture and color:
-			Z:		basic lighting on
-			C:		color mode
-				4:	changing the value of R
-				5:	changing the value of G
-				6:	changing the value of B
-			V:		texture mode
-			B:		texture versions
-						- texture
-						- color
-						- mixture between texture and color
-						- light on
-			T:		changes the texture to the next
-			Y:		changes the texture to the previous
-```
-
 ## Resources
 
 This site provides a good general explanation what can you do with this project
 
 https://learnopengl.com/Introduction
+
+[Menu](#menu)
