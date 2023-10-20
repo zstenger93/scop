@@ -1,5 +1,7 @@
 #include <OpenGL/OpenGL.h>
 
+#include <fstream>
+
 #include "includes/camera.hpp"
 #include "includes/glfw.hpp"
 #include "includes/headers.hpp"
@@ -49,13 +51,13 @@ void inputValidaThor(int argc, char **argv) {
 		std::cout << "Invalid object file, it doesn't have .obj extension." << std::endl;
 		exit(1);
 	}
-	std::ifstream file(fileName);
+	std::ifstream file(fileName.substr(3));
 	if (file.is_open()) {
 		if (file.peek() == std::ifstream::traits_type::eof())
-			std::cout << "The file is empty." << std::endl;
+			std::cout << "The object file is empty." << std::endl;
 		file.close();
 	} else
-		std::cout << "Unable to open the file." << std::endl;
+		std::cout << "Unable to open the object file." << std::endl;
 }
 
 void mouse_callback(GLFWwindow *window, double xposIn, double yposIn) {
