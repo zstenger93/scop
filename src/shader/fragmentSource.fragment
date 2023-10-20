@@ -28,7 +28,7 @@ void main() {
 	vec3 lightColor = vec3(1.0, 1.0, 1.0);
 
 	vec3 lightDir = normalize(LightPos - FragPos);
-	float diffuseStrength = max(0.0, dot(LightPos, lightDir));
+	float diffuseStrength = max(0.0, dot(LightPos, -lightDir));
 	vec3 diffuse = diffuseStrength * Kd;
 
 	vec3 ambient = Ka;
