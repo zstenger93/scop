@@ -141,9 +141,9 @@ With basic light on and ambient at 0.0
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/alien_light_on.png">
 
-Polygon mode POINTS
+Monster with better lighting
 
-<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/alien.png">
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/monster.png">
 
 Skull with it's texture on
 
