@@ -5,7 +5,7 @@
 	Header file collection for standard libraries and
 	for installed extra libraries like GLFW, GLAD, GLM
 */
-
+#define GL_SILENCE_DEPRECATION
 #include </Users/zsolt/.brew/Cellar/glfw/3.3.8/include/GLFW/glfw3.h>
 #include <OpenGL/OpenGL.h>
 

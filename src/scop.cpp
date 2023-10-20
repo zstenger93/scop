@@ -53,11 +53,16 @@ void inputValidaThor(int argc, char **argv) {
 	}
 	std::ifstream file(fileName.substr(3));
 	if (file.is_open()) {
-		if (file.peek() == std::ifstream::traits_type::eof())
+		if (file.peek() == std::ifstream::traits_type::eof()) {
 			std::cout << "The object file is empty." << std::endl;
+			file.close();
+			exit(1);
+		}
 		file.close();
-	} else
+	} else {
 		std::cout << "Unable to open the object file." << std::endl;
+		exit(1);
+	}
 }
 
 void mouse_callback(GLFWwindow *window, double xposIn, double yposIn) {
