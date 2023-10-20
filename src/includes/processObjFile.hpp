@@ -12,6 +12,7 @@
 #include "headers.hpp"
 #include "object.hpp"
 
+void inputValidaThor(int argc, char **argv);
 void processObjFile(const std::string &filePath, Object &object);
 void loadFromObjFile(const std::string &filePath, Object &object);
 void normalizeTextureCoordinates(Object &object);

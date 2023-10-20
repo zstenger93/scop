@@ -13,8 +13,10 @@
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 int main(int argc, char **argv) {
+	inputValidaThor(argc, argv);
+
 	Object object;
-	
+
 	initGLFW();
 	processObjFile(argv[3], object);
 	saveTextures(object, argv);
@@ -35,8 +37,25 @@ int main(int argc, char **argv) {
 	return 0;
 }
 
-void framebuffer_size_callback(GLFWwindow *window, int width, int heigth) {
-	glViewport(0, 0, width, heigth);
+void inputValidaThor(int argc, char **argv) {
+	if (argc < 4) {
+		std::cout << "Not enough arguments." << std::endl;
+		std::cout << "The program needs at least the following:" << std::endl;
+		std::cout << "A vertex and fragment source, an object file and a texture." << std::endl;
+		exit(1);
+	}
+	std::string fileName = argv[3];
+	if (fileName.length() >= 4 && fileName.substr(fileName.length() - 4) != ".obj") {
+		std::cout << "Invalid object file, it doesn't have .obj extension." << std::endl;
+		exit(1);
+	}
+	std::ifstream file(fileName);
+	if (file.is_open()) {
+		if (file.peek() == std::ifstream::traits_type::eof())
+			std::cout << "The file is empty." << std::endl;
+		file.close();
+	} else
+		std::cout << "Unable to open the file." << std::endl;
 }
 
 void mouse_callback(GLFWwindow *window, double xposIn, double yposIn) {
