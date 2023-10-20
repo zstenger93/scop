@@ -43,7 +43,7 @@ OBJECT_PUMPKIN = ../resources/pumpkin.obj
 OBJECT_HOUSE = ../resources/ohouse.obj
 OBJECT_PARROT = ../resources/parrot.obj
 OBJECT_TCP = ../resources/tcp.obj
-OBJECT_PLANE = ../resources/pyramids.obj
+OBJECT_PLANE = ../resources/plane.obj
 
 REBUILD = make re
 RM		= rm -rf
