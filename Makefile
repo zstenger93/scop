@@ -13,38 +13,44 @@ EXEC = ./scop
 VERTEX_SOURCE = ../src/shader/vertexSource.vertex
 FRAGMENT_SOURCE = ../src/shader/fragmentSource.fragment
 
+RS = ../resources/
+TX = ../textures/
+
 # Textures
-TEXTURE_OK = ../textures/ok.jpeg
-TEXTURE_COLORS = ../textures/colors.jpeg
-TEXTURE_SKULL = ../textures/skull.jpeg
-TEXTURE_CAMEL = ../textures/camel.jpeg
-TEXTURE_UVMAP = ../textures/uvmap.jpeg
-TEXTURE_TREX = ../textures/trex.jpeg
-TEXTURE_PUMPKIN = ../textures/pumpkin.png
+TEXTURE_OK = ${TX}ok.jpeg
+TEXTURE_COLORS = ${TX}colors.jpeg
+TEXTURE_SKULL = ${TX}skull.jpeg
+TEXTURE_CAMEL = ${TX}camel.jpeg
+TEXTURE_UVMAP = ${TX}uvmap.jpeg
+TEXTURE_TREX = ${TX}trex.jpeg
+TEXTURE_PUMPKIN = ${TX}pumpkin.png
+TEXTURE_MONSTER = ${TX}monster.jpeg
 
 TEXTURES = ${TEXTURE_OK} ${TEXTURE_COLORS} ${TEXTURE_CAMEL} \
 		   ${TEXTURE_SKULL} ${TEXTURE_TREX} ${TEXTURE_UVMAP} \
-		   ${TEXTURE_PARROT} ${TEXTURE_PUMPKIN} ${TEXTURE_TCP} \
+		   ${TEXTURE_MONSTER} ${TEXTURE_PUMPKIN} \
 
 # Objects
-OBJECT_42 = ../resources/42.obj
-OBJECT_TEAPOT = ../resources/teapot.obj
-OBJECT_SPIDER = ../resources/spider.obj
-OBJECT_SKULL = ../resources/skull.obj
-OBJECT_AXE = ../resources/axe.obj
-OBJECT_ARMOR = ../resources/armor.obj
-OBJECT_ALIENANIMAL = ../resources/alienanimal.obj
-OBJECT_BUILDING = ../resources/building.obj
-OBJECT_STARWARS = ../resources/sw.obj
-OBJECT_HEILBRONN = ../resources/hb.obj
-OBJECT_CAMEL = ../resources/Camel.obj
-OBJECT_CASTLE = ../resources/castle.obj
-OBJECT_TREX = ../resources/trex.obj
-OBJECT_PUMPKIN = ../resources/pumpkin.obj
-OBJECT_HOUSE = ../resources/ohouse.obj
-OBJECT_PARROT = ../resources/parrot.obj
-OBJECT_TCP = ../resources/tcp.obj
-OBJECT_PLANE = ../resources/plane.obj
+OBJECT_42 = ${RS}42.obj
+OBJECT_TEAPOT = ${RS}teapot.obj
+OBJECT_SPIDER = ${RS}spider.obj
+OBJECT_SKULL = ${RS}skull.obj
+OBJECT_AXE = ${RS}axe.obj
+OBJECT_ARMOR = ${RS}armor.obj
+OBJECT_ALIENANIMAL = ${RS}alienanimal.obj
+OBJECT_BUILDING = ${RS}building.obj
+OBJECT_STARWARS = ${RS}sw.obj
+OBJECT_HEILBRONN = ${RS}hb.obj
+OBJECT_CAMEL = ${RS}Camel.obj
+OBJECT_CASTLE = ${RS}castle.obj
+OBJECT_TREX = ${RS}trex.obj
+OBJECT_PUMPKIN = ${RS}pumpkin.obj
+OBJECT_HOUSE = ${RS}ohouse.obj
+OBJECT_PARROT = ${RS}parrot.obj
+OBJECT_TCP = ${RS}tcp.obj
+OBJECT_PLANE = ${RS}plane.obj
+OBJECT_SCULP = ${RS}sculp.obj
+OBJECT_MONSTER = ${RS}monster.obj
 
 REBUILD = make re
 RM		= rm -rf
@@ -99,31 +105,27 @@ re:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_42} ${TEXTURES}
 
-tp:
+teapot:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_TEAPOT} ${TEXTURES}
 
-sp:
+spider:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_SPIDER} ${TEXTURES}
 
-sk:
+skull:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_SKULL} ${TEXTURES}
 
-ax:
+axe:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_AXE} ${TEXTURES}
 
-am:
-	@${REBUILD}
-	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_ARMOR} ${TEXTURES}
-
-an:
+alien:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_ALIENANIMAL} ${TEXTURES}
 
-bf:
+building:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_BUILDING} ${TEXTURES}
 
@@ -135,39 +137,47 @@ hb:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_HEILBRONN} ${TEXTURES}
 
-cm:
+camel:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_CAMEL} ${TEXTURES}
 
-cs:
+castle:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_CASTLE} ${TEXTURES}
 
-tx:
+trex:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_TREX} ${TEXTURES}
 
-hs:
+house:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_HOUSE} ${TEXTURES}
 
-pr:
+parrot:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_PARROT} ${TEXTURES}
 
-tc:
+tric:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_TCP} ${TEXTURES}
 
-pl:
+plane:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_PLANE} ${TEXTURES}
 
-pk:
+pumpkin:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_PUMPKIN} ${TEXTURES}
 
-.PHONY: all clean fclean re 42 tp sp sk ax am an bf sw hb cm cs tx hs pr tc pl
+monster:
+	@${REBUILD}
+	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_MONSTER} ${TEXTURES}
+
+sculp:
+	@${REBUILD}
+	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_SCULP} ${TEXTURES}
+
+.PHONY: all clean fclean re 42 teapot spider skull axe alien building sw hb camel castle trex house parrot tricc plane monster sculp
 
 COLOR_END = \033[0;39m
 CYAN3 = \033[1;4;96m

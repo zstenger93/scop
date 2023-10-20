@@ -51,13 +51,27 @@ You will also need:
 In the Makefile there are quite a few options to play around with eg:
 
 ```
-make sk
-make sx
-make pl
-make cs
+make 42
+make teapot
+make skull
+make axe
+make plane
+make castle
+make spider
+make alien
+make monster
+make building
+make camel
+make hb
+make sw
+make sculp
+make pumpkin
+make tric
+make parrot
+make house
 ```
 
-and so on, feel free to explore. Each one of them will launch with the corresponding object
+Feel free to explore. Each one of them will launch with the corresponding object
 
 ## Keys
 
