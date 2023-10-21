@@ -1,4 +1,5 @@
 #include "includes/keyPress.hpp"
+#include <string>
 
 void keyPressHandler_Camera_wasdSpaceX(GLFWwindow *window, Camera &camera) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) glfwSetWindowShouldClose(window, true);
@@ -16,12 +17,13 @@ void keyPressHandler_Camera_wasdSpaceX(GLFWwindow *window, Camera &camera) {
 		camera.ProcessKeyboard(DOWN, camera.deltaTime);
 }
 
-void keyPressHandler_Camera_Speed(GLFWwindow *window, Camera &camera) {
+void keyPressHandler_Camera_Speed(GLFWwindow *window, Camera &camera, Object &object) {
 	if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS) {
 		camera.MovementSpeed -= camera.changeSpeed;
 		if (camera.MovementSpeed < 1.0f) camera.MovementSpeed = 1.0f;
 	}
 	if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS) camera.MovementSpeed += camera.changeSpeed;
+	object.text.cameraSpeed = std::to_string(camera.MovementSpeed);
 }
 
 void keyPressHandler_PolygonModes(GLFWwindow *window, Object &object) {

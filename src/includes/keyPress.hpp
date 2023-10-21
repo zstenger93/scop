@@ -42,7 +42,7 @@
 #include "shader.hpp"
 
 void keyPressHandler_Camera_wasdSpaceX(GLFWwindow *window, Camera &camera);
-void keyPressHandler_Camera_Speed(GLFWwindow *window, Camera &camera);
+void keyPressHandler_Camera_Speed(GLFWwindow *window, Camera &camera, Object &object);
 void keyPressHandler_PolygonModes(GLFWwindow *window, Object &object);
 void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version, Object &object);
 void keyPressHandler_SetColor(GLFWwindow *window, glm::vec3 &color);

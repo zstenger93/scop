@@ -8,6 +8,7 @@ class Text {
    public:
 	std::string polyCount;
 	std::string vertexCount;
+	std::string cameraSpeed;
 	std::string mode;
 	std::string lightX;
 	std::string lightY;

@@ -16,7 +16,7 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, Object &o
 		createTexture(object, prevTex);
 		camera.fps(camera);
 		keyPressHandler_Camera_wasdSpaceX(window, camera);
-		keyPressHandler_Camera_Speed(window, camera);
+		keyPressHandler_Camera_Speed(window, camera, object);
 		keyPressHandler_PolygonModes(window, object);
 		glm::mat4 model =
 			keyPressHandler_ObjectCenterRotation(window, object.Triangles, object.Squares, model);
@@ -31,7 +31,7 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, Object &o
 		shader.setView(camera, shader);
 		shader.setModel(camera, shader, model);
 		draw(object);
-		renderText(object, color);
+		renderText(window, object, color);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}

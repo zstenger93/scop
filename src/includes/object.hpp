@@ -30,7 +30,7 @@ class Object {
 void createVaoVbo(Object &object);
 void saveTextures(Object &object, char **argv);
 void initIMGUI(GLFWwindow *window);
-void renderText(Object &object, glm::vec3 &color);
+void renderText(GLFWwindow *window, Object &object, glm::vec3 &color);
 void cleanUp(Object &object);
 
 #endif
