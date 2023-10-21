@@ -28,7 +28,11 @@
 
 [Normals](#normals)
 
+[Shaders](#shaders)
+
 [Light](#light)
+
+[Text rendering](#text-rendering)
 
 [Resources](#resources)
 
@@ -42,6 +46,7 @@ You will also need:
 	- GLFW
 	- Specific GLAD headers based on OpenGL version
 	- GLM
+	- imgui
 ```
 
 ## How to use
@@ -242,11 +247,21 @@ In case you don't have them, you need to calculate it yourself, or better say, y
 
 Normals are crucial for lighting calculations, contributing to the realism of the rendered scene. They define the direction a surface is facing, affecting how light interacts with the object. Proper implementation of normals is essential for accurate lighting and shading effects.
 
+## Shaders
+
+Vertex and fragmentshader source file has been used here which are technically executables passed down to the shader, but they have slightly specific syntax for in and output.
+
+In short the vertex shader output will be your fragmentshader input, but you can pass down values to both from your code itself as well.
+
 ## Light
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/light.png">
 
 Lighting in 3D graphics is a complex topic. Implementing different lighting models and techniques can significantly impact the visual quality of your scenes. Experimentation and understanding different lighting properties can help achieve realistic lighting effects in your 3D models.
+
+## Text rendering
+
+There are wuite a few ways to do it. For this project I've found `imgui` the best and esier to use compared to other ones I've tried like `freetype`.
 
 ## Resources
 
