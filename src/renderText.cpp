@@ -11,6 +11,7 @@ void renderText(Object &object, glm::vec3 &color) {
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
+	ImGui::SetNextWindowPos(ImVec2(200, 200));
 	ImGui::SetNextWindowSize(ImVec2(130, 250));
 	ImGui::Begin("window", nullptr, ImGuiWindowFlags_NoDecoration);
 	ImGui::SetCursorPos(ImVec2(10, 10));
