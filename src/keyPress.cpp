@@ -31,9 +31,10 @@ void keyPressHandler_PolygonModes(GLFWwindow *window, Object &object) {
 	} else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
 		object.renderMode = POINTS;
 		object.text.mode = "points";
-	} else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+	} else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) {
 		object.renderMode = FILLED;
 		object.text.mode = "filled";
+	}
 }
 
 void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version, Object &object) {

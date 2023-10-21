@@ -7,6 +7,7 @@
 class Text {
    public:
 	std::string polyCount;
+	std::string vertexCount;
 	std::string mode;
 	std::string lightX;
 	std::string lightY;

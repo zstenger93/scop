@@ -17,6 +17,8 @@ void renderText(Object &object, glm::vec3 &color) {
 	ImGui::SetCursorPos(ImVec2(10, 10));
 	ImGui::Text("___Polycount___");
 	ImGui::Text("%s", object.text.polyCount.c_str());
+	ImGui::Text("__Vertex count__");
+	ImGui::Text("%s", object.text.vertexCount.c_str());
 	ImGui::Text("___RGB values___");
 	std::string r = std::to_string(color.r);
 	ImGui::Text("red:   %s", r.c_str());

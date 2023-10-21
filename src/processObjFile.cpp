@@ -236,4 +236,6 @@ void convertSquaresToTriangles(Object &object) {
 	unsigned int polycount = object.Squares.size() + object.Triangles.size();
 	std::string polycountString = std::to_string(polycount);
 	object.text.polyCount = polycountString;
+	std::string vertexString = std::to_string(object.vertices.size());
+	object.text.vertexCount = vertexString;
 }
