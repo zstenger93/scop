@@ -51,12 +51,6 @@ struct Ks {
 	float r, g, b;
 };
 
-struct Light {
-	Ka ambientIntensity;
-	Kd diffuseIntensity;
-	Ks specularIntensity;
-};
-
 struct Mtl {
 	Ka ka;
 	Kd kd;
