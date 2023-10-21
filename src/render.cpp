@@ -19,7 +19,7 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, Object &o
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
-		ImGui::Begin(object.windowName.c_str(), nullptr, ImGuiWindowFlags_NoDecoration);
+		ImGui::Begin("window", nullptr, ImGuiWindowFlags_NoDecoration);
 
 
 

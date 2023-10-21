@@ -3,7 +3,6 @@ CFLAGS =  -Wno-deprecated-declarations -Wno-macro-redefined -Wno-c++11-extension
 CPPFLAGS=`pkg-config --cflags freetype2`
 LDFLAGS = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib -lglfw -framework OpenGL -framework CoreGraphics -framework CoreFoundation
 GLFW = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include
-FREETYPE = -I/Users/zstenger/.brew/include/freetype2
 GLEWSHIT = -I/Users/${USER}/.brew/Cellar/glew/2.2.0_1/include -L/Users/${USER}/.brew/Cellar/glew/2.2.0_1/lib -lGLEW -framework OpenGL
 
 GLAD = glad.o
@@ -70,22 +69,25 @@ SRC = scop \
 	  renderText \
 	  shader/shader \
 	  processObjFile \
-	  includes/imgui/imgui \
-	  includes/imgui/imgui_demo \
-	  includes/imgui/imgui_draw \
-	  includes/imgui/imgui_tables \
-	  includes/imgui/imgui_widgets \
-	  includes/imgui/imgui_impl_glfw \
-	  includes/imgui/imgui_impl_opengl3 \
+
+IMGUI =	includes/imgui/imgui \
+		includes/imgui/imgui_demo \
+		includes/imgui/imgui_draw \
+		includes/imgui/imgui_tables \
+		includes/imgui/imgui_widgets \
+		includes/imgui/imgui_impl_glfw \
+		includes/imgui/imgui_impl_opengl3 \
 
 SRCS	= $(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC)))
 OBJS	= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC)))
+IMGUI_SRCS	= $(addprefix $(SRC_DIR), $(addsuffix .cpp, $(IMGUI)))
+IMGUI_OBJS	= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(IMGUI)))
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) ${IMGUI_OBJS}
 	@echo "$(YELLOW)Compiling..$(COLOR_END)"
 	@${GLADLIB}
-	@$(CC) $(CFLAGS) ${CPPFLAGS} $(GLEWSHIT) $(GLFW) ${FREETYPE} ${GLAD} $(LDFLAGS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) ${CPPFLAGS} $(GLEWSHIT) $(GLFW) ${GLAD} $(LDFLAGS) $(OBJS) ${IMGUI_OBJS} -o $(NAME)
 	@echo "$(GREEN)The project is compiled..$(COLOR_END)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
