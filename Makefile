@@ -15,7 +15,7 @@ FRAGMENT_SOURCE = ../src/shader/fragmentSource.fragment
 RS = ../resources/
 TX = ../textures/
 
-# Textures
+# Texture files
 TEXTURE_OK = ${TX}ok.jpeg
 TEXTURE_COLORS = ${TX}colors.jpeg
 TEXTURE_SKULL = ${TX}skull.jpeg
@@ -29,7 +29,7 @@ TEXTURES = ${TEXTURE_OK} ${TEXTURE_COLORS} ${TEXTURE_CAMEL} \
 		   ${TEXTURE_SKULL} ${TEXTURE_TREX} ${TEXTURE_UVMAP} \
 		   ${TEXTURE_MONSTER} ${TEXTURE_PUMPKIN} \
 
-# Objects
+# Object files
 OBJECT_42 = ${RS}42.obj
 OBJECT_TEAPOT = ${RS}teapot.obj
 OBJECT_SPIDER = ${RS}spider.obj
@@ -68,6 +68,7 @@ SRC = scop \
 	  shader/shader \
 	  processObjFile \
 
+# Imgui source files to compile
 IMGUI =	includes/imgui/imgui \
 		includes/imgui/imgui_demo \
 		includes/imgui/imgui_draw \
@@ -110,6 +111,7 @@ re:
 	@make all
 	@echo "$(GREEN)The project has been recompiled.$(COLOR_END)"
 
+# Test options
 42:
 	@${REBUILD}
 	@${EXEC} ${VERTEX_SOURCE} ${FRAGMENT_SOURCE} ${OBJECT_42} ${TEXTURES}
