@@ -32,4 +32,23 @@ void renderText(Object &object, glm::vec3 &color) {
 	ImGui::Text("z:  %s", object.text.lightZ.c_str());
 	ImGui::Text("__Render Mode__");
 	ImGui::Text("%s", object.text.mode.c_str());
+
+	ImGui::End();
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplGlfw_NewFrame();
+	ImGui::NewFrame();
+	ImGui::SetNextWindowPos(ImVec2(1600, 200));
+	ImGui::SetNextWindowSize(ImVec2(200, 250));
+	ImGui::Begin("window", nullptr, ImGuiWindowFlags_NoDecoration);
+	ImGui::SetCursorPos(ImVec2(10, 10));
+	ImGui::Text("___Keybindings___");
+	ImGui::Text("General moving: WASD");
+	ImGui::Text("Up and Down: SPACE, X");
+
+	ImGui::End();
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
