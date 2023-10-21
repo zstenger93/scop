@@ -39,7 +39,8 @@ void main() {
 	if (useTexture == 1) {
 		finalColor = texColor.rgb;
 	} else if (useTexture == 2) {
-		finalColor = objectColor;
+		lighting = ambient * strength + diffuse;
+		finalColor = objectColor * lighting;
 	} else if (useTexture == 3) {
 		lighting = ambient * strength + diffuse;
 		finalColor = texColor.rgb * lighting;
