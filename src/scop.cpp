@@ -25,28 +25,14 @@ int main(int argc, char **argv) {
 	GLFWwindow *window = createWindow(object);
 	Shader shader(argv[1], argv[2]);
 
-	ImGui::CreateContext();
-	// ImGuiIO &io = ImGui::GetIO(); (void)io;
-	ImGui_ImplGlfw_InitForOpenGL(window, true);
-	ImGui::StyleColorsDark();
-	ImGui_ImplOpenGL3_Init("#version 330");
-
-
+	initIMGUI(window);
 	passMtlInfoToFragmentShader(shader, object);
 	separateTrianglesAndSquares(object);
 	convertSquaresToTriangles(object);
 	createVaoVbo(object);
 	renderingLoop(window, shader, camera, object);
+	cleanUp(object);
 
-	ImGui_ImplOpenGL3_Shutdown();
-	ImGui_ImplGlfw_Shutdown();
-	ImGui::DestroyContext();
-
-	glDeleteVertexArrays(1, &object.VAO_triangles);
-	glDeleteBuffers(1, &object.VBO_triangles);
-	glDeleteVertexArrays(1, &object.VAO_squares);
-	glDeleteBuffers(1, &object.VBO_squares);
-	glfwTerminate();
 	return 0;
 }
 
@@ -74,6 +60,17 @@ void inputValidaThor(int argc, char **argv) {
 		std::cout << "Unable to open the object file." << std::endl;
 		exit(1);
 	}
+}
+
+void cleanUp(Object &object) {
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
+	glDeleteVertexArrays(1, &object.VAO_triangles);
+	glDeleteBuffers(1, &object.VBO_triangles);
+	glDeleteVertexArrays(1, &object.VAO_squares);
+	glDeleteBuffers(1, &object.VBO_squares);
+	glfwTerminate();
 }
 
 void mouse_callback(GLFWwindow *window, double xposIn, double yposIn) {

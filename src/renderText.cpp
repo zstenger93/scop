@@ -1,5 +1,12 @@
 #include "includes/object.hpp"
 
+void initIMGUI(GLFWwindow *window) {
+	ImGui::CreateContext();
+	ImGui_ImplGlfw_InitForOpenGL(window, true);
+	ImGui::StyleColorsDark();
+	ImGui_ImplOpenGL3_Init("#version 330");
+}
+
 void renderText(Object &object, glm::vec3 &color) {
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
