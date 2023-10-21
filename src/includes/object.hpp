@@ -31,6 +31,8 @@ void createVaoVbo(Object &object);
 void saveTextures(Object &object, char **argv);
 void initIMGUI(GLFWwindow *window);
 void renderText(GLFWwindow *window, Object &object, glm::vec3 &color);
+void drawInfoPanel(Object &object, glm::vec3 &color);
+void drawKeyBindingsPanel();
 void cleanUp(Object &object);
 
 #endif
