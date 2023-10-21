@@ -126,6 +126,10 @@ Handling keypress events as:
 
 ## How it Looks
 
+With rendered text, light on
+
+<img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/text.png">
+
 Teapot with uv map texture
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/teapot.png">
