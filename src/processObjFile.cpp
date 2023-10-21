@@ -229,4 +229,7 @@ void convertSquaresToTriangles(Object &object) {
 										   y4, z4, texX4, texY4});
 	}
 	object.Squares = triangles;
+	unsigned int polycount = object.Squares.size() + object.Triangles.size();
+	std::string polycountString = std::to_string(polycount);
+	object.text.polyCount = "Polycount:  " + polycountString;
 }

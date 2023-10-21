@@ -15,6 +15,24 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, Object &o
 	glm::vec3 color(1.0f, 0.0f, 0.0f);
 	while (!glfwWindowShouldClose(window)) {
 		createTexture(object, prevTex);
+
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
+		ImGui::Begin(object.windowName.c_str(), nullptr, ImGuiWindowFlags_NoDecoration);
+
+
+
+		// Set cursor position to the top-left corner
+		ImGui::SetCursorPos(ImVec2(10, 10));
+
+		// Render text at the top-left corner
+		ImGui::Text("%s", object.text.polyCount.c_str());
+
+		// Render other ImGui UI elements as needed
+
+		// End ImGui frame
+
 		camera.fps(camera);
 		keyPressHandler_Camera_wasdSpaceX(window, camera);
 		keyPressHandler_Camera_Speed(window, camera);
@@ -32,6 +50,12 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, Object &o
 		shader.setView(camera, shader);
 		shader.setModel(camera, shader, model);
 		draw(object);
+
+		ImGui::End();
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+		
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}

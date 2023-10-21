@@ -3,6 +3,7 @@
 
 #include "camera.hpp"
 #include "headers.hpp"
+#include "text.hpp"
 
 class Object {
    public:
@@ -23,6 +24,7 @@ class Object {
 	GLuint VAO_triangles, VBO_triangles, VAO_squares, VBO_squares,
 		normalVBO;	// vertex arrays and buffers maybe for elements arrays later
 	glm::vec3 lightSourcePos;
+	Text text;
 };
 
 void createVaoVbo(Object &object);

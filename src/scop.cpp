@@ -1,10 +1,9 @@
 #include <OpenGL/OpenGL.h>
 
-#include <fstream>
-
 #include "includes/camera.hpp"
 #include "includes/glfw.hpp"
 #include "includes/headers.hpp"
+#include "includes/imgui/imgui.h"
 #include "includes/object.hpp"
 #include "includes/processObjFile.hpp"
 #include "includes/render.hpp"
@@ -26,11 +25,25 @@ int main(int argc, char **argv) {
 	GLFWwindow *window = createWindow(object);
 	Shader shader(argv[1], argv[2]);
 
+	ImGui::CreateContext();
+	ImGuiIO &io = ImGui::GetIO(); (void)io;
+	ImGui_ImplGlfw_InitForOpenGL(window, true);
+	ImGui::StyleColorsDark();
+
+	ImGui_ImplOpenGL3_Init("#version 330");
+
+	// ImGui::GetIO().Fonts->AddFontFromFileTTF("/Users/zstenger/Desktop/42/scop/src/includes/imgui/Roboto-Medium.ttf", 40);
+
 	passMtlInfoToFragmentShader(shader, object);
 	separateTrianglesAndSquares(object);
 	convertSquaresToTriangles(object);
 	createVaoVbo(object);
 	renderingLoop(window, shader, camera, object);
+
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
+
 	glDeleteVertexArrays(1, &object.VAO_triangles);
 	glDeleteBuffers(1, &object.VBO_triangles);
 	glDeleteVertexArrays(1, &object.VAO_squares);
