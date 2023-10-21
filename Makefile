@@ -1,8 +1,6 @@
 NAME = scop
 CFLAGS =  -Wno-deprecated-declarations -Wno-macro-redefined -Wno-c++11-extensions -std=c++11
-CPPFLAGS=`pkg-config --cflags freetype2`
-LDFLAGS = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib -lglfw -framework OpenGL -framework CoreGraphics -framework CoreFoundation
-GLFW = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include
+GLFW = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib -lglfw -framework OpenGL -framework CoreGraphics -framework CoreFoundation
 GLEW = -I/Users/${USER}/.brew/Cellar/glew/2.2.0_1/include -L/Users/${USER}/.brew/Cellar/glew/2.2.0_1/lib -lGLEW -framework OpenGL
 
 GLAD = glad.o
@@ -87,7 +85,7 @@ all: $(NAME)
 $(NAME): $(OBJS) ${IMGUI_OBJS}
 	@echo "$(YELLOW)Compiling..$(COLOR_END)"
 	@${GLADLIB}
-	@$(CC) $(CFLAGS) ${CPPFLAGS} $(GLEW) $(GLFW) ${GLAD} $(LDFLAGS) $(OBJS) ${IMGUI_OBJS} -o $(NAME)
+	@$(CC) $(CFLAGS) $(GLEW) $(GLFW) ${GLAD} $(OBJS) ${IMGUI_OBJS} -o $(NAME)
 	@echo "$(GREEN)The project is compiled..$(COLOR_END)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
