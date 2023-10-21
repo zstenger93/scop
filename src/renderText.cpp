@@ -27,7 +27,7 @@ void drawInfoPanel(Object &object, glm::vec3 &color) {
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
-	ImGui::SetNextWindowPos(ImVec2(200, 100));
+	ImGui::SetNextWindowPos(ImVec2(200, 50));
 	ImGui::SetNextWindowSize(ImVec2(130, 290));
 	ImGui::Begin("window", nullptr, ImGuiWindowFlags_NoDecoration);
 	ImGui::SetCursorPos(ImVec2(10, 10));
@@ -60,7 +60,7 @@ void drawKeyBindingsPanel() {
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
-	ImGui::SetNextWindowPos(ImVec2(1700, 100));
+	ImGui::SetNextWindowPos(ImVec2(1700, 50));
 	ImGui::SetNextWindowSize(ImVec2(160, 690));
 	ImGui::Begin("window", nullptr, ImGuiWindowFlags_NoDecoration);
 	ImGui::SetCursorPos(ImVec2(10, 10));
