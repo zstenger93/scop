@@ -75,6 +75,8 @@ Feel free to explore. Each one of them will launch with the corresponding object
 
 ```
 Handling keypress events as:
+		Text rendering:
+			7:		on/off to show details and keybindings
 		Camera movement:
 			W:		move camera forward
 			A:		move camera left
