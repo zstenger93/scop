@@ -24,8 +24,6 @@
 
 [Color](#color)
 
-[UV Coordinates](#uv-coordinates)
-
 [UV Normalizing](#uv-normalizing)
 
 [Normals](#normals)
@@ -200,9 +198,7 @@ For Star Wars fans
 
 ## Object Files
 
-It's possible to have different layouts, not all the values are necessary.
-
-Faces can be stored different ways like
+Object files (.obj) are commonly used to store 3D model information. The structure of these files can vary, allowing different layouts for vertex data. Faces, which define triangles or squares, can be represented in multiple ways, such as:
 
 ```
 f 4 9 7 1
@@ -218,9 +214,7 @@ f 23/123/123 321/3213/213 43/45/12 423/3423/432
 
 ## .mtl Files
 
-Values for material and lighting calculations
-
-Can be more than one texture file for example and all with different material attributes, but I handle one with this project..
+Material files (.mtl) contain values essential for material and lighting calculations in the rendering process. While a single object can have multiple texture files with different material attributes, this project currently supports handling one texture file per object.
 
 ## Input Handling
 
@@ -234,13 +228,9 @@ Combining these coordinates from a face will result one triangle or square.
 
 In case of squares I calculated 2 triangle from each square because I couldn't make the deprecated GL_QUADS to draw at that point.
 
-## Color
+## Color and Texture
 
-you can use normal colors, or the uv coordinates
-
-## UV Coordinates
-
-Usually provided in the .obj file as well, adn these are the coordinates for the actual texture for the object.
+Colors and textures enhance the visual appeal of 3D models. You can apply normal colors or use UV coordinates provided in the .obj file. UV coordinates represent the actual texture coordinates for the object. If these coordinates are not available, you might need to calculate them manually.
 
 ## UV Normalizing
 
@@ -248,11 +238,13 @@ In case you don't have them, you need to calculate it yourself, or better say, y
 
 ## Normals
 
-Normals are used for lighting calculations, still cannot make an actual sense of it, since the only thing I've got with them is black screen
+Normals are crucial for lighting calculations, contributing to the realism of the rendered scene. They define the direction a surface is facing, affecting how light interacts with the object. Proper implementation of normals is essential for accurate lighting and shading effects.
 
 ## Light
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/light.png">
+
+Lighting in 3D graphics is a complex topic. Implementing different lighting models and techniques can significantly impact the visual quality of your scenes. Experimentation and understanding different lighting properties can help achieve realistic lighting effects in your 3D models.
 
 ## Resources
 
