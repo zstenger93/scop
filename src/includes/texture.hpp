@@ -4,7 +4,7 @@
 #include "headers.hpp"
 #include "object.hpp"
 
-void createTexture(Object &object, int &prevTex);
 void draw(Object &object);
+void createTexture(Object &object, int &prevTex);
 
 #endif
