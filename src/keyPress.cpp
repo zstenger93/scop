@@ -24,13 +24,16 @@ void keyPressHandler_Camera_Speed(GLFWwindow *window, Camera &camera) {
 	if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS) camera.MovementSpeed += camera.changeSpeed;
 }
 
-void keyPressHandler_PolygonModes(GLFWwindow *window, RenderMode &renderMode) {
+void keyPressHandler_PolygonModes(GLFWwindow *window, Object &object) {
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) {
-		renderMode = WIREFRAME;
+		object.renderMode = WIREFRAME;
+		object.text.mode = "wireframe";
 	} else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) {
-		renderMode = POINTS;
+		object.renderMode = POINTS;
+		object.text.mode = "points";
 	} else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
-		renderMode = FILLED;
+		object.renderMode = FILLED;
+		object.text.mode = "filled";
 }
 
 void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version, Object &object) {
@@ -135,26 +138,32 @@ glm::vec3 calculateCenter(const std::vector<float> &triangles) {
 void keyPressHandler_SetLight(GLFWwindow *window, Shader &shader, Object &object) {
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
 		object.lightSourcePos.x -= 0.25;
+		object.text.lightX = std::to_string(object.lightSourcePos.x);
 		shader.setVec3("LightPos", object.lightSourcePos);
 	}
 	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
 		object.lightSourcePos.x += 0.25;
+		object.text.lightX = std::to_string(object.lightSourcePos.x);
 		shader.setVec3("LightPos", object.lightSourcePos);
 	}
 	if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
 		object.lightSourcePos.y -= 0.25;
+		object.text.lightY = std::to_string(object.lightSourcePos.y);
 		shader.setVec3("LightPos", object.lightSourcePos);
 	}
 	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
 		object.lightSourcePos.y += 0.25;
+		object.text.lightY = std::to_string(object.lightSourcePos.y);
 		shader.setVec3("LightPos", object.lightSourcePos);
 	}
 	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS) {
 		object.lightSourcePos.z -= 0.25;
+		object.text.lightZ = std::to_string(object.lightSourcePos.z);
 		shader.setVec3("LightPos", object.lightSourcePos);
 	}
 	if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS) {
 		object.lightSourcePos.z += 0.25;
+		object.text.lightZ = std::to_string(object.lightSourcePos.z);
 		shader.setVec3("LightPos", object.lightSourcePos);
 	}
 }

@@ -29,5 +29,6 @@ class Object {
 
 void createVaoVbo(Object &object);
 void saveTextures(Object &object, char **argv);
+void renderText(Object &object, glm::vec3 &color);
 
 #endif

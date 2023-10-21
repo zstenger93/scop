@@ -6,6 +6,10 @@ void processObjFile(const std::string &filePath, Object &object) {
 	object.lightSourcePos.x = 2.0f;
 	object.lightSourcePos.y = 1.0f;
 	object.lightSourcePos.z = 0.0f;
+	object.text.lightX = std::to_string(object.lightSourcePos.x);
+	object.text.lightY = std::to_string(object.lightSourcePos.y);
+	object.text.lightZ = std::to_string(object.lightSourcePos.z);
+	object.text.mode = "filled";
 	loadFromObjFile(filePath, object);
 	if (object.vertices.size() == 0) return;
 	normalizeTextureCoordinates(object);
@@ -231,5 +235,5 @@ void convertSquaresToTriangles(Object &object) {
 	object.Squares = triangles;
 	unsigned int polycount = object.Squares.size() + object.Triangles.size();
 	std::string polycountString = std::to_string(polycount);
-	object.text.polyCount = "Polycount:  " + polycountString;
+	object.text.polyCount = polycountString;
 }

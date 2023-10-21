@@ -26,13 +26,11 @@ int main(int argc, char **argv) {
 	Shader shader(argv[1], argv[2]);
 
 	ImGui::CreateContext();
-	ImGuiIO &io = ImGui::GetIO(); (void)io;
+	// ImGuiIO &io = ImGui::GetIO(); (void)io;
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui::StyleColorsDark();
-
 	ImGui_ImplOpenGL3_Init("#version 330");
 
-	// ImGui::GetIO().Fonts->AddFontFromFileTTF("/Users/zstenger/Desktop/42/scop/src/includes/imgui/Roboto-Medium.ttf", 40);
 
 	passMtlInfoToFragmentShader(shader, object);
 	separateTrianglesAndSquares(object);
