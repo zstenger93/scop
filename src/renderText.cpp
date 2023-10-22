@@ -1,3 +1,4 @@
+#include "includes/headers.hpp"
 #include "includes/object.hpp"
 
 void initIMGUI(GLFWwindow *window) {
@@ -24,10 +25,13 @@ void renderText(GLFWwindow *window, Object &object, glm::vec3 &color) {
 }
 
 void drawInfoPanel(Object &object, glm::vec3 &color) {
+	const GLFWvidmode *mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
-	ImGui::SetNextWindowPos(ImVec2(200, 50));
+	ImGui::SetNextWindowPos(
+		ImVec2(mode->width - (mode->width - 200), (mode->height - (mode->height - 50))));
 	ImGui::SetNextWindowSize(ImVec2(130, 290));
 	ImGui::Begin("window", nullptr, ImGuiWindowFlags_NoDecoration);
 	ImGui::SetCursorPos(ImVec2(10, 10));
@@ -57,10 +61,12 @@ void drawInfoPanel(Object &object, glm::vec3 &color) {
 }
 
 void drawKeyBindingsPanel() {
+	const GLFWvidmode *mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
-	ImGui::SetNextWindowPos(ImVec2((WINDOW_WIDTH - 910), 50));
+	ImGui::SetNextWindowPos(ImVec2((mode->width - 210), (mode->height - (mode->height - 50))));
 	ImGui::SetNextWindowSize(ImVec2(160, 690));
 	ImGui::Begin("window", nullptr, ImGuiWindowFlags_NoDecoration);
 	ImGui::SetCursorPos(ImVec2(10, 10));
