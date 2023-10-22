@@ -200,6 +200,11 @@ void separateTrianglesAndSquares(Object &object) {
 // our daily sponsor is deprecated functions, no i haven't spent on this one day at all, noo..
 void convertSquaresToTriangles(Object &object) {
 	std::vector<float> triangles;
+	unsigned int polycount = (object.Squares.size() / 4) + (object.Triangles.size() / 3);
+	std::string polycountString = std::to_string(polycount);
+	object.text.polyCount = polycountString;
+	std::string vertexString = std::to_string(object.vertices.size());
+	object.text.vertexCount = vertexString;
 
 	for (size_t i = 0; i < object.Squares.size(); i += 20) {
 		if (object.Squares.size() == 0) break;
@@ -233,9 +238,4 @@ void convertSquaresToTriangles(Object &object) {
 										   y4, z4, texX4, texY4});
 	}
 	object.Squares = triangles;
-	unsigned int polycount = object.Squares.size() + object.Triangles.size();
-	std::string polycountString = std::to_string(polycount);
-	object.text.polyCount = polycountString;
-	std::string vertexString = std::to_string(object.vertices.size());
-	object.text.vertexCount = vertexString;
 }
