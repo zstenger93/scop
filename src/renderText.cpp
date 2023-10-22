@@ -67,7 +67,7 @@ void drawKeyBindingsPanel() {
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
 	ImGui::SetNextWindowPos(ImVec2((mode->width - 210), (mode->height - (mode->height - 50))));
-	ImGui::SetNextWindowSize(ImVec2(160, 690));
+	ImGui::SetNextWindowSize(ImVec2(160, 680));
 	ImGui::Begin("window", nullptr, ImGuiWindowFlags_NoDecoration);
 	ImGui::SetCursorPos(ImVec2(10, 10));
 	ImGui::Text("  ___KEYBINDINGS___");

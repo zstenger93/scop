@@ -9,6 +9,7 @@ class Object {
    public:
 	Mtl mtl;				// material file content
 	Text text;				// for text drawing to screen
+	int polyCount;			// counted from file
 	std::vector<Uv> uv;		// vt aka uv coordinates
 	int textureType = 0;	// switching between textures
 	unsigned int texture;	// texture used for the object

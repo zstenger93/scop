@@ -3,6 +3,7 @@
 #include "includes/headers.hpp"
 
 void processObjFile(const std::string &filePath, Object &object) {
+	object.polyCount = 0;
 	object.lightSourcePos.x = 2.0f;
 	object.lightSourcePos.y = 1.0f;
 	object.lightSourcePos.z = 0.0f;
@@ -44,6 +45,7 @@ void loadFromObjFile(const std::string &filePath, Object &object) {
 			stream >> uvVal.u >> uvVal.v >> uvVal.w;
 			object.uv.push_back(uvVal);
 		} else if (prefix == "f") {
+			object.polyCount ++;
 			saveFaceIndexes(stream, object);
 		}
 	}
@@ -200,8 +202,7 @@ void separateTrianglesAndSquares(Object &object) {
 // our daily sponsor is deprecated functions, no i haven't spent on this one day at all, noo..
 void convertSquaresToTriangles(Object &object) {
 	std::vector<float> triangles;
-	unsigned int polycount = (object.Squares.size() / 4) + (object.Triangles.size() / 3);
-	std::string polycountString = std::to_string(polycount);
+	std::string polycountString = std::to_string(object.polyCount);
 	object.text.polyCount = polycountString;
 	std::string vertexString = std::to_string(object.vertices.size());
 	object.text.vertexCount = vertexString;
