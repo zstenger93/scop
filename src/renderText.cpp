@@ -34,9 +34,9 @@ void drawInfoPanel(Object &object, glm::vec3 &color) {
 	ImGui::Begin("window", nullptr, ImGuiWindowFlags_NoDecoration);
 	ImGui::SetCursorPos(ImVec2(10, 10));
 	ImGui::Text("___Polycount___");
-	ImGui::Text("%s", object.text.polyCount.c_str());
+	ImGui::Text("    %s", object.text.polyCount.c_str());
 	ImGui::Text("__Vertex count__");
-	ImGui::Text("%s", object.text.vertexCount.c_str());
+	ImGui::Text("    %s", object.text.vertexCount.c_str());
 	ImGui::Text("___RGB values___");
 	std::string r = std::to_string(color.r);
 	ImGui::Text("red:   %s", r.c_str());
@@ -49,7 +49,7 @@ void drawInfoPanel(Object &object, glm::vec3 &color) {
 	ImGui::Text("y:     %s", object.text.lightY.c_str());
 	ImGui::Text("z:     %s", object.text.lightZ.c_str());
 	ImGui::Text("__Camera speed__");
-	ImGui::Text("       %s", object.text.cameraSpeed.c_str());
+	ImGui::Text("   %s", object.text.cameraSpeed.c_str());
 	ImGui::Text("__Render Mode__");
 	ImGui::Text("    %s", object.text.mode.c_str());
 

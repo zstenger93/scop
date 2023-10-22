@@ -265,6 +265,10 @@ There are wuite a few ways to do it. For this project I've found `imgui` the bes
 
 ## Resources
 
+The following youtube playlist is golden which mostly works in these videos with the following material from learnopengl
+
+https://www.youtube.com/watch?v=W3gAzLwfIP0&list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2
+
 This site provides a good general explanation what can you do with this project
 
 https://learnopengl.com/Introduction
