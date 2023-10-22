@@ -45,7 +45,7 @@ void loadFromObjFile(const std::string &filePath, Object &object) {
 			stream >> uvVal.u >> uvVal.v >> uvVal.w;
 			object.uv.push_back(uvVal);
 		} else if (prefix == "f") {
-			object.polyCount ++;
+			object.polyCount++;
 			saveFaceIndexes(stream, object);
 		}
 	}
@@ -83,9 +83,8 @@ void saveMtlAttributes(Object &object, std::istringstream &stream, std::string &
 				stream >> object.mtl.Ni;
 			} else if (prefix == "d") {
 				stream >> object.mtl.d;
-			} else if (prefix == "illum") {
+			} else if (prefix == "illum")
 				stream >> object.mtl.illum;
-			}
 		}
 		mtlFile.close();
 	} else

@@ -14,10 +14,8 @@ void renderText(GLFWwindow *window, Object &object, glm::vec3 &color) {
 		keyPressed = true;
 		drawText++;
 		if (drawText > 1) drawText = 0;
-
-	} else if (glfwGetKey(window, GLFW_KEY_7) == GLFW_RELEASE) {
+	} else if (glfwGetKey(window, GLFW_KEY_7) == GLFW_RELEASE)
 		keyPressed = false;
-	}
 	if (drawText == 1) {
 		drawInfoPanel(object, color);
 		drawKeyBindingsPanel();

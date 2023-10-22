@@ -1,4 +1,5 @@
 #include "includes/keyPress.hpp"
+
 #include <string>
 
 void keyPressHandler_Camera_wasdSpaceX(GLFWwindow *window, Camera &camera) {
@@ -52,18 +53,16 @@ void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version, Object &
 		else if (!tKeyPressed)
 			object.textureType += 1;
 		tKeyPressed = true;
-	} else if (glfwGetKey(window, GLFW_KEY_T) == GLFW_RELEASE) {
+	} else if (glfwGetKey(window, GLFW_KEY_T) == GLFW_RELEASE)
 		tKeyPressed = false;
-	}
 	if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS && !yKeyPressed) {
 		if (object.textureType == 0 && !yKeyPressed)
 			object.textureType = object.textures.size() - 1;
 		else if (!yKeyPressed)
 			object.textureType -= 1;
 		yKeyPressed = true;
-	} else if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_RELEASE) {
+	} else if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_RELEASE)
 		yKeyPressed = false;
-	}
 }
 
 float colorChange = 0.05f;
