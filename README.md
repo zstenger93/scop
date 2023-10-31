@@ -78,6 +78,8 @@ Feel free to explore. Each one of them will launch with the corresponding object
 
 ## Keys
 
+I use basic GLFW functions to handle the key inputs so nothing special.
+
 ```
 Handling keypress events as:
 		Text rendering:
