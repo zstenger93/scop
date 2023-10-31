@@ -214,15 +214,25 @@ For Star Wars fans
 
 [Wavefront .obj file](https://en.wikipedia.org/wiki/Wavefront_.obj_file) The OBJ file format is a simple data-format that represents 3D geometry alone — namely, the position of each [vertex](https://en.wikipedia.org/wiki/Vertex_(geometry)), the [UV position](https://en.wikipedia.org/wiki/UV_mapping) of each texture coordinate vertex, [vertex normals](https://en.wikipedia.org/wiki/Vertex_normal), and the faces that make each polygon defined as a list of vertices, and texture vertices. Vertices are stored in a counter-clockwise order by default, making explicit declaration of face normals unnecessary.
 
+The `f` (face) has `x >= 3` amount of numbers which are index to others values.
+
+These values are `vertex`/`UV coordinates`/`normals`.
+
+A simple face format can look like as:
+
 ```
 f 4 9 7 1
 ```
+
+Which contains in this case only `vertex coordinates`
 
 or
 
 ```
 f 23/123/123 321/3213/213 43/45/12 423/3423/432
 ```
+
+Which has a `vertex`/`UV coord`/`normal` for each point of a square.
 
 (there are more)
 
