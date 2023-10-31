@@ -40,6 +40,8 @@
 
 Have at least OpenGL 3 or above or leave the page now and run for the sake of your sanity.
 
+There is 5 include paths through the files where u need to change the username in case, you would like to run the program by yourself.
+
 You will also need:
 ```
 	- stb_image.h
