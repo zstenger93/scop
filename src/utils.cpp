@@ -34,7 +34,5 @@ void cleanUp(Object &object) {
 	ImGui::DestroyContext();
 	glDeleteVertexArrays(1, &object.VAO_triangles);
 	glDeleteBuffers(1, &object.VBO_triangles);
-	glDeleteVertexArrays(1, &object.VAO_squares);
-	glDeleteBuffers(1, &object.VBO_squares);
 	glfwTerminate();
 }
