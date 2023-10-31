@@ -249,7 +249,7 @@ UV coordinates represent the actual texture coordinates for the object. If these
 
 ## UV Normalizing
 
-In case you don't have them, you need to calculate it yourself, or better say, you can try lmao
+In case you don't have them, you need to calculate the uv normals yourself, or better say, you can try lmao
 
 ## Normals
 
@@ -267,9 +267,13 @@ In short the vertex shader output will be your fragmentshader input, but you can
 
 Lighting in 3D graphics is a complex topic. Implementing different lighting models and techniques can significantly impact the visual quality of your scenes. Experimentation and understanding different lighting properties can help achieve realistic lighting effects in your 3D models.
 
+My calculations are working but they are not quite correct. I might try to improve it and implement more later on with different types of lighting.
+
 ## Text rendering
 
-There are wuite a few ways to do it. For this project I've found `imgui` the best and esier to use compared to other ones I've tried like `freetype`.
+There are quite a few ways to do it. For this project I've found `imgui` the best and esier to use compared to other ones I've tried like `freetype`.
+
+It's considerably faster to make it compile and work. Afterwards the how to use it is straight forward.
 
 ## Resources
 
