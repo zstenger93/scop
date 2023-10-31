@@ -15,21 +15,20 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, Object &o
 	while (!glfwWindowShouldClose(window)) {
 		createTexture(object, prevTex);
 		camera.fps(camera);
-		keyPressHandler_Camera_wasdSpaceX(window, camera);
-		keyPressHandler_Camera_Speed(window, camera, object);
-		keyPressHandler_PolygonModes(window, object);
-		glm::mat4 model =
-			keyPressHandler_ObjectCenterRotation(window, object.Triangles, model);
 		keyPressHandler_Color_OR_Texture(window, version, object);
-		keyPressHandler_SetColor(window, color);
 		keyPressHandler_SetColorVersion(window, version, object);
+		keyPressHandler_Camera_Speed(window, camera, object);
+		keyPressHandler_ObjectCenterRotation(window, object);
 		keyPressHandler_SetLight(window, shader, object);
+		keyPressHandler_Camera_wasdSpaceX(window, camera);
+		keyPressHandler_PolygonModes(window, object);
+		keyPressHandler_SetColor(window, color);
 		shader.settings(object.renderMode, object.texture);
 		shader.use();
 		shader.setTexture_OR_setColor(shader, version, color, light);
+		shader.setModel(camera, shader, object.model);
 		shader.setPerspective(camera, shader);
 		shader.setView(camera, shader);
-		shader.setModel(camera, shader, model);
 		draw(object);
 		renderText(window, object, color);
 		glfwSwapBuffers(window);

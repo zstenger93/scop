@@ -98,11 +98,10 @@ float rotationY = 0.0f;
 float rotationZ = 0.0f;
 float rotateSpeed = 1.0f;
 
-glm::mat4 keyPressHandler_ObjectCenterRotation(GLFWwindow *window, std::vector<float> &Triangles,
-											   glm::mat4 &model) {
-	model = glm::mat4(1.0f);
+void keyPressHandler_ObjectCenterRotation(GLFWwindow *window, Object &object) {
+	object.model = glm::mat4(1.0f);
 	std::vector<float> allTriangles;
-	allTriangles.insert(allTriangles.end(), Triangles.begin(), Triangles.end());
+	allTriangles.insert(allTriangles.end(), object.Triangles.begin(), object.Triangles.end());
 
 	glm::vec3 objectCenter = calculateCenter(allTriangles);
 
@@ -116,12 +115,11 @@ glm::mat4 keyPressHandler_ObjectCenterRotation(GLFWwindow *window, std::vector<f
 		if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS) rotateSpeed -= 1.0f;
 	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS) rotateSpeed += 1.0f;
 
-	model = glm::translate(model, objectCenter);
-	model = glm::rotate(model, glm::radians(rotationX), glm::vec3(1.0f, 0.0f, 0.0f));
-	model = glm::rotate(model, glm::radians(rotationY), glm::vec3(0.0f, 1.0f, 0.0f));
-	model = glm::rotate(model, glm::radians(rotationZ), glm::vec3(0.0f, 0.0f, 1.0f));
-	model = glm::translate(model, -objectCenter);
-	return model;
+	object.model = glm::translate(object.model, objectCenter);
+	object.model = glm::rotate(object.model, glm::radians(rotationX), glm::vec3(1.0f, 0.0f, 0.0f));
+	object.model = glm::rotate(object.model, glm::radians(rotationY), glm::vec3(0.0f, 1.0f, 0.0f));
+	object.model = glm::rotate(object.model, glm::radians(rotationZ), glm::vec3(0.0f, 0.0f, 1.0f));
+	object.model = glm::translate(object.model, -objectCenter);
 }
 
 glm::vec3 calculateCenter(const std::vector<float> &triangles) {

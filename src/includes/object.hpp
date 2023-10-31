@@ -7,15 +7,16 @@
 
 class Object {
    public:
-	Mtl mtl;				// material file content
-	Text text;				// for text drawing to screen
-	int polyCount;			// counted from file
-	std::vector<Uv> uv;		// vt aka uv coordinates
-	int textureType = 0;	// switching between textures
-	unsigned int texture;	// texture used for the object
-	bool hasSlash = false;	// flag for type of the object file
-	std::string windowName;
-	glm::vec3 lightSourcePos;
+	Mtl mtl;									  // material file content
+	Text text;									  // for text drawing to screen
+	int polyCount;								  // counted from file
+	glm::mat4 model;							  // used for shader calculations
+	std::vector<Uv> uv;							  // vt aka uv coordinates
+	int textureType = 0;						  // switching between textures
+	unsigned int texture;						  // texture used for the object
+	bool hasSlash = false;						  // flag for type of the object file
+	std::string windowName;						  // first 'o' from obj file
+	glm::vec3 lightSourcePos;					  // pos of light
 	std::vector<Vertex> vertices;				  // triangle ad square coordinates
 	std::vector<char *> textures;				  // all textures saved here
 	RenderMode renderMode = FILLED;				  // default, hotkey available
