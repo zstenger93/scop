@@ -59,6 +59,7 @@ OBJ_DIR = objects/
 
 SRC = scop \
 	  glfw \
+	  utils \
 	  camera \
 	  render \
 	  object \
