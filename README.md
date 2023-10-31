@@ -209,7 +209,7 @@ For Star Wars fans
 
 ## Object Files
 
-Object files (.obj) are commonly used to store 3D model information. The structure of these files can vary, allowing different layouts for vertex data. Faces, which define triangles or squares, can be represented in multiple ways, such as:
+Object files (.obj) are commonly used to store 3D model information. The structure of these files can vary, allowing different layouts for vertex data. Faces, which define triangles or squares, can be represented in multiple ways, eg:
 
 ```
 f 4 9 7 1
@@ -225,7 +225,7 @@ f 23/123/123 321/3213/213 43/45/12 423/3423/432
 
 ## .mtl Files
 
-Material files (.mtl) contain values essential for material and lighting calculations in the rendering process. While a single object can have multiple texture files with different material attributes, this project currently supports handling one texture file per object.
+Material files (.mtl) contain values essential for material and lighting calculations in the rendering process. While a single object can have multiple texture files with different material attributes, this project currently supports handling one texture file and settings per object.
 
 ## Input Handling
 
@@ -241,7 +241,11 @@ In case of squares I calculated 2 triangle from each square because I couldn't m
 
 ## Color and Texture
 
-Colors and textures enhance the visual appeal of 3D models. You can apply normal colors or use UV coordinates provided in the .obj file. UV coordinates represent the actual texture coordinates for the object. If these coordinates are not available, you might need to calculate them manually.
+The texture file locations are saved in a vactor, so you can just switch them around on any object without recompiling etc.
+
+Colors and textures enhance the visual appeal of 3D models. You can apply normal colors or use UV coordinates provided in the .obj file.
+
+UV coordinates represent the actual texture coordinates for the object. If these coordinates are not available, you might need to calculate them manually.
 
 ## UV Normalizing
 
