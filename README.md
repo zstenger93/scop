@@ -259,19 +259,19 @@ Make yourself a favor, plan and save all the values in a structured way, then st
 
 ## Creating Triangles
 
-One face contains usually 3, 4(or more) indexes and each of them marks the index of an x, y and z coordinate for one point of a triangle or square etc.
+One `face` contains usually 3, 4(or more) indexes and each of them marks the index of an `x, y and z` coordinate for one point of a triangle or square etc.
 
 Combining these coordinates from a face will result one triangle or square.
 
-In case of squares I calculated 2 triangle from each square because I couldn't make the deprecated GL_QUADS to draw at that point.
+In case of squares I calculated 2 triangle from each square because I couldn't make the deprecated `GL_QUADS` to draw at that point.
 
 ## Color and Texture
 
 The texture file locations are saved in a vector, so you can just switch them around on any object without recompiling etc.
 
-Colors and textures enhance the visual appeal of 3D models. You can apply normal colors or use UV coordinates provided in the .obj file.
+Colors and textures enhance the visual appeal of 3D models. You can apply `normal` colors or use UV coordinates provided in the .obj file with is's `texture file`.
 
-UV coordinates represent the actual texture coordinates for the object. If these coordinates are not available, you might need to calculate them manually.
+UV coordinates represent `the actual texture coordinates for the object in the texture file`. If these coordinates are not available, you might need to calculate them manually.
 
 ## UV Normalizing
 
@@ -283,7 +283,7 @@ Normals are crucial for `lighting` calculations, contributing to the realism of 
 
 ## Shaders
 
-Vertex and fragmentshader source file has been used here which are technically executables passed down to the [shader](https://en.wikipedia.org/wiki/Shader), but they have slightly specific syntax for in and output.
+`Vertex and fragmentshader` source file has been used here which are technically executables passed down to the [shader](https://en.wikipedia.org/wiki/Shader), but they have slightly specific syntax for in and output.
 
 In short the vertex shader output will be your fragmentshader input, but you can pass down values to both from your code itself as well.
 
