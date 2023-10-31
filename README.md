@@ -143,7 +143,10 @@ Teapot with uv map texture
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/teapot.png">
 
-Object which for I created the .obj file manually (yes I like the pain)
+Object which for I created the .obj file and calculated the coordinates manually because I wanted to know how it works.
+It isn't perfect obviously, but for now it's fine.
+
+(yes I like the pain and don't question my sanity)
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/hb.png">
 
@@ -209,7 +212,7 @@ For Star Wars fans
 
 ## Object Files
 
-Object files (.obj) are commonly used to store 3D model information. The structure of these files can vary, allowing different layouts for vertex data. Faces, which define triangles or squares, can be represented in multiple ways, eg:
+[Wavefront .obj file](https://en.wikipedia.org/wiki/Wavefront_.obj_file) The OBJ file format is a simple data-format that represents 3D geometry alone — namely, the position of each [vertex](https://en.wikipedia.org/wiki/Vertex_(geometry)), the [UV position](https://en.wikipedia.org/wiki/UV_mapping) of each texture coordinate vertex, [vertex normals](https://en.wikipedia.org/wiki/Vertex_normal), and the faces that make each polygon defined as a list of vertices, and texture vertices. Vertices are stored in a counter-clockwise order by default, making explicit declaration of face normals unnecessary.
 
 ```
 f 4 9 7 1
