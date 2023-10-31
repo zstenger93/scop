@@ -30,6 +30,4 @@ void createTexture(Object &object, int &prevTex) {
 void draw(Object &object) {
 	glBindVertexArray(object.VAO_triangles);
 	glDrawArrays(GL_TRIANGLES, 0, object.Triangles.size());
-	glBindVertexArray(object.VAO_squares);
-	glDrawArrays(GL_TRIANGLES, 0, object.Squares.size());
 }

@@ -99,11 +99,10 @@ float rotationZ = 0.0f;
 float rotateSpeed = 1.0f;
 
 glm::mat4 keyPressHandler_ObjectCenterRotation(GLFWwindow *window, std::vector<float> &Triangles,
-											   std::vector<float> &Squares, glm::mat4 &model) {
+											   glm::mat4 &model) {
 	model = glm::mat4(1.0f);
 	std::vector<float> allTriangles;
 	allTriangles.insert(allTriangles.end(), Triangles.begin(), Triangles.end());
-	allTriangles.insert(allTriangles.end(), Squares.begin(), Squares.end());
 
 	glm::vec3 objectCenter = calculateCenter(allTriangles);
 

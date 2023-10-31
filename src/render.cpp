@@ -19,7 +19,7 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, Object &o
 		keyPressHandler_Camera_Speed(window, camera, object);
 		keyPressHandler_PolygonModes(window, object);
 		glm::mat4 model =
-			keyPressHandler_ObjectCenterRotation(window, object.Triangles, object.Squares, model);
+			keyPressHandler_ObjectCenterRotation(window, object.Triangles, model);
 		keyPressHandler_Color_OR_Texture(window, version, object);
 		keyPressHandler_SetColor(window, color);
 		keyPressHandler_SetColorVersion(window, version, object);

@@ -50,6 +50,6 @@ void keyPressHandler_Camera_Speed(GLFWwindow *window, Camera &camera, Object &ob
 void keyPressHandler_SetColorVersion(GLFWwindow *window, int &version, Object &object);
 void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version, Object &object);
 glm::mat4 keyPressHandler_ObjectCenterRotation(GLFWwindow *window, std::vector<float> &Triangles,
-											   std::vector<float> &Squares, glm::mat4 &model);
+											   glm::mat4 &model);
 
 #endif

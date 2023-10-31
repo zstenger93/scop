@@ -232,10 +232,9 @@ void convertSquaresToTriangles(Object &object) {
 		float texX4 = object.Squares[i + 18];
 		float texY4 = object.Squares[i + 19];
 
-		triangles.insert(triangles.end(), {x1, y1, z1, texX1, texY1, x2, y2, z2, texX2, texY2, x3,
+		object.Triangles.insert(object.Triangles.end(), {x1, y1, z1, texX1, texY1, x2, y2, z2, texX2, texY2, x3,
 										   y3, z3, texX3, texY3});
-		triangles.insert(triangles.end(), {x1, y1, z1, texX1, texY1, x3, y3, z3, texX3, texY3, x4,
+		object.Triangles.insert(object.Triangles.end(), {x1, y1, z1, texX1, texY1, x3, y3, z3, texX3, texY3, x4,
 										   y4, z4, texX4, texY4});
 	}
-	object.Squares = triangles;
 }

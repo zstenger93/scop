@@ -19,21 +19,6 @@ void createVaoVbo(Object &object) {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	// Generate VAO and VBO for squares
-	glGenVertexArrays(1, &object.VAO_squares);
-	glGenBuffers(1, &object.VBO_squares);
-	glBindVertexArray(object.VAO_squares);
-	glBindBuffer(GL_ARRAY_BUFFER, object.VBO_squares);
-	glBufferData(GL_ARRAY_BUFFER, object.Squares.size() * sizeof(float), object.Squares.data(),
-				 GL_STATIC_DRAW);
-	// Specify vertex attribute pointers for squares
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)0);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-
 	if (object.normals.size() > 0) {
 		glGenBuffers(1, &object.normalVBO);
 		glBindBuffer(GL_ARRAY_BUFFER, object.normalVBO);
