@@ -240,6 +240,19 @@ Which has a `vertex`/`UV coord`/`normal` for each point of a square.
 
 [Material](https://paulbourke.net/dataformats/mtl/) files (.mtl) contain values essential for `material` and `lighting` calculations `in the rendering process`. While a single object can have multiple texture files with different material attributes, this project currently supports handling one texture file and settings per object.
 
+It can store a lot of information, but just to name a few:
+
+```
+newmtl Material										material name
+Ns 96.078431										shininess of the object
+Ka 0.500000 0.500000 0.500000						ambient light
+Kd 0.640000 0.640000 0.640000						diffuse light
+Ks 0.500000 0.500000 0.500000						specular light
+Ni 1.000000											optical density
+d 1.000000											transparency value
+illum 2												type of lighting model
+```
+
 ## Input Handling
 
 Make yourself a favor, plan and save all the values in a structured way, then start playing with them
@@ -278,7 +291,7 @@ In short the vertex shader output will be your fragmentshader input, but you can
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/light.png">
 
-[Lighting](https://shader-tutorial.dev/intermediates/lighting/) in 3D graphics is a complex topic. Implementing different lighting models and techniques can significantly impact the visual quality of your scenes. Experimentation and understanding different lighting properties can help achieve realistic lighting effects in your 3D models.
+[Lighting](https://shader-tutorial.dev/intermediates/lighting/) in 3D graphics is a complex topic. Implementing different `lighting model`s and techniques can significantly impact the visual quality of your scenes. Experimentation and understanding different lighting properties can help achieve realistic lighting effects in your 3D models.
 
 My calculations are working but they are not quite correct. I might try to improve it and implement more later on with different types of lighting.
 
