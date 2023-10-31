@@ -245,12 +245,12 @@ It can store a lot of information, but just to name a few:
 ```
 newmtl Material				material name
 Ns 96.078431				shininess of the object
-Ka 0.500000 0.500000 0.500000			ambient light
-Kd 0.640000 0.640000 0.640000			diffuse light
-Ks 0.500000 0.500000 0.500000			specular light
-Ni 1.000000					optical density
-d 1.000000					transparency value
-illum 2						type of lighting model
+Ka 0.500000 0.500000 0.500000		ambient light
+Kd 0.640000 0.640000 0.640000		diffuse light
+Ks 0.500000 0.500000 0.500000		specular light
+Ni 1.000000				optical density
+d 1.000000				transparency value
+illum 2					type of lighting model
 ```
 
 ## Input Handling
