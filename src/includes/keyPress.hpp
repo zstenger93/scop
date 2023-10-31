@@ -3,6 +3,8 @@
 
 /*
 	Handling keypress events as:
+		Text rendering:
+			7: 		on/off to show details and keybindings
 		Camera movement:
 			W:		move camera forward
 			A:		move camera left
@@ -32,9 +34,21 @@
 				6:	changing the value of B
 			V:		texture mode
 			B:		texture versions
-				texture
-				color
-				mixture between texture and color
+						texture
+						color
+						mixture between texture and color
+						light on
+			T:		changes the texture to the next
+			Y:		changes the texture to the previous
+		Light:
+			Z:		lighting on
+				to controll it's pos:
+					Q:	LightPos.x -+ 0.25;
+					E:	LightPos.x ++ 0.25;
+					R:	LightPos.y -+ 0.25;
+					F:	LightPos.y ++ 0.25;
+					G:	LightPos.z -+ 0.25;
+					H:	LightPos.z ++ 0.25;
 */
 
 #include "camera.hpp"
