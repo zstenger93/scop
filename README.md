@@ -278,7 +278,7 @@ In short the vertex shader output will be your fragmentshader input, but you can
 
 <img align=center src="https://github.com/zstenger93/scop/blob/master/readme_src/light.png">
 
-Lighting in 3D graphics is a complex topic. Implementing different lighting models and techniques can significantly impact the visual quality of your scenes. Experimentation and understanding different lighting properties can help achieve realistic lighting effects in your 3D models.
+[Lighting](https://shader-tutorial.dev/intermediates/lighting/) in 3D graphics is a complex topic. Implementing different lighting models and techniques can significantly impact the visual quality of your scenes. Experimentation and understanding different lighting properties can help achieve realistic lighting effects in your 3D models.
 
 My calculations are working but they are not quite correct. I might try to improve it and implement more later on with different types of lighting.
 
