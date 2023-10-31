@@ -22,13 +22,13 @@ class Shader {
 	unsigned int ID;
 
 	void use();
+	void settings(Object &object);
 	void setView(Camera &camera, Shader &shader);
 	void setPerspective(Camera &camera, Shader &shader);
 	void setInt(const std::string &name, int value) const;
 	void setBool(const std::string &name, bool value) const;
 	Shader(const char *vertexPath, const char *fragmentPath);
 	void setFloat(const std::string &name, float value) const;
-	void settings(RenderMode &renderMode, unsigned int &texture);
 	void setVec2(const std::string &name, float x, float y) const;
 	void setModel(Camera &camera, Shader &shader, glm::mat4 &model);
 	void setMat2(const std::string &name, const glm::mat2 &mat) const;

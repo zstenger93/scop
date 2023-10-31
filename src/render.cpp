@@ -23,7 +23,7 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, Object &o
 		keyPressHandler_Camera_wasdSpaceX(window, camera);
 		keyPressHandler_PolygonModes(window, object);
 		keyPressHandler_SetColor(window, color);
-		shader.settings(object.renderMode, object.texture);
+		shader.settings(object);
 		shader.use();
 		shader.setTexture_OR_setColor(shader, version, color, light);
 		shader.setModel(camera, shader, object.model);

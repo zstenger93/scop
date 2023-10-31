@@ -112,14 +112,14 @@ void Shader::setModel(Camera &camera, Shader &shader, glm::mat4 &model) {
 	shader.setMat4("model", model);
 }
 
-void Shader::settings(RenderMode &renderMode, unsigned int &texture) {
+void Shader::settings(Object &object) {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glPolygonMode(GL_FRONT_AND_BACK, (renderMode == WIREFRAME) ? GL_LINE
-									 : (renderMode == POINTS)  ? GL_POINT
-															   : GL_FILL);
+	glPolygonMode(GL_FRONT_AND_BACK, (object.renderMode == WIREFRAME) ? GL_LINE
+									 : (object.renderMode == POINTS)  ? GL_POINT
+																	  : GL_FILL);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glBindTexture(GL_TEXTURE_2D, object.texture);
 }
 
 void Shader::setTexture_OR_setColor(Shader &shader, int &version, glm::vec3 &color, int &light) {
