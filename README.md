@@ -224,9 +224,9 @@ A simple face format can look like as:
 f 4 9 7 1
 ```
 
-Which contains in this case only `vertex coordinates`
+Which contains indexes in this case only for the `vertex coordinates` of a square.
 
-or
+or the following:
 
 ```
 f 23/123/123 321/3213/213 43/45/12 423/3423/432
@@ -238,7 +238,7 @@ Which has a `vertex`/`UV coord`/`normal` for each point of a square.
 
 ## .mtl Files
 
-Material files (.mtl) contain values essential for material and lighting calculations in the rendering process. While a single object can have multiple texture files with different material attributes, this project currently supports handling one texture file and settings per object.
+[Material](https://paulbourke.net/dataformats/mtl/) files (.mtl) contain values essential for `material` and `lighting` calculations `in the rendering process`. While a single object can have multiple texture files with different material attributes, this project currently supports handling one texture file and settings per object.
 
 ## Input Handling
 
@@ -246,7 +246,7 @@ Make yourself a favor, plan and save all the values in a structured way, then st
 
 ## Creating Triangles
 
-One face contains 3 or 4 indexes and each of them marks the index of an x, y and z coordinate for one point of a triangle or square.
+One face contains usually 3, 4(or more) indexes and each of them marks the index of an x, y and z coordinate for one point of a triangle or square etc.
 
 Combining these coordinates from a face will result one triangle or square.
 
@@ -254,7 +254,7 @@ In case of squares I calculated 2 triangle from each square because I couldn't m
 
 ## Color and Texture
 
-The texture file locations are saved in a vactor, so you can just switch them around on any object without recompiling etc.
+The texture file locations are saved in a vector, so you can just switch them around on any object without recompiling etc.
 
 Colors and textures enhance the visual appeal of 3D models. You can apply normal colors or use UV coordinates provided in the .obj file.
 
@@ -262,15 +262,15 @@ UV coordinates represent the actual texture coordinates for the object. If these
 
 ## UV Normalizing
 
-In case you don't have them, you need to calculate the uv normals yourself, or better say, you can try lmao
+In case you don't have them already ready in the .obj file, you need to calculate the uv normals yourself, or better say, you can try lmao
 
 ## Normals
 
-Normals are crucial for lighting calculations, contributing to the realism of the rendered scene. They define the direction a surface is facing, affecting how light interacts with the object. Proper implementation of normals is essential for accurate lighting and shading effects.
+Normals are crucial for `lighting` calculations, contributing to the realism of the rendered scene. They define the direction a surface is facing, affecting how light interacts with the object. Proper implementation of normals is essential for accurate lighting and shading effects.
 
 ## Shaders
 
-Vertex and fragmentshader source file has been used here which are technically executables passed down to the shader, but they have slightly specific syntax for in and output.
+Vertex and fragmentshader source file has been used here which are technically executables passed down to the [shader](https://en.wikipedia.org/wiki/Shader), but they have slightly specific syntax for in and output.
 
 In short the vertex shader output will be your fragmentshader input, but you can pass down values to both from your code itself as well.
 
