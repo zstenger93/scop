@@ -3,6 +3,7 @@
 #include "includes/headers.hpp"
 
 void processObjFile(const std::string &filePath, Object &object) {
+	object.fps_count = 0;
 	object.polyCount = 0;
 	object.lightSourcePos.x = 2.0f;
 	object.lightSourcePos.y = 1.0f;

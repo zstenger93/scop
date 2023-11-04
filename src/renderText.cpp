@@ -1,3 +1,4 @@
+#include <string>
 #include "includes/headers.hpp"
 #include "includes/object.hpp"
 
@@ -7,7 +8,9 @@ void initIMGUI(GLFWwindow *window) {
 	ImGui::StyleColorsDark();
 	ImGui_ImplOpenGL3_Init("#version 330");
 }
+
 int drawText = 0;
+
 void renderText(GLFWwindow *window, Object &object, glm::vec3 &color) {
 	static bool keyPressed = false;
 	if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS && !keyPressed) {
@@ -20,6 +23,11 @@ void renderText(GLFWwindow *window, Object &object, glm::vec3 &color) {
 		drawInfoPanel(object, color);
 		drawKeyBindingsPanel();
 	}
+	object.end_time = std::chrono::high_resolution_clock::now();
+	object.frame_duration = std::chrono::duration_cast<std::chrono::duration<double>>(object.end_time - object.start_time);
+	object.frame_time = object.frame_duration.count();
+	object.fps_count = 1 / object.frame_time;
+	object.fps = std::to_string(object.fps_count);
 }
 
 void drawInfoPanel(Object &object, glm::vec3 &color) {
@@ -30,7 +38,7 @@ void drawInfoPanel(Object &object, glm::vec3 &color) {
 	ImGui::NewFrame();
 	ImGui::SetNextWindowPos(
 		ImVec2(mode->width - (mode->width - 200), (mode->height - (mode->height - 50))));
-	ImGui::SetNextWindowSize(ImVec2(130, 290));
+	ImGui::SetNextWindowSize(ImVec2(130, 340));
 	ImGui::Begin("window", nullptr, ImGuiWindowFlags_NoDecoration);
 	ImGui::SetCursorPos(ImVec2(10, 10));
 	ImGui::Text("___Polycount___");
@@ -52,7 +60,8 @@ void drawInfoPanel(Object &object, glm::vec3 &color) {
 	ImGui::Text("   %s", object.text.cameraSpeed.c_str());
 	ImGui::Text("__Render Mode__");
 	ImGui::Text("    %s", object.text.mode.c_str());
-
+	ImGui::Text("   ___FPS___   ");
+	ImGui::Text("  %s", object.fps.c_str());
 	ImGui::End();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

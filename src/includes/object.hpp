@@ -26,6 +26,12 @@ class Object {
 	std::vector<std::vector<Vertex> > triangles;  // contains all shapes for now
 	std::vector<float> Triangles, unpreaparedSquares, Squares;	// converting squares to triangles
 	GLuint VAO_triangles, VBO_triangles, normalVBO;				// vertex arrays and buffers
+	std::chrono::high_resolution_clock::time_point start_time;
+	std::chrono::high_resolution_clock::time_point end_time;
+	std::chrono::duration<double> frame_duration;
+	double frame_time;
+	double fps_count;
+	std::string fps;
 };
 
 void drawKeyBindingsPanel();

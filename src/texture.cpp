@@ -4,6 +4,7 @@
 #include "includes/stb_image.h"
 
 void createTexture(Object &object, int &prevTex) {
+	object.start_time = std::chrono::high_resolution_clock::now();
 	if (prevTex != object.textureType) {
 		glGenTextures(1, &object.texture);
 		glBindTexture(GL_TEXTURE_2D, object.texture);
