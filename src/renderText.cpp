@@ -1,4 +1,5 @@
 #include <string>
+
 #include "includes/headers.hpp"
 #include "includes/object.hpp"
 
@@ -24,7 +25,8 @@ void renderText(GLFWwindow *window, Object &object, glm::vec3 &color) {
 		drawKeyBindingsPanel();
 	}
 	object.end_time = std::chrono::high_resolution_clock::now();
-	object.frame_duration = std::chrono::duration_cast<std::chrono::duration<double>>(object.end_time - object.start_time);
+	object.frame_duration = std::chrono::duration_cast<std::chrono::duration<double>>(
+		object.end_time - object.start_time);
 	object.frame_time = object.frame_duration.count();
 	object.fps_count = 1 / object.frame_time;
 	object.fps = std::to_string(object.fps_count);
@@ -38,7 +40,7 @@ void drawInfoPanel(Object &object, glm::vec3 &color) {
 	ImGui::NewFrame();
 	ImGui::SetNextWindowPos(
 		ImVec2(mode->width - (mode->width - 200), (mode->height - (mode->height - 50))));
-	ImGui::SetNextWindowSize(ImVec2(130, 340));
+	ImGui::SetNextWindowSize(ImVec2(130, 320));
 	ImGui::Begin("window", nullptr, ImGuiWindowFlags_NoDecoration);
 	ImGui::SetCursorPos(ImVec2(10, 10));
 	ImGui::Text("___Polycount___");
