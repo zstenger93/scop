@@ -63,7 +63,7 @@ void drawInfoPanel(Object &object, glm::vec3 &color) {
 	ImGui::Text("__Render Mode__");
 	ImGui::Text("    %s", object.text.mode.c_str());
 	ImGui::Text("   ___FPS___   ");
-	ImGui::Text("  %s", object.fps.c_str());
+	ImGui::Text("      %s", object.fps.c_str());
 	ImGui::End();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

@@ -30,7 +30,7 @@ class Object {
 	std::chrono::high_resolution_clock::time_point end_time;
 	std::chrono::duration<double> frame_duration;
 	double frame_time;
-	double fps_count;
+	int fps_count;
 	std::string fps;
 };
 
