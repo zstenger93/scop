@@ -12,6 +12,8 @@
 
 [Keys](#keys)
 
+[Video](#video)
+
 [How it Looks](#how-it-looks)
 
 [Object Files](#object-files)
@@ -132,6 +134,10 @@ Handling keypress events as:
 				H:	LightPos.z ++ 0.25;
 
 ```
+
+## Video
+
+https://github.com/zstenger93/scop/assets/115490237/019743e2-e5d1-488f-8b00-443503a921a9
 
 ## How it Looks
 
