@@ -1,8 +1,19 @@
 #include "includes/processObjFile.hpp"
 
 #include "includes/headers.hpp"
+#include "includes/object.hpp"
 
 void processObjFile(const std::string &filePath, Object &object) {
+	initObject(object);
+	loadFromObjFile(filePath, object);
+	if (object.vertices.size() == 0) return;
+	normalizeTextureCoordinates(object);
+	triangleAssembly(object);
+	separateTrianglesAndSquares(object);
+	convertSquaresToTriangles(object);
+}
+
+void initObject(Object &object) {
 	object.fps_count = 0;
 	object.polyCount = 0;
 	object.lightSourcePos.x = 2.0f;
@@ -12,12 +23,6 @@ void processObjFile(const std::string &filePath, Object &object) {
 	object.text.lightY = std::to_string(object.lightSourcePos.y);
 	object.text.lightZ = std::to_string(object.lightSourcePos.z);
 	object.text.mode = "filled";
-	loadFromObjFile(filePath, object);
-	if (object.vertices.size() == 0) return;
-	normalizeTextureCoordinates(object);
-	triangleAssembly(object);
-	separateTrianglesAndSquares(object);
-	convertSquaresToTriangles(object);
 }
 
 void loadFromObjFile(const std::string &filePath, Object &object) {

@@ -36,6 +36,7 @@ class Object {
 
 void drawKeyBindingsPanel();
 void cleanUp(Object &object);
+void initObject(Object &object);
 void createVaoVbo(Object &object);
 void initIMGUI(GLFWwindow *window);
 void saveTextures(Object &object, char **argv);
