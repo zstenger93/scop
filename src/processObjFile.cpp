@@ -16,6 +16,8 @@ void processObjFile(const std::string &filePath, Object &object) {
 	if (object.vertices.size() == 0) return;
 	normalizeTextureCoordinates(object);
 	triangleAssembly(object);
+	separateTrianglesAndSquares(object);
+	convertSquaresToTriangles(object);
 }
 
 void loadFromObjFile(const std::string &filePath, Object &object) {

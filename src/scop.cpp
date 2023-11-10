@@ -27,8 +27,7 @@ int main(int argc, char **argv) {
 
 	initIMGUI(window);
 	passMtlInfoToFragmentShader(shader, object);
-	separateTrianglesAndSquares(object);
-	convertSquaresToTriangles(object);
+	
 	createVaoVbo(object);
 	renderingLoop(window, shader, camera, object);
 	cleanUp(object);
