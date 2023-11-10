@@ -27,11 +27,9 @@ int main(int argc, char **argv) {
 
 	initIMGUI(window);
 	passMtlInfoToFragmentShader(shader, object);
-	
 	createVaoVbo(object);
 	renderingLoop(window, shader, camera, object);
 	cleanUp(object);
-
 	return 0;
 }
 

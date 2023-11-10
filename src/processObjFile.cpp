@@ -5,6 +5,7 @@
 
 void processObjFile(const std::string &filePath, Object &object) {
 	initObject(object);
+	initMtl(object);
 	loadFromObjFile(filePath, object);
 	if (object.vertices.size() == 0) return;
 	normalizeTextureCoordinates(object);
@@ -32,7 +33,6 @@ void loadFromObjFile(const std::string &filePath, Object &object) {
 		std::cerr << "Error opening the file: " << filePath << std::endl;
 		return;
 	}
-	initMtl(object);
 	while (std::getline(objFile, line)) {
 		std::string prefix, fileName;
 		std::istringstream stream(line);
