@@ -166,3 +166,14 @@ void keyPressHandler_SetLight(GLFWwindow *window, Shader &shader, Object &object
 		shader.setVec3("LightPos", object.lightSourcePos);
 	}
 }
+
+void keyPressHandler(GLFWwindow *window, int &version, Camera &camera, Object &object, Shader &shader, glm::vec3 &color) {
+	keyPressHandler_Color_OR_Texture(window, version, object);
+	keyPressHandler_SetColorVersion(window, version, object);
+	keyPressHandler_Camera_Speed(window, camera, object);
+	keyPressHandler_ObjectCenterRotation(window, object);
+	keyPressHandler_SetLight(window, shader, object);
+	keyPressHandler_Camera_wasdSpaceX(window, camera);
+	keyPressHandler_PolygonModes(window, object);
+	keyPressHandler_SetColor(window, color);
+}

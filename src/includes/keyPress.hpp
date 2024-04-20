@@ -64,5 +64,6 @@ void keyPressHandler_SetLight(GLFWwindow *window, Shader &shader, Object &object
 void keyPressHandler_Camera_Speed(GLFWwindow *window, Camera &camera, Object &object);
 void keyPressHandler_SetColorVersion(GLFWwindow *window, int &version, Object &object);
 void keyPressHandler_Color_OR_Texture(GLFWwindow *window, int &version, Object &object);
+void keyPressHandler(GLFWwindow *window, int &version, Camera &camera, Object &object, Shader &shader, glm::vec3 &color);
 
 #endif

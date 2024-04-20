@@ -259,6 +259,14 @@ d 1.000000				transparency value
 illum 2					type of lighting model
 ```
 
+## Vertex
+
+Used to define the shape of a graphical object, typically in a 3D space. A vertex represents a single point in space and serves as a building block for creating more complex geometric shapes like triangles, polygons, or more intricate 3D models.
+
+## Polygon
+
+A polygon is a flat surface formed by connecting three or more vertices. In 3D graphics, triangles are the most commonly used polygons because they are simple and efficient to render.
+
 ## Input Handling
 
 Make yourself a favor, plan and save all the values in a structured way, then start playing with them
@@ -289,7 +297,7 @@ Normals are crucial for `lighting` calculations, contributing to the realism of 
 
 ## Shaders
 
-`Vertex and fragmentshader` source file has been used here which are technically executables passed down to the [shader](https://en.wikipedia.org/wiki/Shader), but they have slightly specific syntax for in and output.
+`Vertex and fragmentshader` source file has been used here which are technically executables passed down to the [shader](https://en.wikipedia.org/wiki/Shader), but they have slightly specific syntax for in and output called GLSL (OpenGL Shading Language)1.
 
 In short the vertex shader output will be your fragmentshader input, but you can pass down values to both from your code itself as well.
 

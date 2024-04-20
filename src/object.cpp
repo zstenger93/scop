@@ -2,6 +2,11 @@
 
 #include <__config>
 
+/*
+	VAOs organize and manage the configuration of vertex attributes for rendering
+	VBOs store actual vertex data on the GPU,
+	
+*/
 void createVaoVbo(Object &object) {
 	// Initialize VAOs and VBOs for triangles and squares
 	// Generate VAO and VBO for triangles

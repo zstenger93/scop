@@ -15,14 +15,7 @@ void renderingLoop(GLFWwindow *window, Shader &shader, Camera &camera, Object &o
 	while (!glfwWindowShouldClose(window)) {
 		createTexture(object, prevTex);
 		camera.fps(camera);
-		keyPressHandler_Color_OR_Texture(window, version, object);
-		keyPressHandler_SetColorVersion(window, version, object);
-		keyPressHandler_Camera_Speed(window, camera, object);
-		keyPressHandler_ObjectCenterRotation(window, object);
-		keyPressHandler_SetLight(window, shader, object);
-		keyPressHandler_Camera_wasdSpaceX(window, camera);
-		keyPressHandler_PolygonModes(window, object);
-		keyPressHandler_SetColor(window, color);
+		keyPressHandler(window, version, camera, object, shader, color);
 		shader.settings(object);
 		shader.use();
 		shader.setTexture_OR_setColor(shader, version, color, light);
