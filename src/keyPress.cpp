@@ -112,8 +112,8 @@ void keyPressHandler_ObjectCenterRotation(GLFWwindow *window, Object &object) {
 	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS) rotationZ += rotateSpeed;
 	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS) rotationZ -= rotateSpeed;
 	if (rotateSpeed > 1.0f)
-		if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS) rotateSpeed -= 1.0f;
-	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS) rotateSpeed += 1.0f;
+		if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS) rotateSpeed -= 0.5f;
+	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS) rotateSpeed += 0.5f;
 
 	object.model = glm::translate(object.model, objectCenter);
 	object.model = glm::rotate(object.model, glm::radians(rotationX), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -132,6 +132,33 @@ glm::vec3 calculateCenter(const std::vector<float> &triangles) {
 		sum.z += triangles[i + 2];
 	}
 	return sum / static_cast<float>(totalVertices);
+}
+
+bool autoRotate = false;
+
+void keyPressHandler_AutoRotate(GLFWwindow *window, Object &object) {
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
+		autoRotate = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS) {
+		autoRotate = false;
+	}
+
+	if (autoRotate) {
+		rotationY += rotateSpeed;
+	}
+
+	object.model = glm::mat4(1.0f);
+	std::vector<float> allTriangles;
+	allTriangles.insert(allTriangles.end(), object.Triangles.begin(), object.Triangles.end());
+
+	glm::vec3 objectCenter = calculateCenter(allTriangles);
+
+	object.model = glm::translate(object.model, objectCenter);
+	object.model = glm::rotate(object.model, glm::radians(rotationX), glm::vec3(1.0f, 0.0f, 0.0f));
+	object.model = glm::rotate(object.model, glm::radians(rotationY), glm::vec3(0.0f, 1.0f, 0.0f));
+	object.model = glm::rotate(object.model, glm::radians(rotationZ), glm::vec3(0.0f, 0.0f, 1.0f));
+	object.model = glm::translate(object.model, -objectCenter);
 }
 
 void keyPressHandler_SetLight(GLFWwindow *window, Shader &shader, Object &object) {
@@ -175,5 +202,6 @@ void keyPressHandler(GLFWwindow *window, int &version, Camera &camera, Object &o
 	keyPressHandler_SetLight(window, shader, object);
 	keyPressHandler_Camera_wasdSpaceX(window, camera);
 	keyPressHandler_PolygonModes(window, object);
+	keyPressHandler_AutoRotate(window, object);
 	keyPressHandler_SetColor(window, color);
 }
